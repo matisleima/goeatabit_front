@@ -1,20 +1,19 @@
 <template>
   <div class="home">
-<!--    <HelloWorld msg="Welcome to Your Vue.js App"/>-->
 
-    GO EAT A BIT
+<h1>LANDING EHK HOMEPAGE</h1>
 
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
+import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'HomeView',
   components: {
-    // HelloWorld
+    HelloWorld
   }
 }
 </script>

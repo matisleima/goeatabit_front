@@ -1,42 +1,63 @@
 <template>
 
-  <div class="container text-center">
+
+  <div class="container" @keydown.enter="login">
+    <div class="row">
+      <h1>TÜHJUS</h1>
+    </div>
+    <div class="row">tühjus</div>
+    <div class="row">tühjus</div>
+
     <div class="row">
       <div class="col">
-        {{ this.errorResponse.message }}
+
       </div>
+
+
       <div class="col">
-        Column
+
+
       </div>
+
       <div class="col">
-        <p><input v-model="email" type="text" id="exampleInputEmail1"/></p>
-        <p><input v-model="password" type="password" id="exampleInputPassword1"></p>
-        <button @click="login" type="submit">Log</button>
+
+          <div class="d-grid gap-3">
+            <div v-show="this.errorResponse.message.length > 0" class="alert alert-danger" role="alert">
+              {{ this.errorResponse.message }}
+            </div>
+            <input v-model="email" type="text" class="form-control" id="exampleInputEmail1"
+                   placeholder="Sisesta email">
+            <input v-model="password" type="password" class="form-control" id="exampleInputPassword1"
+                   placeholder="Sisesta parool">
+            <button @click="login" type="submit" class="btn btn-primary">Logi sisse</button>
+            <button @click="login" type="submit" class="btn btn-primary">Loo kasutaja</button>
+          </div>
       </div>
+
+
     </div>
   </div>
-
-
 </template>
 
 <script>
 import router from "@/router";
 
-export default{
+export default {
   data() {
-    return{
+    return {
       email: '',
       password: '',
-      loginResponse:{
-        userId:0
+      loginResponse: {
+        userId: 0
       },
       errorResponse: {
         message: '',
         errorCode: 0
-      },
+      }
     }
   },
-  methods:{
+
+  methods: {
     login() {
       this.$http.get("/login", {
             params: {
@@ -47,21 +68,17 @@ export default{
       ).then(response => {
         // Siit saame kätte JSONi  ↓↓↓↓↓↓↓↓
         this.loginResponse.userId = response.data.userId
-
         sessionStorage.setItem('userId', this.loginResponse.userId)
         this.goToHome()
       }).catch(error => {
-        this.errorResponse=error.response.data
-
+        // Siit saame kätte errori JSONi  ↓↓↓↓↓↓↓↓
+        this.errorResponse = error.response.data
       })
     },
-
     goToHome() {
-      router.push({name:'homeRoute'})
+      router.push({name: 'homeRoute'})
     },
-  }
-
+  },
 }
-
 
 </script>
