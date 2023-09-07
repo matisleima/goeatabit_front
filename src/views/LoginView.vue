@@ -3,15 +3,15 @@
   <div class="container text-center">
     <div class="row">
       <div class="col">
-        Column
+        {{ this.errorResponse.message }}
       </div>
       <div class="col">
         Column
       </div>
       <div class="col">
-        <p><input v-model="email" type="email"/></p>
-        <p><input v-model="password" type="password"></p>
-        <button @click="login">Log</button>
+        <p><input v-model="email" type="text" id="exampleInputEmail1"/></p>
+        <p><input v-model="password" type="password" id="exampleInputPassword1"></p>
+        <button @click="login" type="submit">Log</button>
       </div>
     </div>
   </div>
@@ -29,7 +29,11 @@ export default{
       password: '',
       loginResponse:{
         userId:0
-      }
+      },
+      errorResponse: {
+        message: '',
+        errorCode: 0
+      },
     }
   },
   methods:{
@@ -47,8 +51,8 @@ export default{
         sessionStorage.setItem('userId', this.loginResponse.userId)
         this.goToHome()
       }).catch(error => {
-        // Siit saame kätte errori JSONi  ↓↓↓↓↓↓↓↓
-        const errorResponseBody = error.response.data
+        this.errorResponse=error.response.data
+
       })
     },
 
