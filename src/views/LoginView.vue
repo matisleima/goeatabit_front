@@ -1,16 +1,13 @@
 <template>
 
 
-  <div class="container" @keydown.enter="login">
+  <div style="background-color: #a5912a" class="container" @keydown.enter="login">
     <div class="row">
-      <h1>TÜHJUS</h1>
     </div>
-    <div class="row">tühjus</div>
-    <div class="row">tühjus</div>
 
     <div class="row">
       <div class="col">
-
+<h1>GO EAT A BIT</h1>
       </div>
 
 
@@ -33,8 +30,6 @@
             <button @click="login" type="submit" class="btn btn-primary">Loo kasutaja</button>
           </div>
       </div>
-
-
     </div>
   </div>
 </template>
@@ -43,6 +38,7 @@
 import router from "@/router";
 
 export default {
+  name: 'LoginView',
   data() {
     return {
       email: '',
@@ -69,6 +65,7 @@ export default {
         // Siit saame kätte JSONi  ↓↓↓↓↓↓↓↓
         this.loginResponse.userId = response.data.userId
         sessionStorage.setItem('userId', this.loginResponse.userId)
+        this.resetErrorMessage()
         this.goToHome()
       }).catch(error => {
         // Siit saame kätte errori JSONi  ↓↓↓↓↓↓↓↓
@@ -76,7 +73,10 @@ export default {
       })
     },
     goToHome() {
-      router.push({name: 'homeRoute'})
+      router.push({name: 'landingRoute'})
+    },
+    resetErrorMessage() {
+      this.errorResponse.message = ''
     },
   },
 }
