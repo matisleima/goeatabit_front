@@ -69,7 +69,14 @@ export default {
         this.goToHome()
       }).catch(error => {
         // Siit saame kätte errori JSONi  ↓↓↓↓↓↓↓↓
+
+        if (error.response.status === 500 ) {
+          router.push({name: 'errorRoute'})
+        }
+
         this.errorResponse = error.response.data
+
+
       })
     },
     goToHome() {
