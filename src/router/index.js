@@ -1,18 +1,18 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import {createRouter, createWebHistory} from 'vue-router'
+import HomeView from "@/views/HomeView.vue";
 import LoginView from "@/views/LoginView.vue";
-import LandingView from "@/views/LandingView.vue";
 
 const routes = [
   {
-    path: '/landing',
-    name: 'landingRoute',
-    component: LandingView
+    path: '/home',
+    name: 'homeRoute',
+    component: HomeView
   },
   {
-    path: '/login',
+    path: '/',
     name: 'loginRoute',
     component: LoginView
-  },
+  }
 ]
 
 const router = createRouter({
