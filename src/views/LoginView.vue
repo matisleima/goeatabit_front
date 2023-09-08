@@ -20,9 +20,9 @@
           <div class="col">
 
             <div class="d-grid gap-3">
-<!--              <div v-show="this.errorResponse.message.length > 0" class="alert alert-danger" role="alert">-->
-<!--                {{ this.errorResponse.message }}-->
-<!--              </div>-->
+              <div v-show="this.errorResponse.message.length > 0" class="alert alert-danger" role="alert">
+                {{ this.errorResponse.message }}
+              </div>
               <input v-model="email" type="text" class="form-control" id="exampleInputEmail1"
                      placeholder="Sisesta email">
               <input v-model="password" type="password" class="form-control" id="exampleInputPassword1"
@@ -66,9 +66,7 @@ export default {
         this.loginResponse.userId = response.data.userId
         sessionStorage.setItem('userId', this.loginResponse.userId)
         this.resetErrorMessage()
-        alert('pärast fields resetti')
         this.goToHome()
-        alert('goToHome reached')
       }).catch(error => {
         // Siit saame kätte errori JSONi  ↓↓↓↓↓↓↓↓
 
@@ -95,7 +93,6 @@ export default {
   },
   mounted() {
     this.getAndSetUserIdFromSessionStorage()
-    console.log("OLEN SIIN")
     if (this.loginResponse.userId !== null) {
       this.goToHome()
     }
