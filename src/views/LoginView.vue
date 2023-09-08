@@ -1,5 +1,7 @@
 <template>
 
+  <SignupModal ref="signupModalRef"></SignupModal>
+
 
   <div style="background-color: #a5912a" class="container" @keydown.enter="login">
     <div class="row">
@@ -27,7 +29,7 @@
             <input v-model="password" type="password" class="form-control" id="exampleInputPassword1"
                    placeholder="Sisesta parool">
             <button @click="login" type="submit" class="btn btn-primary">Logi sisse</button>
-            <button @click="login" type="submit" class="btn btn-primary">Loo kasutaja</button>
+            <button @click="openSignupModal" type="submit" class="btn btn-primary">Loo kasutaja</button>
           </div>
       </div>
     </div>
@@ -36,9 +38,12 @@
 
 <script>
 import router from "@/router";
+import Modal from "@/components/modal/Modal.vue";
+import SignupModal from "@/components/modal/SignupModal.vue";
 
 export default {
   name: 'LoginView',
+  components: {SignupModal, Modal},
   data() {
     return {
       email: '',
@@ -78,6 +83,10 @@ export default {
     resetErrorMessage() {
       this.errorResponse.message = ''
     },
+
+    openSignupModal() {
+      this.$refs.signupModalRef.$refs.modalRef.openModal()
+    }
   },
 }
 
