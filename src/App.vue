@@ -1,13 +1,5 @@
 <template>
-  <!--  <nav>-->
-  <!--    <router-link to="/">Home</router-link> |-->
-  <!--    <router-link to="/about">About</router-link>-->
-  <!--  </nav>-->
-
-  <!--  <router-view/>-->
-  <login-view/>
-
-
+    <router-view/>
 </template>
 
 <style>
@@ -33,5 +25,5 @@ nav a.router-link-exact-active {
 }
 </style>
 <script setup>
-import LoginView from "@/views/LoginView.vue";
+import LoginView from "@/views/LoginViewOLD.vue";
 </script>
