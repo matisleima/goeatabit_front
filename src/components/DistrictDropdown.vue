@@ -1,6 +1,6 @@
 <template>
   <select v-model="selectedDistrictId" @change="emitSelectedDistrictId" class="form-select" aria-label="Default select example">
-    <option selected :value="0">Kõik linnad</option>
+    <option selected :value="0">Vali linnaosa</option>
     <option v-for="district in districts" :value="district.districtId" :key="district.districtId">{{ district.districtName }}</option>
   </select>
 </template>
