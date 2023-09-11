@@ -5,6 +5,12 @@
         <h3>Kasutaja loomine</h3>
       </template>
       <template #body>
+        <div class="row">
+          <div class="col">
+            <AlertDanger :alert-message="errorResponse.message"/>
+            <AlertSuccess :alert-message="successMessage"/>
+          </div>
+        </div>
         <div class="container text-center">
           <div class="row">
             <div class="col">
@@ -13,7 +19,7 @@
                 <input v-model="user.lastName" type="text" class="form-control" placeholder="Sisesta perekonnanimi">
                 <input v-model="user.email" class="form-control" placeholder="Sisesta e-mail">
                 <input v-model="user.password" type="password" class="form-control" placeholder="Sisesta parool">
-                <input type="password" class="form-control" placeholder="Sisesta parool uuesti">
+                <input type="password" class="form-control" placeholder="Sisesta parool uuesti *ei tööta veel*">
 
                 <DistrictDropdown @event-update-selected-district-id="setUserDistrictId"/>
 
@@ -39,13 +45,17 @@ import router from "@/router";
 import LocationInfoBody from "@/components/modal/Modal.vue";
 import ImageInput from "@/components/ImageInput.vue";
 import DistrictDropdown from "@/components/DistrictDropdown.vue";
+import AlertDanger from "@/components/alert/AlertDanger.vue";
+import AlertSuccess from "@/components/alert/AlertSuccess.vue";
 
 export default {
   name: 'SignupModal',
-  components: {DistrictDropdown, ImageInput, Modal},
+  components: {AlertSuccess, AlertDanger, DistrictDropdown, ImageInput, Modal},
 
   data() {
     return {
+      successMessage: '',
+
       user: {
         districtId: 0,
         firstName: '',
@@ -53,8 +63,13 @@ export default {
         email: '',
         password: '',
         address: '',
-        imageData: '',
-      }
+        imageData: ''
+      },
+
+      errorResponse: {
+        message: '',
+        errorCode: 0
+      },
     }
   },
   methods: {
