@@ -1,7 +1,6 @@
 <template>
     <div>
-      <label for="files" class="btn">Lisa pilt</label>
-        <input id="files" type="file" @change="handleImage" accept="image/x-png,image/jpeg,image/gif">
+        <input type="file" @change="handleImage" accept="image/x-png,image/jpeg,image/gif">
     </div>
 </template>
 

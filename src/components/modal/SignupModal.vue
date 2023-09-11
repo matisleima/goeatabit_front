@@ -57,13 +57,13 @@ export default {
       successMessage: '',
 
       user: {
-        districtId: 0,
         firstName: '',
         lastName: '',
         email: '',
         password: '',
+        districtId: 0,
         address: '',
-        imageData: ''
+        imageString: ''
       },
 
       errorResponse: {
@@ -78,7 +78,7 @@ export default {
     },
 
     setUserImageData(imageDataBase64) {
-      this.user.imageData = imageDataBase64
+      this.user.imageString = imageDataBase64
     },
 
     registerUser() {
