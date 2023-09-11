@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SignupModal ref="signupModalRef"></SignupModal>
+    <SignupModal ref="signupModalRef" @event-user-registration-success="showSignupSuccessMessage"/>>
 
     LOGIN
 
@@ -22,9 +22,12 @@
         <div class="col">
 
           <div class="d-grid gap-3">
-            <div v-show="this.errorResponse.message.length > 0" class="alert alert-danger" role="alert">
-              {{ this.errorResponse.message }}
+            <div class="col">
+              <AlertDanger :alert-message="errorResponse.message"/>
+              <AlertSuccess :alert-message="signupSuccessMessage"/>
             </div>
+
+
             <input v-model="email" type="text" class="form-control" id="exampleInputEmail1"
                    placeholder="Sisesta email">
             <input v-model="password" type="password" class="form-control" id="exampleInputPassword1"
@@ -37,17 +40,23 @@
     </div>
   </div>
 </template>
+
 <script>
 import router from "@/router";
 import SignupModal from "@/components/modal/SignupModal.vue";
+import AlertDanger from "@/components/alert/AlertDanger.vue";
+import AlertSuccess from "@/components/alert/AlertSuccess.vue";
+
 
 
 export default {
   name: "LoginView",
-  components: {SignupModal},
+  components: {AlertSuccess, AlertDanger, SignupModal},
 
   data() {
     return {
+      signupSuccessMessage: '',
+
       email: '',
       password: '',
       loginResponse: {
@@ -98,7 +107,12 @@ export default {
 
     openSignupModal() {
       this.$refs.signupModalRef.$refs.modalRef.openModal()
+    },
+
+    showSignupSuccessMessage (successMessage) {
+      this.signupSuccessMessage = successMessage
     }
+
   },
   mounted() {
     this.getAndSetUserIdFromSessionStorage()

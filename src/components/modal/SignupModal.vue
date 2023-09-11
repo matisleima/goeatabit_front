@@ -8,7 +8,7 @@
         <div class="row">
           <div class="col">
             <AlertDanger :alert-message="errorResponse.message"/>
-            <AlertSuccess :alert-message="successMessage"/>
+<!--            <AlertSuccess :alert-message="successMessage"/>-->
           </div>
         </div>
         <div class="container text-center">
@@ -26,6 +26,9 @@
                 <input v-model="user.address" type="text" class="form-control" id="" placeholder="Sisesta aadress">
 
                 <ImageInput @event-emit-base64="setUserImageData"/>
+                <div class="col col-3">
+                  <UserImage :image-data-base64="user.imageString"/>
+                </div>
 
               </div>
             </div>
@@ -33,7 +36,7 @@
         </div>
       </template>
       <template #footer>
-        <button @click="registerUser" type="button" class="btn btn-secondary" >Loo kasutaja</button>
+        <button @click="sendRegisterUserRequest" type="button" class="btn btn-secondary" >Loo kasutaja</button>
       </template>
     </Modal>
   </div>
@@ -47,15 +50,18 @@ import ImageInput from "@/components/ImageInput.vue";
 import DistrictDropdown from "@/components/DistrictDropdown.vue";
 import AlertDanger from "@/components/alert/AlertDanger.vue";
 import AlertSuccess from "@/components/alert/AlertSuccess.vue";
+import UserImage from "@/components/UserImage.vue";
+import {USER_NAME_UNAVAILABLE} from "@/assets/script/ErrorCode";
+import {USER_REGISTERED} from "@/assets/script/AlertMessage";
+import modal from "@/components/modal/Modal.vue";
+
 
 export default {
   name: 'SignupModal',
-  components: {AlertSuccess, AlertDanger, DistrictDropdown, ImageInput, Modal},
+  components: {UserImage, AlertSuccess, AlertDanger, DistrictDropdown, ImageInput, Modal},
 
   data() {
     return {
-      successMessage: '',
-
       user: {
         firstName: '',
         lastName: '',
@@ -66,10 +72,12 @@ export default {
         imageString: ''
       },
 
+      successMessage: '',
+
       errorResponse: {
         message: '',
         errorCode: 0
-      },
+      }
     }
   },
   methods: {
@@ -81,18 +89,43 @@ export default {
       this.user.imageString = imageDataBase64
     },
 
-    registerUser() {
+    sendRegisterUserRequest() {
       this.$http.post("/sign-up", this.user
       ).then(response => {
         // Siit saame kätte JSONi  ↓↓↓↓↓↓↓↓
-        const responseBody = response.data
+        this.handleRegisterUserSuccessResponse()
       }).catch(error => {
         // Siit saame kätte errori JSONi  ↓↓↓↓↓↓↓↓
-        const errorResponseBody = error.response.data
+        this.handleErrorResponse(error)
       })
+    },
+
+    handleRegisterUserSuccessResponse() {
+      this.successMessage = USER_REGISTERED
+      this.resetAllFields();
+      this.$emit('event-user-registration-success', this.successMessage)
+      this.$refs.modalRef.closeModal()
+    },
+
+    handleErrorResponse(error) {
+      if (error.response.data.errorCode === USER_NAME_UNAVAILABLE) {
+        this.errorResponse.message = error.response.data.message
+      }
+    },
+
+    resetAllFields() {
+      this.user.firstName = ''
+      this.user.lastName = ''
+      this.user.email = ''
+      this.user.password = ''
+      this.user.districtId = 0
+      this.user.address = ''
+      this.user.imageString = ''
+      this.errorResponse.message = ''
+      this.errorResponse.errorCode = 0
     }
 
-  }
 
+  }
 }
 </script>
