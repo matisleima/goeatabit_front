@@ -70,6 +70,7 @@ export default {
   },
   methods: {
     login() {
+      this.signupSuccessMessage = ''
       this.$http.get("/login", {
             params: {
               email: this.email,

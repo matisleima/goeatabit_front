@@ -19,9 +19,9 @@
                 <input v-model="user.lastName" type="text" class="form-control" placeholder="Sisesta perekonnanimi">
                 <input v-model="user.email" class="form-control" placeholder="Sisesta e-mail">
                 <input v-model="user.password" type="password" class="form-control" placeholder="Sisesta parool">
-                <input type="password" class="form-control" placeholder="Sisesta parool uuesti *ei tööta veel*">
+                <input v-model="passwordAgain" type="password" class="form-control" placeholder="Sisesta parool uuesti *ei tööta veel*">
 
-                <DistrictDropdown @event-update-selected-district-id="setUserDistrictId"/>
+                <DistrictDropdown @event-update-selected-district-id="setUserDistrictId" ref="districtDropdownRef"/>
 
                 <input v-model="user.address" type="text" class="form-control" id="" placeholder="Sisesta aadress">
 
@@ -36,7 +36,7 @@
         </div>
       </template>
       <template #footer>
-        <button @click="sendRegisterUserRequest" type="button" class="btn btn-secondary" >Loo kasutaja</button>
+        <button @click="validateForm" type="button" class="btn btn-secondary" >Loo kasutaja</button>
       </template>
     </Modal>
   </div>
@@ -52,7 +52,7 @@ import AlertDanger from "@/components/alert/AlertDanger.vue";
 import AlertSuccess from "@/components/alert/AlertSuccess.vue";
 import UserImage from "@/components/UserImage.vue";
 import {USER_NAME_UNAVAILABLE} from "@/assets/script/ErrorCode";
-import {USER_REGISTERED} from "@/assets/script/AlertMessage";
+import {FILL_ALL_FIELDS, PASSWORD_NOT_MATCHING, USER_REGISTERED} from "@/assets/script/AlertMessage";
 import modal from "@/components/modal/Modal.vue";
 
 
@@ -72,6 +72,8 @@ export default {
         imageString: ''
       },
 
+      passwordAgain: '',
+
       successMessage: '',
 
       errorResponse: {
@@ -80,6 +82,7 @@ export default {
       }
     }
   },
+
   methods: {
     setUserDistrictId(selectedDistrictId) {
       this.user.districtId = selectedDistrictId
@@ -88,6 +91,36 @@ export default {
     setUserImageData(imageDataBase64) {
       this.user.imageString = imageDataBase64
     },
+
+    allFieldsAreFilled() {
+      let check = this.user;
+      return check.firstName.length > 0 &&
+          check.lastName.length > 0 &&
+          check.email.length > 0 &&
+          check.password.length > 0 &&
+          check.districtId > 0 &&
+          check.address.length > 0
+    },
+
+
+    validatePassword() {
+      return this.user.password === this.passwordAgain
+    },
+
+    validateForm() {
+      if(!this.allFieldsAreFilled()){
+        this.errorResponse.message = FILL_ALL_FIELDS
+      } else {
+        if(!this.validatePassword()) {
+          this.errorResponse.message = PASSWORD_NOT_MATCHING
+          this.user.password = ''
+          this.passwordAgain = ''
+        } else {
+          this.sendRegisterUserRequest()
+        }
+      }
+    },
+
 
     sendRegisterUserRequest() {
       this.$http.post("/sign-up", this.user
@@ -118,7 +151,8 @@ export default {
       this.user.lastName = ''
       this.user.email = ''
       this.user.password = ''
-      this.user.districtId = 0
+      this.passwordAgain = ''
+      this.$refs.districtDropdownRef.setSelectedDistrictId(0)
       this.user.address = ''
       this.user.imageString = ''
       this.errorResponse.message = ''
