@@ -24,14 +24,17 @@ export default {
   },
   methods: {
 
+    setSelectedDistrictId(selectedDistrictId) {
+      this.selectedDistrictId = selectedDistrictId
+    },
+
     getDistricts() {
       this.$http.get("/districts")
           .then(response => {
             this.districts = response.data
           })
           .catch(error => {
-           alert("errorRoute here")
-            // router.push({name: 'errorRoute'})
+            router.push({name: 'errorRoute'})
           })
     },
     emitSelectedDistrictId() {
