@@ -19,7 +19,7 @@
                 <input v-model="user.lastName" type="text" class="form-control" placeholder="Sisesta perekonnanimi">
                 <input v-model="user.email" class="form-control" placeholder="Sisesta e-mail">
                 <input v-model="user.password" type="password" class="form-control" placeholder="Sisesta parool">
-                <input v-model="passwordAgain" type="password" class="form-control" placeholder="Sisesta parool uuesti *ei tööta veel*">
+                <input v-model="passwordAgain" type="password" class="form-control" placeholder="Sisesta parool uuesti">
 
                 <DistrictDropdown @event-update-selected-district-id="setUserDistrictId" ref="districtDropdownRef"/>
 
