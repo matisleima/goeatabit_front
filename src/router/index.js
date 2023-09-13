@@ -3,6 +3,8 @@ import HomeView from "@/views/HomeView.vue";
 import LoginView from "@/views/LoginView.vue";
 import ErrorView from "@/views/ErrorView.vue";
 import OfferView from "@/views/OfferView.vue";
+import ReserveView from "@/views/ReserveView.vue";
+
 
 const routes = [
   {
@@ -20,11 +22,16 @@ const routes = [
     name: 'errorRoute',
     component: ErrorView
   },
-  {
-    path: '/offer',
-    name: 'offerRoute',
-    component: OfferView
-  }
+    {
+        path: '/offer',
+        name: 'offerRoute',
+        component: OfferView
+    },
+    {
+        path: '/reserve',
+        name: 'reserveRoute',
+        component: ReserveView
+    }
 ]
 
 const router = createRouter({
