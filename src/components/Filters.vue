@@ -3,7 +3,7 @@
     <div class="d-grid gap-3 mt-5">
       <district-dropdown @event-update-selected-district-id="setSelectedDistrictId"/>
 
-      <input type="date" class="form-control" v-model="filter.selectedDate">
+      <input type="date" class="form-control" v-model="filter.selectedDate" :min="new Date().toISOString().substr(0, 10)">
 
       <select class="form-select" aria-label="Default select example"
               :value="filter.selectedFoodGroupId"
@@ -18,7 +18,7 @@
 
       <input type="number" class="form-control " v-model="filter.priceLimit" placeholder="Maksimumhind (€)" min="0">
 
-      <button type="button" @click="emitFilters" class="btn btn-secondary">Filtreeri</button>
+      <button type="button" @click="getFilteredOffers" class="btn btn-secondary">Filtreeri</button>
     </div>
 
   </div>
@@ -46,7 +46,8 @@ export default {
         selectedFoodGroupId: 0,
         description: '',
         priceLimit: ''
-      }
+      },
+      filteredOffers: {}
     }
 
   },
@@ -64,12 +65,21 @@ export default {
           })
     },
     setSelectedDistrictId(selectedDistrictId) {
-      this.filter.selectedDistrictId = selectedDistrictId
-    },
-    emitFilters() {
-      this.$emit('event-filter', this.filter)
+      this.emitFilter.selectedDistrictId = selectedDistrictId
     },
 
+    getFilteredOffers() {
+      this.$http.get("/meals/offers", {
+            params: {
+              filter: this.filter
+            }
+          }
+      ).then(response => {
+        this.filteredOffers = response.data
+      }).catch(error => {
+        const errorResponseBody = error.response.data
+      })
+    },
   },
   mounted() {
     this.getFoodGroups()

@@ -2,7 +2,7 @@
   <div>
     <SignupModal ref="signupModalRef" @event-user-registration-success="showSignupSuccessMessage"/>
 
-    <div class="container" @keydown.enter="login">
+    <div class="container  mt-5" @keydown.enter="login">
       <div class="row">
       </div>
       <div class="row">
