@@ -7,21 +7,21 @@ import ReserveView from "@/views/ReserveView.vue";
 
 
 const routes = [
-  {
-    path: '/home',
-    name: 'homeRoute',
-    component: HomeView
-  },
-  {
-    path: '/',
-    name: 'loginRoute',
-    component: LoginView
-  },
-  {
-    path: '/error',
-    name: 'errorRoute',
-    component: ErrorView
-  },
+    {
+        path: '/home',
+        name: 'homeRoute',
+        component: HomeView
+    },
+    {
+        path: '/',
+        name: 'loginRoute',
+        component: LoginView
+    },
+    {
+        path: '/error',
+        name: 'errorRoute',
+        component: ErrorView
+    },
     {
         path: '/offer',
         name: 'offerRoute',
@@ -35,8 +35,8 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes
+    history: createWebHistory(process.env.BASE_URL),
+    routes
 })
 
 export default router

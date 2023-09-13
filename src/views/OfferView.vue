@@ -10,7 +10,9 @@
           <input v-model="offer.date" :min="new Date().toISOString().substr(0, 10)" type="date" class="form-control"
                  placeholder="Kuupäev">
           <input v-model="offer.time" type="number" class="form-control" placeholder="Kellaaeg">
-          <input v-model="offer.foodGroupId" type="text" class="form-control" placeholder="_food group here_">
+
+          <FoodGroupDropDown @event-update-selected-food-group-id="setOfferFoodGroupId" ref="foodGroupRef"/>
+
           <input v-model="offer.offerName" type="text" size="" class="form-control" placeholder="Toidu nimi">
           <input v-model="offer.description" id="descriptionbox" type="text" class="form-control"
                  placeholder="Sisaldab...">
@@ -50,10 +52,11 @@ import Modal from "@/components/modal/Modal.vue";
 import LogoutModal from "@/components/modal/LogoutModal.vue";
 import {FILL_ALL_FIELDS, OFFER_ADDED, USER_REGISTERED} from "@/assets/script/AlertMessage";
 import {USER_NAME_UNAVAILABLE} from "@/assets/script/ErrorCode";
+import FoodGroupDropDown from "@/components/FoodGroupDropdown.vue";
 
 export default {
   name: 'OfferView',
-  components: {LogoutModal, Modal, AlertSuccess, AlertDanger},
+  components: {FoodGroupDropDown, LogoutModal, Modal, AlertSuccess, AlertDanger},
 
 
   data() {
@@ -68,7 +71,7 @@ export default {
         totalPortions: '',
         offerName: '',
         description: '',
-        foodGroupId: 1,
+        foodGroupId: 0,
         offerStatus: 'A',
         address: '',
         districtId: 0
@@ -86,7 +89,8 @@ export default {
     resetForm() {
       this.offer.date = ''
       this.offer.time = ''
-      this.offer.foodGroupId = ''
+      this.$refs.foodGroupRef.setSelectedFoodGroupId(0)
+      this.offer.foodGroupId = 0
       this.offer.offerName = ''
       this.offer.description = ''
       this.offer.price = ''
@@ -114,6 +118,8 @@ export default {
 
 
     sendOfferRequest() {
+      this.errorResponse.message = ''
+      this.successMessage = ''
       this.$http.post("/meals/offers", this.offer
       ).then(response => {
         // Siit saame kätte JSONi  ↓↓↓↓↓↓↓↓
@@ -140,6 +146,10 @@ export default {
         // this.errorResponse.message = error.response.data.message
       }
     },
+
+    setOfferFoodGroupId(selectedFoodGroupId) {
+      this.offer.foodGroupId = selectedFoodGroupId;
+    }
 
   }
 }
