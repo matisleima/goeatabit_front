@@ -12,13 +12,10 @@
           </thead>
           <tbody>
           <tr v-for="offer in offers" :value="offer.offerId" :key="offer.offerId">
-            <td>{{offer.firstName}}{{" "}}{{offer.lastName}}</td>
+            <td @click="navigateToUserOffersView(offer.offerId)"
+                style="cursor: pointer; color: blue; text-decoration: underline;">{{offer.firstName}}{{" "}}{{offer.lastName}}</td>
             <td> {{offer.offerName}}</td>
           </tr>
-<!--          <tr>-->
-<!--            <td>Jacob</td>-->
-<!--            <td>Thornton</td>-->
-<!--          </tr>-->
           </tbody>
         </table>
 
@@ -32,9 +29,6 @@ import router from "@/router";
 export default {
   name: 'HomePageFilteredOffersTable',
 
-  // props:{
-  //   offers:[]
-  // },
   data(){
     return{
 
@@ -54,7 +48,8 @@ export default {
           address: '',
           districtId: 0,
           firstName: '',
-          lastName: ''
+          lastName: '',
+          imageString:''
         }
       ]
     }
@@ -71,6 +66,9 @@ export default {
             // Siit saame kätte errori JSONi  ↓↓↓↓↓↓↓↓
             router.push({name:'errorRoute'})
           })
+    },
+    navigateToUserOffersView(offerId){
+      router.push({name:'userOffersRoute', query:{offerId:offerId}})
     },
 
   },

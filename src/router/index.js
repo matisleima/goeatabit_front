@@ -3,6 +3,8 @@ import HomeView from "@/views/HomeView.vue";
 import LoginView from "@/views/LoginView.vue";
 import ErrorView from "@/views/ErrorView.vue";
 import ReserveView from "@/views/ReserveView.vue";
+import ReservationsView from "@/views/UserOffersView.vue";
+import UserOffersView from "@/views/UserOffersView.vue";
 
 const routes = [
   {
@@ -24,6 +26,11 @@ const routes = [
     path: '/reserve',
     name: 'reserveRoute',
     component: ReserveView
+  },
+  {
+    path: '/userOffers',
+    name: 'userOffersRoute',
+    component: UserOffersView
   }
 ]
 

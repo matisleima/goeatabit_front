@@ -1,18 +1,19 @@
 <template>
   <LogoutModal ref="logoutModalRef"/>
   <div>
-    <h1>Tänased TOP pakkumised MINGI_FILTER</h1>
+    //TODO:LOOGELISED SULUD EI TÖÖTA ALL-> kasutajaga seotud sitrict
+    <h1>Tänased TOP pakkumised {{ userId}}</h1>
   </div>
 
-  <!--  //PILDID-->
+<!--  //PILDID-->
 
   <LandingPageFilteredOffersPicture/>
 
-  <!--  //TABEL-->
+<!--  //TABEL-->
 
   <HomePageFilteredOffersTable :offers="offers"/>
 
-  <!--  //NUPUD-->
+<!--  //NUPUD-->
 
   <HomePageButtons :handle-logout="handleLogout"/>
 
@@ -25,13 +26,13 @@ import LandingPageFilteredOffersPicture from "@/components/homePageComponents/Ho
 import HomePageFilteredOffersTable from "@/components/homePageComponents/HomePageFilteredOffersTable.vue";
 import HomePageButtons from "@/components/homePageComponents/HomePageButtons.vue";
 
-export default {
+export default{
   name: 'HomeView',
   components: {HomePageButtons, HomePageFilteredOffersTable, LandingPageFilteredOffersPicture, LogoutModal},
 
   data() {
     return {
-      offerId: 0,
+      userId: 0,
       offers: [
         {
           offerId: 0,
@@ -49,7 +50,7 @@ export default {
           districtId: 0,
           firstName: '',
           lastName: ''
-        }
+        } 
       ]
     }
   },
@@ -58,6 +59,29 @@ export default {
     handleLogout() {
       this.$refs.logoutModalRef.$refs.modalRef.openModal()
     },
-  }
+
+  },
+  beforeMount() {
+    this.userId = sessionStorage.getItem('userId')
+
+  },
+  getDistrict() {
+    this.$http.get("/some/path", {
+          params: {
+            userId: this.userId,
+          }
+        }
+    ).then(response => {
+      // Siit saame kätte JSONi  ↓↓↓↓↓↓↓↓
+      const responseBody = response.data
+    }).catch(error => {
+      // Siit saame kätte errori JSONi  ↓↓↓↓↓↓↓↓
+      const errorResponseBody = error.response.data
+    })
+  },
+
+
 }
+
+
 </script>
