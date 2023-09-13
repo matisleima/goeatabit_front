@@ -48,7 +48,8 @@ export default {
           address: '',
           districtId: 0,
           firstName: '',
-          lastName: ''
+          lastName: '',
+          imageString:''
         }
       ]
     }

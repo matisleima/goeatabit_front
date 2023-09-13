@@ -5,14 +5,17 @@
         <img src="../../assets/script/meal.jpg" height="400" width="400"
         @click="navigateToUserOffersView"/>
       </div>
-      <div class="col">
-<!--        todo -v-for="offer in offers" :value="offer.offerId" :key="offer.offerId"-->
-        DEFAULT PILT VÕI OFFER PILT
-        <img>
+
+      <div v-for="offer in offers" :value="offer.offerId" :key="offer.offerId" class="col">
+        <img :src="offer.imageString || '../../assets/script/meal.jpg'">
+        <a @click="navigateToUserOffersView(offer.offerId)">
+          {{offer.offerName}}
+        </a>
+        <p>{{offer.offerName}}</p>
+        <p>{{offer.address}}</p>
+
       </div>
-      <div class="col">
-        DEFAULT PILT VÕI OFFER PILT
-      </div>
+
     </div>
   </div>
 </template>
@@ -42,7 +45,8 @@ data(){
         address: '',
         districtId: 0,
         firstName: '',
-        lastName: ''
+        lastName: '',
+        imageString:''
       }
     ]
   }
