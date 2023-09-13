@@ -1,32 +1,24 @@
 <template>
   <div>
     <div class="d-grid gap-3 mt-5">
-      <district-dropdown/>
+      <district-dropdown @event-update-selected-district-id="setSelectedDistrictId"/>
 
-      <select class="form-select " aria-label="Default select example">
-        <option selected :value="0">Kuupäev</option>
-        <option v-for="district in districts" :value="district.districtId" :key="district.districtId">
-          {{ district.districtName }}
-        </option>
-      </select>
+      <input type="date" class="form-control" v-model="filter.selectedDate">
 
-      <select class="form-select" aria-label="Default select example">
-        <option selected :value="0">Söök</option>
+      <select class="form-select" aria-label="Default select example"
+              :value="filter.selectedFoodGroupId"
+              @input="filter.selectedFoodGroupId = $event.target.value">
+        <option :value="0">Toidu kategooria</option>
         <option v-for="foodGroup in foodGroups" :value="foodGroup.foodGroupId" :key="foodGroup.foodGroupId">
           {{ foodGroup.foodGroupName }}
         </option>
       </select>
 
-      <input type="text" class="form-control " placeholder="Kirjeldus...">
+      <input type="text" class="form-control " v-model="filter.description" placeholder="Kirjeldus...">
 
-      <select class="form-select " aria-label="Default select example">
-        <option selected :value="0">Piirhind</option>
-        <option v-for="district in districts" :value="district.districtId" :key="district.districtId">
-          {{ district.districtName }}
-        </option>
-      </select>
+      <input type="number" class="form-control " v-model="filter.priceLimit" placeholder="Maksimumhind (€)" min="0">
 
-      <button type="button" class="btn btn-secondary">Filtreeri</button>
+      <button type="button" @click="emitFilters" class="btn btn-secondary">Filtreeri</button>
     </div>
 
   </div>
@@ -47,7 +39,14 @@ export default {
           foodGroupId: 0,
           foodGroupName: ''
         }
-      ]
+      ],
+      filter: {
+        selectedDistrictId: 0,
+        selectedDate: '',
+        selectedFoodGroupId: 0,
+        description: '',
+        priceLimit: ''
+      }
     }
 
   },
@@ -64,13 +63,16 @@ export default {
             const errorResponseBody = error.response.data
           })
     },
+    setSelectedDistrictId(selectedDistrictId) {
+      this.filter.selectedDistrictId = selectedDistrictId
+    },
+    emitFilters() {
+      this.$emit('event-filter', this.filter)
+    },
 
   },
   mounted() {
     this.getFoodGroups()
-
   }
-
-
 }
 </script>

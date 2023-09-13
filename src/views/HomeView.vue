@@ -4,15 +4,15 @@
     <h1>Tänased TOP pakkumised MINGI_FILTER</h1>
   </div>
 
-<!--  //PILDID-->
+  <!--  //PILDID-->
 
   <LandingPageFilteredOffersPicture/>
 
-<!--  //TABEL-->
+  <!--  //TABEL-->
 
   <HomePageFilteredOffersTable :offers="offers"/>
 
-<!--  //NUPUD-->
+  <!--  //NUPUD-->
 
   <HomePageButtons :handle-logout="handleLogout"/>
 
@@ -25,14 +25,14 @@ import LandingPageFilteredOffersPicture from "@/components/homePageComponents/Ho
 import HomePageFilteredOffersTable from "@/components/homePageComponents/HomePageFilteredOffersTable.vue";
 import HomePageButtons from "@/components/homePageComponents/HomePageButtons.vue";
 
-export default{
+export default {
   name: 'HomeView',
   components: {HomePageButtons, HomePageFilteredOffersTable, LandingPageFilteredOffersPicture, LogoutModal},
 
-  data(){
-    return{
-      offerId:0,
-      offers:[
+  data() {
+    return {
+      offerId: 0,
+      offers: [
         {
           offerId: 0,
           userId: 0,
@@ -49,7 +49,7 @@ export default{
           districtId: 0,
           firstName: '',
           lastName: ''
-        } 
+        }
       ]
     }
   },
@@ -58,13 +58,6 @@ export default{
     handleLogout() {
       this.$refs.logoutModalRef.$refs.modalRef.openModal()
     },
-
   }
-
 }
-
-
-
-
-
 </script>
