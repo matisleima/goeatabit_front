@@ -1,17 +1,13 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col">
-        <img src="../../assets/script/meal.jpg" height="400" width="400"
-        @click="navigateToUserOffersView"/>
-      </div>
 
+//TODO: PILDI LINGID EI TÖÖTA
       <div v-for="offer in offers" :value="offer.offerId" :key="offer.offerId" class="col">
-        <img :src="offer.imageString || '../../assets/script/meal.jpg'">
+        <img :src="offer.imageString || '../../assets/script/meal.jpg'" height="300" width="300">
         <a @click="navigateToUserOffersView(offer.offerId)">
           {{offer.offerName}}
         </a>
-        <p>{{offer.offerName}}</p>
         <p>{{offer.address}}</p>
 
       </div>
