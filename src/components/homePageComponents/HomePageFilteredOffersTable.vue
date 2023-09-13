@@ -12,7 +12,7 @@
           </thead>
           <tbody>
           <tr v-for="offer in offers" :value="offer.offerId" :key="offer.offerId">
-            <td>{{offer.firstName}}</td>
+            <td>{{offer.firstName}}{{" "}}{{offer.lastName}}</td>
             <td> {{offer.offerName}}</td>
           </tr>
 <!--          <tr>-->
