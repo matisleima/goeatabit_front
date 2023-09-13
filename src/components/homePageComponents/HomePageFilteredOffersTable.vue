@@ -12,8 +12,9 @@
           </thead>
           <tbody>
           <tr v-for="offer in offers" :value="offer.offerId" :key="offer.offerId">
-            <td>{{offer.firstName}}{{" "}}{{offer.lastName}}</td>
-            <td @click="navigateToReservationsView(offer.offerId)"> {{offer.offerName}}</td>
+            <td @click="navigateToUserOffersView(offer.offerId)"
+                style="cursor: pointer; color: blue; text-decoration: underline;">{{offer.firstName}}{{" "}}{{offer.lastName}}</td>
+            <td> {{offer.offerName}}</td>
           </tr>
           </tbody>
         </table>
@@ -65,8 +66,8 @@ export default {
             router.push({name:'errorRoute'})
           })
     },
-    navigateToReservationsView(offerId){
-      router.push({name:'reservationsRoute', query:{offerId:offerId}})
+    navigateToUserOffersView(offerId){
+      router.push({name:'userOffersRoute', query:{offerId:offerId}})
     },
 
   },
