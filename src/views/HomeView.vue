@@ -10,7 +10,7 @@
 
 <!--  //TABEL-->
 
-  <HomePageFilteredOffersTable/>
+  <HomePageFilteredOffersTable :offers="offers"/>
 
 <!--  //NUPUD-->
 
@@ -29,6 +29,30 @@ export default{
   name: 'HomeView',
   components: {HomePageButtons, HomePageFilteredOffersTable, LandingPageFilteredOffersPicture, LogoutModal},
 
+  data(){
+    return{
+      offerId:0,
+      offers:[
+        {
+          offerId: 0,
+          userId: 0,
+          userRating: 0,
+          time: '',
+          date: '',
+          price: 0,
+          totalPortions: 0,
+          offerName: '',
+          description: '',
+          foodGroupId: 0,
+          offerStatus: '',
+          address: '',
+          districtId: 0,
+          firstName: '',
+          lastName: ''
+        } 
+      ]
+    }
+  },
   methods: {
 
     handleLogout() {
