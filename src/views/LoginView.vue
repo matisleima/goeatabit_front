@@ -128,8 +128,8 @@ export default {
 
 
 <style>
-/*body {
-  background-image: url("../assets/background.jpg");
-  background-size: cover;
-}*/
+body {
+    //background-image: url("../assets/background.jpg");
+    //background-size: cover;
+}
 </style>
