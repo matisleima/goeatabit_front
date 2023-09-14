@@ -26,11 +26,13 @@
       </div>
       <div class="row">
         <div class="col col-2">
-          <filters/>
+          <filters @event-emit-filter-request="sendFilterRequest"
+                   @event-emit-filter-content="catchFilter"
+          />
         </div>
 
         <div class="col mt-5">
-          <offers-table/>
+          <offers-table ref="filterRequestRef" :filter="filter"/>
         </div>
 
         <div class="col col-2">
@@ -52,16 +54,17 @@ import Filters from "@/components/Filters.vue";
 
 export default {
   name: "ReserveView",
-  computed: {
-    loginView() {
-      return loginView
-    }
-  },
   components: {Filters, DistrictDropdown, OffersTable, LogoutModal},
   data() {
     return {
       userId: 0,
-
+      filter: {
+        selectedDistrictId: 0,
+        selectedDate: '',
+        selectedFoodGroupId: 0,
+        description: '',
+        priceLimit: ''
+      },
     }
   },
   methods: {
@@ -71,7 +74,9 @@ export default {
     catchFilter(filter) {
       this.filter = filter
     },
-
+    sendFilterRequest() {
+      this.$refs.filterRequestRef.getFilteredOffers()
+    },
   },
   mounted() {
     this.userId = Number(sessionStorage.getItem('userId'))
