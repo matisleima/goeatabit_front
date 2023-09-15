@@ -1,5 +1,5 @@
 <template>
-  <BookConfirmModal ref="bookConfirmModalRef" :selectedOffer="selectedOffer"/>
+  <BookConfirmModal ref="bookConfirmModalRef"/>
 
   <div v-if="userId === 0">
     <h1>
@@ -75,7 +75,6 @@ export default {
   data() {
     return {
       userId: 0,
-      selectedOffer: 0,
       filter: {
         selectedDistrictId: 0,
         selectedDate: '',
@@ -91,14 +90,11 @@ export default {
     },
     handleConfirmation(offerId, userId) {
       this.$refs.bookConfirmModalRef.$refs.modalRef.openModal()
-      this.selectedOffer = offerId
-      this.$refs.bookConfirmModalRef.getOfferByOfferId(userId)
+      this.$refs.bookConfirmModalRef.getOfferByOfferId(userId, offerId)
     },
     passFilterOn(filter) {
       this.filter = filter
       this.$refs.filterRequestRef.getFilteredOffers()
-    },
-    sendFilterRequest() {
     },
   },
   mounted() {

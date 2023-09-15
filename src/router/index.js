@@ -4,8 +4,7 @@ import LoginView from "@/views/LoginView.vue";
 import ErrorView from "@/views/ErrorView.vue";
 import OfferView from "@/views/OfferView.vue";
 import ReserveView from "@/views/ReserveView.vue";
-import ReservationsView from "@/views/UserOffersView.vue";
-import UserOffersView from "@/views/UserOffersView.vue";
+import ReservationsView from "@/views/ReservationsView.vue";
 
 const routes = [
     {
@@ -34,9 +33,9 @@ const routes = [
         component: OfferView
     },
     {
-        path: '/userOffers',
-        name: 'userOffersRoute',
-        component: UserOffersView
+        path: '/reservations',
+        name: 'reservationsView',
+        component: ReservationsView
     },
 
 ]

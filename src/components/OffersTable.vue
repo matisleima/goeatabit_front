@@ -16,7 +16,7 @@
       </thead>
 
       <tbody>
-      <tr v-for="offer in filteredOffers" :key="filteredOffers.offerId">
+      <tr v-for="offer in filteredOffers" :key="offer.offerId">
         <td><a>{{ offer.date }}</a></td>
         <td><a>{{ offer.time }}</a></td>
         <td><a>{{ offer.address }}</a></td>
@@ -79,16 +79,20 @@ export default {
         {
           offerId: 0,
           userId: 0,
+          userRating: 0,
+          time: 0,
+          date: '',
+          price: 0,
+          totalPortions: 0,
           offerName: '',
           description: '',
-          date: '',
-          time: 0,
+          foodGroupId: 0,
+          offerStatus: '',
           address: '',
+          districtId: 0,
           firstName: '',
           lastName: '',
-          price: 0,
-          availableMeals: 0,
-          userRating: 0
+          imageString: 0
         }
       ]
     }

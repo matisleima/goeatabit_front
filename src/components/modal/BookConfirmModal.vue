@@ -21,19 +21,19 @@
           </thead>
 
           <tbody>
-          <tr v-for="offer in filteredOffers" :key="filteredOffers.offerId">
-            <td><a>{{ offer.date }}</a></td>
-            <td><a>{{ offer.time }}</a></td>
-            <td><a>{{ offer.address }}</a></td>
-            <td><a>{{ offer.firstName }} {{ offer.lastName }}</a></td>
+          <tr>
+            <td><a>{{ filteredOffer.date }}</a></td>
+            <td><a>{{ filteredOffer.time }}</a></td>
+            <td><a>{{ filteredOffer.address }}</a></td>
+            <td><a>{{ filteredOffer.firstName }} {{ filteredOffer.lastName }}</a></td>
             <td>
               <div class="hover-container">
-                <a>{{ offer.offerName }}</a>
-                <div class="hover-text">{{ offer.description }}</div>
+                <a>{{ filteredOffer.offerName }}</a>
+                <div class="hover-text">{{ filteredOffer.description }}</div>
               </div>
             </td>
-            <td><a>{{ offer.price }}€</a></td>
-            <td><a>{{ offer.userRating }}</a></td>
+            <td><a>{{ filteredOffer.price }}€</a></td>
+            <td><a>{{ filteredOffer.userRating }}</a></td>
             <td></td>
 
           </tr>
@@ -42,7 +42,7 @@
       </template>
 
       <template #footer>
-        <button @click="confirm" type="button" class="btn btn-success">Kinnitan</button>
+        <button @click="confirm(); bookOffer()" type="button" class="btn btn-success">Kinnitan</button>
       </template>
 
     </Modal>
@@ -56,47 +56,64 @@ import OffersTable from "@/components/OffersTable.vue";
 export default {
   name: 'BookConfirmModal',
   components: {OffersTable, Modal},
-  props: {
-    selectedOffer: 0
-  },
+
   data() {
     return {
-      filteredOffers: [
+      userId: sessionStorage.getItem('userId'),
+      filteredOffer: [
         {
           offerId: 0,
           userId: 0,
+          userRating: 0,
+          time: 0,
+          date: '',
+          price: 0,
+          totalPortions: 0,
           offerName: '',
           description: '',
-          date: '',
-          time: 0,
+          foodGroupId: 0,
+          offerStatus: '',
           address: '',
+          districtId: 0,
           firstName: '',
           lastName: '',
-          price: 0,
-          availableMeals: 0,
-          userRating: 0
+          imageString: ''
+
         }
       ]
     }
   },
   methods: {
-    getOfferByOfferId(userId) {
+    getOfferByOfferId(userId, offerId) {
       this.$http.get("/meals/offer", {
             params: {
-              offerId: this.selectedOffer,
+              offerId: offerId,
               userId: userId
             }
           }
       ).then(response => {
-        alert(response.data.date)
-        this.filteredOffers = response.data
+        this.filteredOffer = response.data
       }).catch(error => {
         const errorResponseBody = error.response.data
       })
     },
+    bookOffer() {
+      this.$http.post("/meals/event", null, {
+            params: {
+              userId: this.userId,
+              offerId: this.filteredOffer.offerId
+            }
+          }
+      ).then(response => {
+        const responseBody = response.data
+      }).catch(error => {
+        const errorResponseBody = error.response.data
+      })
+    },
+
     confirm() {
       this.$refs.modalRef.closeModal()
-      router.push({name: 'reservationsRoute'})
+      router.push({name: 'reservationsView'})
     },
   }
 }
