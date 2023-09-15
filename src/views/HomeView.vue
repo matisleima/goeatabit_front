@@ -1,8 +1,7 @@
 <template>
   <LogoutModal ref="logoutModalRef"/>
   <div>
-    //TODO:LOOGELISED SULUD EI TÖÖTA ALL-> kasutajaga seotud sitrict
-    <h1>Tänased TOP pakkumised {{ userId}}</h1>
+    <h1>Tänased TOP pakkumised {{locations.districtName}}</h1>
   </div>
 
 <!--  //PILDID-->
@@ -25,6 +24,7 @@ import LogoutModal from "@/components/modal/LogoutModal.vue";
 import LandingPageFilteredOffersPicture from "@/components/homePageComponents/HomePageFilteredOffersPicture.vue";
 import HomePageFilteredOffersTable from "@/components/homePageComponents/HomePageFilteredOffersTable.vue";
 import HomePageButtons from "@/components/homePageComponents/HomePageButtons.vue";
+import router from "@/router";
 
 export default{
   name: 'HomeView',
@@ -32,7 +32,6 @@ export default{
 
   data() {
     return {
-      userId: 0,
       offers: [
         {
           offerId: 0,
@@ -49,8 +48,15 @@ export default{
           address: '',
           districtId: 0,
           firstName: '',
-          lastName: ''
+          lastName: '',
+          imageString: '',
         } 
+      ],
+      locations:[
+        {
+          districtId: 0,
+          districtName: ''
+        }
       ]
     }
   },
@@ -59,25 +65,26 @@ export default{
     handleLogout() {
       this.$refs.logoutModalRef.$refs.modalRef.openModal()
     },
+    getDistrict() {
+      this.$http.get("/meals/offers/location", {
+            params: {
+              userId: this.userId,
+            }
+          }
+      ).then(response => {
+        // Siit saame kätte JSONi  ↓↓↓↓↓↓↓↓
+        this.locations = response.data
+      }).catch(error => {
+        // Siit saame kätte errori JSONi  ↓↓↓↓↓↓↓↓
+        router.push({name: 'errorRoute'})
+      })
+    },
 
   },
   beforeMount() {
     this.userId = sessionStorage.getItem('userId')
+    this.getDistrict()
 
-  },
-  getDistrict() {
-    this.$http.get("/some/path", {
-          params: {
-            userId: this.userId,
-          }
-        }
-    ).then(response => {
-      // Siit saame kätte JSONi  ↓↓↓↓↓↓↓↓
-      const responseBody = response.data
-    }).catch(error => {
-      // Siit saame kätte errori JSONi  ↓↓↓↓↓↓↓↓
-      const errorResponseBody = error.response.data
-    })
   },
 
 
