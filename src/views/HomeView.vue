@@ -1,7 +1,6 @@
 <template>
   <LogoutModal ref="logoutModalRef"/>
   <div>
-    //TODO:LOOGELISED SULUD EI TÖÖTA ALL-> kasutajaga seotud sitrict
     <h1>Tänased TOP pakkumised {{locations.districtName}}</h1>
   </div>
 
