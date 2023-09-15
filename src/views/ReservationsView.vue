@@ -18,8 +18,39 @@
         </div>
 
         <div class="col mt-5">
-        MY RESERVATIONS TABLE
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">Kuupäev</th>
+              <th scope="col">Kell</th>
+              <th scope="col">Aadress</th>
+              <th scope="col">Pakkuja</th>
+              <th scope="col">Söök</th>
+              <th scope="col">Hind</th>
+              <th scope="col">Vabu kohti</th>
+              <th scope="col">Hinnang</th>
+            </tr>
+            </thead>
 
+            <tbody>
+            <tr v-for="event in myEvents" :key="event.offerId">
+              <td><a>{{ event.date }}</a></td>
+              <td><a>{{ event.time }}</a></td>
+              <td><a>{{ event.address }}</a></td>
+              <td><a>{{ event.firstName }} {{ event.lastName }}</a></td>
+              <td>
+                <div class="hover-container">
+                  <a>{{ event.offerName }}</a>
+                  <div class="hover-text">{{ event.description }}</div>
+                </div>
+              </td>
+              <td><a>{{ event.price }}€</a></td>
+              <td><a>?</a></td>
+              <td><a>{{ event.userRating }}</a></td>
+
+            </tr>
+            </tbody>
+          </table>
         </div>
 
         <div class="col col-2">
@@ -43,7 +74,6 @@
       </div>
 
 
-
     </div>
   </div>
 </template>
@@ -53,6 +83,45 @@ import OffersTable from "@/components/OffersTable.vue";
 
 export default {
   name: "ReservationsView",
-  components: { OffersTable}
+  components: {OffersTable},
+  data() {
+    return {
+      userId: sessionStorage.getItem('userId'),
+      myEvents: [
+        {
+          offerId: 0,
+          userId: 0,
+          userRating: 0,
+          time: 0,
+          date: '',
+          price: 0,
+          totalPortions: 0,
+          offerName: '',
+          description: '',
+          foodGroupId: 0,
+          offerStatus: '',
+          address: '',
+          districtId: 0,
+          firstName: '',
+          lastName: '',
+          imageString: 0
+        }
+      ]
+    }
+  },
+  methods: {
+    getMyEvents() {
+      this.$http.get("/meals/events", {
+            params: {
+              userId: this.userId
+            }
+          }
+      ).then(response => {
+        this.myEvents = response.data
+      }).catch(error => {
+        const errorResponseBody = error.response.data
+      })
+    },
+  }
 }
 </script>

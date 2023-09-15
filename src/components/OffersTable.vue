@@ -35,7 +35,6 @@
               <button type="button" class="btn btn-success" @click="launchConfirmModal(offer.offerId, offer.userId)">Go Eat A Bit!</button>
             </a>
         </td>
-
       </tr>
       </tbody>
     </table>
@@ -107,6 +106,7 @@ export default {
               foodGroupId: this.filter.selectedFoodGroupId,
               description: this.filter.description,
               priceLimit: Number(this.filter.priceLimit),
+              userId: 0
             }
           }
       ).then(response => {
