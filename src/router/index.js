@@ -8,31 +8,31 @@ import ReservationsView from "@/views/UserOffersView.vue";
 import UserOffersView from "@/views/UserOffersView.vue";
 
 const routes = [
-  {
-    path: '/home',
-    name: 'homeRoute',
-    component: HomeView
-  },
-  {
-    path: '/',
-    name: 'loginRoute',
-    component: LoginView
-  },
-  {
-    path: '/error',
-    name: 'errorRoute',
-    component: ErrorView
-  },
-  {
-    path: '/reserve',
-    name: 'reserveRoute',
-    component: ReserveView
-  },
-  {
-    path: '/userOffers',
-    name: 'userOffersRoute',
-    component: UserOffersView
-  },
+    {
+        path: '/home',
+        name: 'homeRoute',
+        component: HomeView
+    },
+    {
+        path: '/',
+        name: 'loginRoute',
+        component: LoginView
+    },
+    {
+        path: '/error',
+        name: 'errorRoute',
+        component: ErrorView
+    },
+    {
+        path: '/reserve',
+        name: 'reserveRoute',
+        component: ReserveView
+    },
+    {
+        path: '/userOffers',
+        name: 'userOffersRoute',
+        component: UserOffersView
+    },
     {
         path: '/home',
         name: 'homeRoute',
@@ -61,8 +61,8 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes
+    history: createWebHistory(process.env.BASE_URL),
+    routes
 })
 
 export default router

@@ -30,11 +30,11 @@
         <td><a>{{ offer.price }}€</a></td>
         <td><a>?</a></td>
         <td><a>{{ offer.userRating }}</a></td>
-        <td><a>
-
-          <button type="button" class="btn btn-success">Go Eat A Bit!</button>
-
-        </a></td>
+        <td>
+            <a>
+              <button type="button" class="btn btn-success" @click="launchConfirmModal(offer.offerId, offer.userId)">Go Eat A Bit!</button>
+            </a>
+        </td>
 
       </tr>
       </tbody>
@@ -75,7 +75,6 @@ export default {
 
   data() {
     return {
-
       filteredOffers: [
         {
           offerId: 0,
@@ -96,17 +95,6 @@ export default {
   },
 
   methods: {
-    // getOffers() {
-    //   this.$http.get("/meals/offers")
-    //       .then(response => {
-    //         // Siit saame kätte JSONi  ↓↓↓↓↓↓↓↓
-    //         this.offers = response.data
-    //       })
-    //       .catch(error => {
-    //         // Siit saame kätte errori JSONi  ↓↓↓↓↓↓↓↓
-    //         const errorResponseBody = error.response.data
-    //       })
-    // },
     getFilteredOffers() {
       this.$http.get("meals/filtered-offers", {
             params: {
@@ -118,12 +106,13 @@ export default {
             }
           }
       ).then(response => {
-        alert('filteredOffersi väärtustamine! enne')
         this.filteredOffers = response.data
-        alert('filteredOffersi väärtustamine! pärast')
       }).catch(error => {
         const errorResponseBody = error.response.data
       })
+    },
+    launchConfirmModal(offerId, userId) {
+      this.$emit('event-book-meal', offerId, userId)
     },
 
   },

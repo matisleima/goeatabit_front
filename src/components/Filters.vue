@@ -21,7 +21,7 @@
 
       <input type="number" class="form-control " v-model="filter.priceLimit" placeholder="Maksimumhind (€)" min="0">
 
-      <button type="button" @click="sendFilterRequest" class="btn btn-secondary">Filtreeri</button>
+      <button type="button" @click="sendFilterRequest" @keydown.enter="sendFilterRequest" class="btn btn-secondary">Filtreeri</button>
     </div>
 
   </div>
@@ -72,8 +72,7 @@ export default {
       this.emitFilter.selectedDistrictId = selectedDistrictId
     },
     sendFilterRequest() {
-      this.$emit('event-emit-filter-content', this.filter)
-      this.$emit('event-emit-filter-request')
+      this.$emit('event-emit-filter-request', this.filter)
     },
   },
   mounted() {
