@@ -74,7 +74,7 @@ export default {
         foodGroupId: 0,
         offerStatus: 'A',
         address: '',
-        districtId: 0
+        districtId: 0,
       },
 
       successMessage: '',
@@ -120,7 +120,7 @@ export default {
     sendOfferRequest() {
       this.errorResponse.message = ''
       this.successMessage = ''
-      this.$http.post("/meals/offers", this.offer
+      this.$http.post("/meals/offer", this.offer
       ).then(response => {
         // Siit saame kätte JSONi  ↓↓↓↓↓↓↓↓
         this.handleAddOfferSuccessResponse()
