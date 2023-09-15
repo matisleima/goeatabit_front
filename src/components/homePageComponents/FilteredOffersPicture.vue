@@ -2,7 +2,9 @@
   <div class="container">
     <div class="row">
 
-//TODO: PILDI LINGID EI TÖÖTA
+//TODO: PILDI LINGID EI TÖÖTA;  kuvada user`´ i pildid, pakkumised useri piirkonnas,
+      3 kellaajaliselt varajasemat pakkumist
+      <p></p>
       <div v-for="offer in offers" :value="offer.offerId" :key="offer.offerId" class="col">
         <img :src="offer.imageString || '../../assets/script/meal.jpg'" height="300" width="300">
         <a @click="navigateToUserOffersView(offer.offerId)">

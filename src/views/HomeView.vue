@@ -21,9 +21,9 @@
 
 <script>
 import LogoutModal from "@/components/modal/LogoutModal.vue";
-import LandingPageFilteredOffersPicture from "@/components/homePageComponents/HomePageFilteredOffersPicture.vue";
-import HomePageFilteredOffersTable from "@/components/homePageComponents/HomePageFilteredOffersTable.vue";
-import HomePageButtons from "@/components/homePageComponents/HomePageButtons.vue";
+import LandingPageFilteredOffersPicture from "@/components/homePageComponents/FilteredOffersPicture.vue";
+import HomePageFilteredOffersTable from "@/components/homePageComponents/FilteredOffersTable.vue";
+import HomePageButtons from "@/components/homePageComponents/Buttons.vue";
 import router from "@/router";
 
 export default{

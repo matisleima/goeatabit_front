@@ -11,7 +11,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr v-for="offer in offers" :value="offer.offerId" :key="offer.offerId">
+          <tr v-for="(offer, index) in offers.slice(Math.max(offers.length-3,0))" :key="offer.offerId">
             <td @click="navigateToUserOffersView(offer.offerId)"
                 style="cursor: pointer; color: blue; text-decoration: underline;">{{offer.firstName}}{{" "}}{{offer.lastName}}</td>
             <td> {{offer.offerName}}</td>
