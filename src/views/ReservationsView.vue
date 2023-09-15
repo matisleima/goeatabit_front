@@ -33,7 +33,7 @@
             </thead>
 
             <tbody>
-            <tr v-for="event in myEvents" :key="event.offerId">
+            <tr v-for="event in myEvents" :key="event.eventId">
               <td><a>{{ event.date }}</a></td>
               <td><a>{{ event.time }}</a></td>
               <td><a>{{ event.address }}</a></td>
@@ -46,7 +46,7 @@
               </td>
               <td><a>{{ event.price }}€</a></td>
               <td><a>?</a></td>
-              <td><a>{{ event.userRating }}</a></td>
+              <td><a>{{ event.offerUserRating }}</a></td>
 
             </tr>
             </tbody>
@@ -89,22 +89,22 @@ export default {
       userId: sessionStorage.getItem('userId'),
       myEvents: [
         {
+          eventId: 0,
+          clientUserId: 0,
           offerId: 0,
-          userId: 0,
-          userRating: 0,
+          offerUserId: 0,
+          offerUserRating: 0,
           time: 0,
           date: '',
           price: 0,
           totalPortions: 0,
           offerName: '',
           description: '',
-          foodGroupId: 0,
           offerStatus: '',
-          address: '',
-          districtId: 0,
+          eventStatus: '',
           firstName: '',
           lastName: '',
-          imageString: 0
+          address: ''
         }
       ]
     }
@@ -122,6 +122,9 @@ export default {
         const errorResponseBody = error.response.data
       })
     },
+  },
+  mounted() {
+    this.getMyEvents()
   }
 }
 </script>
