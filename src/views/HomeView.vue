@@ -66,7 +66,7 @@ export default{
       this.$refs.logoutModalRef.$refs.modalRef.openModal()
     },
     getDistrict() {
-      this.$http.get("/meals/offers/location", {
+      this.$http.get("/district", {
             params: {
               userId: this.userId,
             }
