@@ -25,11 +25,6 @@ export default {
   },
 
   methods: {
-
-    setSelectedDistrictId(selectedDistrictId) {
-      this.selectedDistrictId = selectedDistrictId
-    },
-
     getDistricts() {
       this.$http.get("/districts")
           .then(response => {

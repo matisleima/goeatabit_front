@@ -51,25 +51,21 @@ export default {
         description: '',
         priceLimit: ''
       },
-
     }
-
   },
 
   methods: {
     getFoodGroups() {
       this.$http.get("/food-groups")
           .then(response => {
-            // Siit saame kätte JSONi  ↓↓↓↓↓↓↓↓
             this.foodGroups = response.data
           })
           .catch(error => {
-            // Siit saame kätte errori JSONi  ↓↓↓↓↓↓↓↓
             const errorResponseBody = error.response.data
           })
     },
     setSelectedDistrictId(selectedDistrictId) {
-      this.emitFilter.selectedDistrictId = selectedDistrictId
+      this.filter.selectedDistrictId = selectedDistrictId
     },
     sendFilterRequest() {
       this.$emit('event-emit-filter-request', this.filter)

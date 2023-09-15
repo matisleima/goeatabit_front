@@ -29,35 +29,16 @@ const routes = [
         component: ReserveView
     },
     {
-        path: '/userOffers',
-        name: 'userOffersRoute',
-        component: UserOffersView
-    },
-    {
-        path: '/home',
-        name: 'homeRoute',
-        component: HomeView
-    },
-    {
-        path: '/',
-        name: 'loginRoute',
-        component: LoginView
-    },
-    {
-        path: '/error',
-        name: 'errorRoute',
-        component: ErrorView
-    },
-    {
         path: '/offer',
         name: 'offerRoute',
         component: OfferView
     },
     {
-        path: '/reserve',
-        name: 'reserveRoute',
-        component: ReserveView
-    }
+        path: '/userOffers',
+        name: 'userOffersRoute',
+        component: UserOffersView
+    },
+
 ]
 
 const router = createRouter({

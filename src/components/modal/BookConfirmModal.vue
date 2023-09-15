@@ -88,6 +88,7 @@ export default {
             }
           }
       ).then(response => {
+        alert(response.data.date)
         this.filteredOffers = response.data
       }).catch(error => {
         const errorResponseBody = error.response.data
