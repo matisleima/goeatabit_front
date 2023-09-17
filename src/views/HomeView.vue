@@ -6,7 +6,7 @@
 
 <!--  //PILDID-->
 
-  <LandingPageFilteredOffersPicture @event-filtered-view="getDistrict"/>
+  <LandingPageFilteredOffersPicture :districtId="locations.districtId"/>
 
 <!--  //TABEL-->
 

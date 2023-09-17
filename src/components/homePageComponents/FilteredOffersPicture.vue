@@ -8,16 +8,23 @@
       //TODO: kuvada user`´ i pildid, pakkumised useri piirkonnas,
       3 kellaajaliselt varajasemat pakkumist
       <p></p>
-<!--            <div v-for="offer in offers" :value="offer.offerId" :key="offer.offerId" class="col">-->
-      <div v-for="(offer, index) in offers.slice(Math.max(offers.length-2,0))" :value="offer.offerId"
-           :key="offer.offerId" class="col">
+      <!--            <div v-for="offer in offers" :value="offer.offerId" :key="offer.offerId" class="col">-->
+      <!--      <div v-for="(offer, index) in offers.slice(Math.max(offers.length-2,0))" :value="offer.offerId"-->
+      <!--           :key="offer.offerId" class="col">-->
+
+      <!--        <img :src="offer.imageString" height="300" width="300">-->
+      <!--        <a @click="navigateToUserOffersView(offer.offerId)">-->
+
+      <div v-for="(offer, index) in filteredOffers" :key="offer.offerId" class="col">
         <img :src="offer.imageString" height="300" width="300">
-        <a @click="navigateToUserOffersView(offer.offerId)">
+        <a @click="navigateToUserOffersView(offer.offerId)"
+           style="cursor: pointer; color: blue; text-decoration: underline;">
           {{ offer.offerName }}
         </a>
         <p>{{ offer.address }}</p>
-
+        <p>{{ offer.districtId }}</p>
       </div>
+      <!--      </div>-->
 
     </div>
   </div>
@@ -26,12 +33,15 @@
 import router from "@/router";
 
 export default {
-  name: 'LandingPageFilteredOffersPicture',
+  name: 'FilteredOffersPicture',
 
-
+  props:{
+    districtId: Number,
+  },
   data() {
     return {
-
+// siia vaja vastand õige districtId´ga
+//       districtId: 1,
       offers: [
         {
           offerId: 0,
@@ -55,6 +65,14 @@ export default {
       ]
     }
   },
+  computed: {
+    filteredOffers() {
+      return this.offers
+          .filter(offer => offer.districtId === this.districtId)
+          .slice(-3)
+          .reverse();
+    },
+  },
 
   methods: {
     getOffers() {
@@ -72,6 +90,7 @@ export default {
       router.push({name: 'userOffersRoute', query: {offerId: offerId}})
     },
   },
+
   beforeMount() {
     this.getOffers()
   },
