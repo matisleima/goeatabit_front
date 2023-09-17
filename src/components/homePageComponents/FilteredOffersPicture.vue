@@ -5,15 +5,11 @@
       //TODO: userImageString kuvamine ei tööta (võimalik viga, pildiga pakkumine puudub ja ei saa ka "" tekitada)
       //TODO: imageString kuvamine töötab
       //TODO: välista pildita pakkumised!!
-      //TODO: kuvada user`´ i pildid, pakkumised useri piirkonnas,
-      3 kellaajaliselt varajasemat pakkumist
+
       <p></p>
       <!--            <div v-for="offer in offers" :value="offer.offerId" :key="offer.offerId" class="col">-->
       <!--      <div v-for="(offer, index) in offers.slice(Math.max(offers.length-2,0))" :value="offer.offerId"-->
       <!--           :key="offer.offerId" class="col">-->
-
-      <!--        <img :src="offer.imageString" height="300" width="300">-->
-      <!--        <a @click="navigateToUserOffersView(offer.offerId)">-->
 
       <div v-for="(offer, index) in filteredOffers" :key="offer.offerId" class="col">
         <img :src="offer.imageString" height="300" width="300">
@@ -40,8 +36,6 @@ export default {
   },
   data() {
     return {
-// siia vaja vastand õige districtId´ga
-//       districtId: 1,
       offers: [
         {
           offerId: 0,
