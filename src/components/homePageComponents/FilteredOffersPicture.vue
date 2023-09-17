@@ -7,21 +7,18 @@
       //TODO: välista pildita pakkumised!!
 
       <p></p>
-      <!--            <div v-for="offer in offers" :value="offer.offerId" :key="offer.offerId" class="col">-->
-      <!--      <div v-for="(offer, index) in offers.slice(Math.max(offers.length-2,0))" :value="offer.offerId"-->
-      <!--           :key="offer.offerId" class="col">-->
-
       <div v-for="(offer, index) in filteredOffers" :key="offer.offerId" class="col">
-        <img :src="offer.imageString" height="300" width="300">
+<!--        <img :src="offer.imageString" height="300" width="300">-->
+
+        <img v-if="offers.userImageString==null" :src="offer.imageString" height="300" width="300">
+        <img v-else-if="offers.imageString==null" :src="offer.userImageString" height="300" width="300">
+        <img v-else src="../../assets/smiley.png" height="300" width="300"/>
         <a @click="navigateToUserOffersView(offer.offerId)"
            style="cursor: pointer; color: blue; text-decoration: underline;">
-          {{ offer.offerName }}
+          <p>{{ offer.offerName }}</p>
         </a>
         <p>{{ offer.address }}</p>
-        <p>{{ offer.districtId }}</p>
       </div>
-      <!--      </div>-->
-
     </div>
   </div>
 </template>
