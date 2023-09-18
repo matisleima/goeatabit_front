@@ -1,60 +1,48 @@
 <template>
+  <div>
   <LogoutModal ref="logoutModalRef"/>
+  <BookConfirmModal ref="bookingConfirmModalRef"/>
+
   <div>
     <h1>Järgmised kellaajaliselt lähimat pakkumist {{locations.districtName}}</h1>
   </div>
 
 <!--  //PILDID-->
 
-  <LandingPageFilteredOffersPicture :districtId="locations.districtId"/>
+  <LandingPageFilteredOffersPicture @event-open-modal="openBookingModal"/>
 
 <!--  //TABEL-->
 
   <h1>3 viimasena lisatud pakkumist</h1>
 
 
-  <HomePageFilteredOffersTable :offers="offers"/>
+  <FilteredOffersTable/>
 
 <!--  //NUPUD-->
 
   <HomePageButtons :handle-logout="handleLogout"/>
 
-
+  </div>
 </template>
 
 <script>
 import LogoutModal from "@/components/modal/LogoutModal.vue";
 import LandingPageFilteredOffersPicture from "@/components/homePageComponents/FilteredOffersPicture.vue";
-import HomePageFilteredOffersTable from "@/components/homePageComponents/FilteredOffersTable.vue";
+import FilteredOffersTable from "@/components/homePageComponents/FilteredOffersTable.vue";
 import HomePageButtons from "@/components/homePageComponents/Buttons.vue";
 import router from "@/router";
+import UserOfferModal from "@/components/modal/UserOfferModal.vue";
+import BookConfirmModal from "@/components/modal/BookConfirmModal.vue";
 
 export default{
   name: 'HomeView',
-  components: {HomePageButtons, HomePageFilteredOffersTable, LandingPageFilteredOffersPicture, LogoutModal},
+  components: {
+    BookConfirmModal,
+    UserOfferModal, HomePageButtons, FilteredOffersTable, LandingPageFilteredOffersPicture, LogoutModal},
 
   data() {
     return {
-      offers: [
-        {
-          offerId: 0,
-          userId: 0,
-          userRating: 0,
-          time: '',
-          date: '',
-          price: 0,
-          totalPortions: 0,
-          offerName: '',
-          description: '',
-          foodGroupId: 0,
-          offerStatus: '',
-          address: '',
-          districtId: 0,
-          firstName: '',
-          lastName: '',
-          imageString: '',
-        } 
-      ],
+
       locations:[
         {
           districtId: 0,
@@ -81,6 +69,9 @@ export default{
         // Siit saame kätte errori JSONi  ↓↓↓↓↓↓↓↓
         router.push({name: 'errorRoute'})
       })
+    },
+    openBookingModal() {
+      this.$refs.bookingConfirmModalRef.$refs.modalRef.openModal()
     },
 
   },
