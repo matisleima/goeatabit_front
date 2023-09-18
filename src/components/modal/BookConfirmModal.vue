@@ -85,6 +85,7 @@ export default {
   },
   methods: {
     getOfferByOfferId(userId, offerId) {
+      console.log('enne päringut', offerId)
       this.$http.get("/meals/offer", {
             params: {
               offerId: offerId,

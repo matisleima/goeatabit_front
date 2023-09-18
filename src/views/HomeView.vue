@@ -9,7 +9,7 @@
 
 <!--  //PILDID-->
 
-  <LandingPageFilteredOffersPicture @event-open-modal="openBookingModal"/>
+  <FilteredOffersPicture @event-open-modal="openBookingModal"/>
 
 <!--  //TABEL-->
 
@@ -27,18 +27,17 @@
 
 <script>
 import LogoutModal from "@/components/modal/LogoutModal.vue";
-import LandingPageFilteredOffersPicture from "@/components/homePageComponents/FilteredOffersPicture.vue";
 import FilteredOffersTable from "@/components/homePageComponents/FilteredOffersTable.vue";
 import HomePageButtons from "@/components/homePageComponents/Buttons.vue";
 import router from "@/router";
-import UserOfferModal from "@/components/modal/UserOfferModal.vue";
 import BookConfirmModal from "@/components/modal/BookConfirmModal.vue";
+import FilteredOffersPicture from "@/components/homePageComponents/FilteredOffersPicture.vue";
 
 export default{
   name: 'HomeView',
   components: {
     BookConfirmModal,
-    UserOfferModal, HomePageButtons, FilteredOffersTable, LandingPageFilteredOffersPicture, LogoutModal},
+    HomePageButtons, FilteredOffersTable, LogoutModal, FilteredOffersPicture},
 
   data() {
     return {
@@ -70,8 +69,9 @@ export default{
         router.push({name: 'errorRoute'})
       })
     },
-    openBookingModal() {
+    openBookingModal(userId,offerId) {
       this.$refs.bookingConfirmModalRef.$refs.modalRef.openModal()
+      this.$refs.bookingConfirmModalRef.getOfferByOfferId(userId, offerId)
     },
 
   },
