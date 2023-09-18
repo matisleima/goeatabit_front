@@ -102,7 +102,6 @@ export default {
           check.address.length > 0
     },
 
-
     validatePassword() {
       return this.user.password === this.passwordAgain
     },
@@ -121,14 +120,11 @@ export default {
       }
     },
 
-
     sendRegisterUserRequest() {
       this.$http.post("/sign-up", this.user
       ).then(response => {
-        // Siit saame kätte JSONi  ↓↓↓↓↓↓↓↓
         this.handleRegisterUserSuccessResponse()
       }).catch(error => {
-        // Siit saame kätte errori JSONi  ↓↓↓↓↓↓↓↓
         this.handleErrorResponse(error)
       })
     },

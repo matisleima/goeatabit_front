@@ -37,7 +37,9 @@ export default {
     emitSelectedDistrictId() {
       this.$emit('event-update-selected-district-id', this.selectedDistrictId)
     },
-
+    setSelectedDistrictId(selectedDistrictId) {
+      this.selectedDistrictId = selectedDistrictId
+    },
   },
   beforeMount() {
     this.getDistricts()
