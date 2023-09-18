@@ -1,7 +1,7 @@
 <template>
   <LogoutModal ref="logoutModalRef"/>
   <div>
-    <h1>Tänased TOP pakkumised {{locations.districtName}}</h1>
+    <h1>Järgmised kellaajaliselt lähimat pakkumist {{locations.districtName}}</h1>
   </div>
 
 <!--  //PILDID-->
@@ -9,6 +9,9 @@
   <LandingPageFilteredOffersPicture :districtId="locations.districtId"/>
 
 <!--  //TABEL-->
+
+  <h1>3 viimasena lisatud pakkumist</h1>
+
 
   <HomePageFilteredOffersTable :offers="offers"/>
 

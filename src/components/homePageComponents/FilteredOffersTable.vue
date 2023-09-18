@@ -73,7 +73,7 @@ export default {
 
   },
   beforeMount(){
-    this.getOffers()
+    // this.getOffers()
   }
 }
 </script>
