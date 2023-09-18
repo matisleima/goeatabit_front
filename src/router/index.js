@@ -5,6 +5,7 @@ import ErrorView from "@/views/ErrorView.vue";
 import OfferView from "@/views/OfferView.vue";
 import ReserveView from "@/views/ReserveView.vue";
 import ReservationsView from "@/views/ReservationsView.vue";
+import UserOffersView from "@/components/modal/UserOffersView.vue";
 
 const routes = [
     {
@@ -36,6 +37,11 @@ const routes = [
         path: '/reservations',
         name: 'reservationsView',
         component: ReservationsView
+    },
+    {
+        path: '/user_offers',
+        name: 'userOffersView',
+        component: UserOffersView
     },
 
 ]

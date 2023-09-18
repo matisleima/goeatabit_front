@@ -118,7 +118,6 @@ export default {
     launchConfirmModal(offerId, userId) {
       this.$emit('event-book-meal', offerId, userId)
     },
-
   },
   mounted() {
     this.getFilteredOffers()
