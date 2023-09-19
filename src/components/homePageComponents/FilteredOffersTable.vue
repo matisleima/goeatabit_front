@@ -60,7 +60,6 @@ export default {
           })
     },
     navigateToUserOffersView(offerUserId) {
-      // this.$emit('event-open-userOfferView', userId)
       router.push({name: 'userOffersRoute', query: {offerUserId: offerUserId}})
     },
 

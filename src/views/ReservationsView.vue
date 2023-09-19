@@ -1,4 +1,5 @@
 <template>
+  <logout-modal ref="logoutModalRef"/>
   <div>
     <div class="container">
       <div class="row mt-5">
@@ -66,9 +67,10 @@
 
         <div class="col col-2">
           <div class="d-grid gap-3">
-            <button @click="handleLogout" type="button" class="btn btn-secondary">Tahan süüa</button>
-            <button @click="handleLogout" type="button" class="btn btn-secondary">Minu pakkumised</button>
+            <button @click="$router.push('/reserve')" type="button" class="btn btn-secondary">Tahan süüa</button>
+            <button @click="$router.push('/my-offers')" type="button" class="btn btn-secondary">Minu pakkumised</button>
             <button @click="handleLogout" type="button" class="btn btn-secondary">Logi välja</button>
+
           </div>
         </div>
       </div>
@@ -80,10 +82,11 @@
 
 <script>
 import OffersTable from "@/components/OffersTable.vue";
+import LogoutModal from "@/components/modal/LogoutModal.vue";
 
 export default {
   name: "ReservationsView",
-  components: {OffersTable},
+  components: {LogoutModal, OffersTable},
   data() {
     return {
       userId: sessionStorage.getItem('userId'),
@@ -122,7 +125,11 @@ export default {
         const errorResponseBody = error.response.data
       })
     },
+    handleLogout() {
+      this.$refs.logoutModalRef.$refs.modalRef.openModal()
+    },
   },
+
   mounted() {
     this.getMyEvents()
   }
