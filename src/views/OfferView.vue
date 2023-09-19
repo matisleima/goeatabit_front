@@ -23,7 +23,7 @@
         <p></p>
         <div>
           <button @click="resetForm" type="button" class="btn btn-secondary">Tühjenda väljad</button>
-          <button v-if="isEdit" @click="validateForm" type="button" class="btn btn-secondary">Muuda pakkumine</button>
+          <button v-if="isEdit" @click="testMethod" type="button" class="btn btn-secondary">Muuda pakkumine</button>
           <button v-else @click="validateForm" type="button" class="btn btn-secondary">Lisa pakkumine</button>
         </div>
 
@@ -170,12 +170,18 @@ export default {
         this.offer.description = useRoute().query.description
         this.offer.price = useRoute().query.price
         this.offer.totalPortions = useRoute().query.totalPortions
-        this.setOfferFoodGroupId(Number(useRoute().query.offerId))
+        this.$refs.foodGroupRef.setSelectedFoodGroupId(useRoute().query.foodGroupId)
+        this.offer.foodGroupId = useRoute().query.foodGroupId
 
 
         alert(this.offerId)
       }
+    },
+
+    testMethod() {
+      alert("food group " + this.offer.foodGroupId)
     }
+
 
 
   },
