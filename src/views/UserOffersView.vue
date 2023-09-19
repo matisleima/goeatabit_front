@@ -1,5 +1,7 @@
 <template>
   <BookConfirmModal ref="bookConfirmModalRef"/>
+  <logout-modal ref="logoutModalRef"/>
+
 
   <div>
     <div class="row">
@@ -15,7 +17,7 @@
     </div>
 
     <div class="row">
-      <div class="col">
+      <div class="col m-3">
         <UserImage :image-data-base64="offerUserImageString"/>
       </div>
 
@@ -48,7 +50,7 @@
               </div>
             </td>
             <td><a>{{ offer.price }}€</a></td>
-            <td><a>?</a></td>
+            <td><a>?/{{ offer.totalPortions }}</a></td>
             <td><a>{{ offer.userRating }}</a></td>
             <td>
               <a>
@@ -62,8 +64,13 @@
         </table>
       </div>
 
-      <div class="col">
-        NAVIGATION BUTTONS
+      <div class="col col-2">
+        <div class="d-grid gap-3">
+          <button @click="$router.push('/home')" type="button" class="btn btn-secondary">Kodu</button>
+          <button @click="$router.push('/reservations')" type="button" class="btn btn-secondary">Minu broneeringud</button>
+          <button @click="$router.push('/offer')" type="button" class="btn btn-secondary">Pakun süüa</button>
+          <button @click="handleLogout" type="button" class="btn btn-secondary">Logi välja</button>
+        </div>
       </div>
     </div>
   </div>
@@ -74,10 +81,11 @@ import UserImage from "@/components/UserImage.vue";
 import OffersTable from "@/components/OffersTable.vue";
 import BookConfirmModal from "@/components/modal/BookConfirmModal.vue";
 import {useRoute} from "vue-router";
+import LogoutModal from "@/components/modal/LogoutModal.vue";
 
 export default {
   name: "UserOfferView",
-  components: {BookConfirmModal, OffersTable, UserImage},
+  components: {LogoutModal, BookConfirmModal, OffersTable, UserImage},
   data() {
     return {
       userId: sessionStorage.getItem('userId'),
@@ -95,7 +103,7 @@ export default {
           firstName: '',
           lastName: '',
           price: 0,
-          availableMeals: 0,
+          totalPortions: 0,
           userRating: 0
         }
       ]
@@ -133,6 +141,9 @@ export default {
     handleConfirmation(offerId, userId) {
       this.$refs.bookConfirmModalRef.$refs.modalRef.openModal()
       this.$refs.bookConfirmModalRef.getOfferByOfferId(userId, offerId)
+    },
+    handleLogout() {
+      this.$refs.logoutModalRef.$refs.modalRef.openModal()
     },
   },
   beforeMount() {

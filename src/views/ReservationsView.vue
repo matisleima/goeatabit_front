@@ -27,7 +27,7 @@
               <th scope="col">Pakkuja</th>
               <th scope="col">Söök</th>
               <th scope="col">Hind</th>
-              <th scope="col">Vabu kohti</th>
+              <th scope="col">Broneeringuid</th>
               <th scope="col">Hinnang</th>
             </tr>
             </thead>
@@ -41,11 +41,11 @@
               <td>
                 <div class="hover-container">
                   <a>{{ event.offerName }}</a>
-                  <div class="hover-text">{{ event.description }}</div>
+                  <div v-show="event.description.length > 0" class="hover-text">{{ event.description }}</div>
                 </div>
               </td>
               <td><a>{{ event.price }}€</a></td>
-              <td><a>?</a></td>
+              <td><a>?/{{event.totalPortions}}</a></td>
               <td><a>{{ event.offerUserRating }}</a></td>
 
             </tr>
