@@ -73,6 +73,7 @@
 import UserImage from "@/components/UserImage.vue";
 import OffersTable from "@/components/OffersTable.vue";
 import BookConfirmModal from "@/components/modal/BookConfirmModal.vue";
+import {useRoute} from "vue-router";
 
 export default {
   name: "UserOfferView",
@@ -80,7 +81,7 @@ export default {
   data() {
     return {
       userId: sessionStorage.getItem('userId'),
-      offerUserId: 0,
+      offerUserId: Number(useRoute().query.offerUserId),
       offerUserImageString: '',
       offers: [
         {

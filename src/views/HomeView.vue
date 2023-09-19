@@ -8,6 +8,7 @@
   </div>
 
 <!--  //PILDID-->
+
   <FilteredOffersPicture @event-open-modal="openBookingModal"/>
 
 <!--  //TABEL-->
@@ -15,7 +16,7 @@
   <h1>3 viimasena lisatud pakkumist</h1>
 
 
-  <FilteredOffersTable/>
+    <FilteredOffersTable @event-open-userOfferView="openUserOfferView"/>
 
 <!--  //NUPUD-->
 
@@ -31,10 +32,12 @@ import HomePageButtons from "@/components/homePageComponents/Buttons.vue";
 import router from "@/router";
 import BookConfirmModal from "@/components/modal/BookConfirmModal.vue";
 import FilteredOffersPicture from "@/components/homePageComponents/FilteredOffersPicture.vue";
+import UserOfferView from "@/views/UserOffersView.vue";
 
 export default{
   name: 'HomeView',
   components: {
+    UserOfferView,
     BookConfirmModal,
     HomePageButtons, FilteredOffersTable, LogoutModal, FilteredOffersPicture},
 
@@ -68,7 +71,7 @@ export default{
         router.push({name: 'errorRoute'})
       })
     },
-    openBookingModal(userId,offerId) {
+    openBookingModal(userId, offerId) {
       this.$refs.bookingConfirmModalRef.$refs.modalRef.openModal()
       this.$refs.bookingConfirmModalRef.getOfferByOfferId(userId, offerId)
     },
