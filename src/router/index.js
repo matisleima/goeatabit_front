@@ -5,7 +5,7 @@ import ErrorView from "@/views/ErrorView.vue";
 import OfferView from "@/views/OfferView.vue";
 import ReserveView from "@/views/ReserveView.vue";
 import ReservationsView from "@/views/ReservationsView.vue";
-import UserOffersView from "@/components/modal/UserOffersView.vue";
+import UserOffersView from "@/components/UserOffersView.vue";
 
 const routes = [
     {

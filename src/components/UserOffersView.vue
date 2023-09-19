@@ -1,9 +1,10 @@
 <template>
-  <div>
+  <BookConfirmModal ref="bookConfirmModalRef"/>
 
+  <div>
     <div class="row">
       <div class="col col-6 m-3">
-          <h1>Kasutaja {{ offers[0].firstName }} {{ offers[0].lastName }} pakkumised</h1>
+        <h1>Kasutaja {{ offers[0].firstName }} {{ offers[0].lastName }} pakkumised</h1>
       </div>
 
       <div class="col">
@@ -51,7 +52,9 @@
             <td><a>{{ offer.userRating }}</a></td>
             <td>
               <a>
-                <button type="button" class="btn btn-success" @click="launchConfirmModal(offer.offerId, offer.userId)">Go Eat A Bit!</button>
+                <button type="button" class="btn btn-success" @click="handleConfirmation(offer.offerId, userId)">Go Eat
+                  A Bit!
+                </button>
               </a>
             </td>
           </tr>
@@ -63,20 +66,20 @@
         NAVIGATION BUTTONS
       </div>
     </div>
-
-
   </div>
 </template>
 
 <script>
 import UserImage from "@/components/UserImage.vue";
 import OffersTable from "@/components/OffersTable.vue";
+import BookConfirmModal from "@/components/modal/BookConfirmModal.vue";
 
 export default {
   name: "UserOfferView",
-  components: {OffersTable, UserImage},
+  components: {BookConfirmModal, OffersTable, UserImage},
   data() {
     return {
+      userId: sessionStorage.getItem('userId'),
       offerUserId: 4, //SEE VÄÄRTUSTATAKSE HOME PAGE'ILT TULLES! KELLE NIMELE KLIKID?
       offerUserImageString: '',
       offers: [
@@ -125,6 +128,10 @@ export default {
         this.offers = response.data
       }).catch(error => {
       })
+    },
+    handleConfirmation(offerId, userId) {
+      this.$refs.bookConfirmModalRef.$refs.modalRef.openModal()
+      this.$refs.bookConfirmModalRef.getOfferByOfferId(userId, offerId)
     },
   },
   beforeMount() {
