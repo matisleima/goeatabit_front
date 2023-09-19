@@ -54,6 +54,7 @@ import LogoutModal from "@/components/modal/LogoutModal.vue";
 import {FILL_ALL_FIELDS, OFFER_ADDED, USER_REGISTERED} from "@/assets/script/AlertMessage";
 import {USER_NAME_UNAVAILABLE} from "@/assets/script/ErrorCode";
 import FoodGroupDropDown from "@/components/FoodGroupDropdown.vue";
+import {useRoute} from "vue-router";
 
 export default {
   name: 'OfferView',
@@ -152,10 +153,39 @@ export default {
 
     setOfferFoodGroupId(selectedFoodGroupId) {
       this.offer.foodGroupId = selectedFoodGroupId;
+    },
+
+    handleIsEdit: function () {
+      this.offerId = Number(useRoute().query.offerId)
+      this.isEdit = !isNaN(this.offerId)
+
+      alert(this.isEdit)
+
+      if(this.isEdit) {
+        this.title = "Pakkumise muutmine"
+        this.offer.offerId = useRoute().query.offerId
+        this.offer.date = useRoute().query.date
+        this.offer.time = useRoute().query.time
+        this.offer.offerName = useRoute().query.offerName
+        this.offer.description = useRoute().query.description
+        this.offer.price = useRoute().query.price
+        this.offer.totalPortions = useRoute().query.totalPortions
+        this.setOfferFoodGroupId(Number(useRoute().query.offerId))
+
+
+        alert(this.offerId)
+      }
     }
 
+
+  },
+
+  mounted() {
+    this.handleIsEdit()
   }
+
 }
+
 
 </script>
 
