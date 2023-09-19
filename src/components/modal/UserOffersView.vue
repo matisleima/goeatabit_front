@@ -2,34 +2,61 @@
   <div>
 
     <div class="row">
-      <div class="col">
-        USER IMAGE, propsiga kaasa alla
-        <UserImage :image-data-base64="offerUserImageString"/>
+      <div class="col col-6 m-3">
+          <h1>Kasutaja {{ offers[0].firstName }} {{ offers[0].lastName }} pakkumised</h1>
       </div>
 
       <div class="col">
+      </div>
 
+      <div class="col">
+      </div>
+    </div>
 
-        <offers-table/>
+    <div class="row">
+      <div class="col">
+        <UserImage :image-data-base64="offerUserImageString"/>
+      </div>
 
+      <div class="col col-7">
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">Kuupäev</th>
+            <th scope="col">Kell</th>
+            <th scope="col">Aadress</th>
+            <th scope="col">Pakkuja</th>
+            <th scope="col">Söök</th>
+            <th scope="col">Hind</th>
+            <th scope="col">Vabu kohti</th>
+            <th scope="col">Hinnang</th>
+            <th scope="col">Lähen sööma</th>
+          </tr>
+          </thead>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+          <tbody>
+          <tr v-for="offer in offers" :key="offer.offerId">
+            <td><a>{{ offer.date }}</a></td>
+            <td><a>{{ offer.time }}</a></td>
+            <td><a>{{ offer.address }}</a></td>
+            <td><a>{{ offer.firstName }} {{ offer.lastName }}</a></td>
+            <td>
+              <div class="hover-container">
+                <a>{{ offer.offerName }}</a>
+                <div class="hover-text">{{ offer.description }}</div>
+              </div>
+            </td>
+            <td><a>{{ offer.price }}€</a></td>
+            <td><a>?</a></td>
+            <td><a>{{ offer.userRating }}</a></td>
+            <td>
+              <a>
+                <button type="button" class="btn btn-success" @click="launchConfirmModal(offer.offerId, offer.userId)">Go Eat A Bit!</button>
+              </a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </div>
 
       <div class="col">
@@ -80,6 +107,7 @@ export default {
           }
       ).then(response => {
         this.offerUserImageString = response.data
+        console.log('image string pärast väärtustamist', response.data)
       })
     },
     getUserOffers() {
@@ -99,7 +127,7 @@ export default {
       })
     },
   },
-  mounted() {
+  beforeMount() {
     this.getUserImage()
     this.getUserOffers()
   }
