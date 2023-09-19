@@ -1,47 +1,35 @@
 <template>
-
+  <delete-offer-modal ref="deleteOfferRef"/>
   <div>
     <table class="table">
       <thead>
       <tr>
-        <th scope="col">offerId_test</th>
+        <th scope="col">*offerId*</th>
         <th scope="col">Kuupäev</th>
         <th scope="col">Kell</th>
-
-
         <th scope="col">Söök</th>
         <th scope="col">Kirjeldus</th>
         <th scope="col">Hind</th>
         <th scope="col">Vabu kohti</th>
-
-        <th scope="col">*Edit*</th>
-
+        <th scope="col"></th>
       </tr>
       </thead>
-
       <tbody>
       <tr v-for="offer in filteredOffers" :key="filteredOffers.offerId">
         <td><a>{{ offer.offerId }}</a></td>
         <td><a>{{ offer.date }}</a></td>
         <td><a>{{ offer.time }}</a></td>
-
-
         <td><a>{{ offer.offerName }}</a></td>
         <td><a>{{ offer.description }}</a></td>
-
-
         <td><a>{{ offer.price }}€</a></td>
-
-        <td><a>?</a></td>
-
+        <td><a>{{  offer.totalPortions }}</a></td>
         <td><a>
-          <font-awesome-icon @click="navigateToOfferView(offer.offerId)" class="hoverable-link m-2" :icon="['fas', 'pen-to-square']"/>
+          <font-awesome-icon @click="navigateToOfferView(offer)" class="hoverable-link m-2"
+                             :icon="['fas', 'pen-to-square']"/>
           &#20;
-          <font-awesome-icon @click="openDeleteOfferModal(offer.offerId)" class="hoverable-link m-2" :icon="['fas', 'trash']"/>
+          <font-awesome-icon @click="openDeleteOfferModal(offer)" class="hoverable-link m-2"
+                             :icon="['fas', 'trash']"/>
         </a></td>
-
-
-
       </tr>
       </tbody>
     </table>
@@ -60,7 +48,9 @@ import DeleteOfferModal from "@/components/modal/DeleteOfferModal.vue";
 export default {
   name: "MyOffersTable",
   components: {DeleteOfferModal},
+  props: {
 
+  },
 
   data() {
     return {
@@ -76,7 +66,7 @@ export default {
           firstName: '',
           lastName: '',
           price: 0,
-          availableMeals: 0,
+          totalPortions: 0,
           userRating: 0
         }
       ]
@@ -107,13 +97,10 @@ export default {
       alert("update offer view: " + offerId)
     },
 
-    openDeleteOfferModal(offerId) {
-      alert("delete offer: " + offerId)
-      this.$emit("event-open-delete-offer-modal", offerId)
-
+    openDeleteOfferModal(offer) {
+      this.$refs.deleteOfferRef.$refs.modalRef.openModal()
+      this.$refs.deleteOfferRef.offer = offer
     }
-
-
 
 
   },

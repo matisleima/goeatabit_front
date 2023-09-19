@@ -1,13 +1,12 @@
 <template>
-
-  <delete-offer-modal ref="deleteOfferRef"/>
+  <LogoutModal ref="logoutModalRef"/>
 
   <h1>Minu pakkumised</h1>
 
   <div class="container text-center">
     <div class="row">
 
-      <my-offers-table @event-open-delete-offer-modal="openDeleteOfferModal"/>
+      <my-offers-table :filteredOffers="filteredOffers"/>
 
     </div>
 
@@ -30,7 +29,12 @@
         Column
       </div>
       <div class="col">
-        *** Buttons here ***
+        <div class="d-grid gap-3">
+          <button @click="$router.push('/home')" type="button" class="btn btn-secondary">Kodu</button>
+          <button @click="$router.push('/reservations')" type="button" class="btn btn-secondary">Minu broneeringud</button>
+          <button @click="$router.push('/offer')" type="button" class="btn btn-secondary">Pakun süüa</button>
+          <button @click="handleLogout" type="button" class="btn btn-secondary">Logi välja</button>
+        </div>
 
       </div>
     </div>
@@ -40,20 +44,41 @@
 
 
 <script>
-import OffersTable from "@/components/OffersTable.vue";
 import MyOffersTable from "@/components/MyOffersTable.vue";
 import DeleteOfferModal from "@/components/modal/DeleteOfferModal.vue";
+import LogoutModal from "@/components/modal/LogoutModal.vue";
 
 export default {
   name: 'MyOfferView',
-  components: {DeleteOfferModal, MyOffersTable},
+  components: {LogoutModal, DeleteOfferModal, MyOffersTable},
 
-  methods: {
-
-    openDeleteOfferModal(offerId) {
-      this.$refs.deleteOfferRef.$refs.modalRef.openModal(offerId)
+  data() {
+    return {
+      offerId: 0,
+      filteredOffers: [
+          {
+        offerId: 0,
+        userId: 0,
+        offerName: '',
+        description: '',
+        date: '',
+        time: 0,
+        address: '',
+        firstName: '',
+        lastName: '',
+        price: 0,
+        availableMeals: 0,
+        userRating: 0
+      }
+      ]
     }
 
+  },
+
+  methods: {
+    handleLogout() {
+      this.$refs.logoutModalRef.$refs.modalRef.openModal()
+    },
   }
 
 }

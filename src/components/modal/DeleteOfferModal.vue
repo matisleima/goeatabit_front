@@ -2,10 +2,31 @@
   <div>
     <Modal close-button-name="Sulge" ref="modalRef">
       <template #header>
-        <h3>Kustuta offerId?</h3>
+        <h3>Kustuta pakkumine nr. {{ offer.offerId }}?</h3>
       </template>
       <template #body>
-        offer details here
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">Kuupäev</th>
+            <th scope="col">Kell</th>
+            <th scope="col">Söök</th>
+            <th scope="col">Kirjeldus</th>
+            <th scope="col">Hind</th>
+            <th scope="col">Vabu kohti</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><a>{{ offer.date }}</a></td>
+            <td><a>{{ offer.time }}</a></td>
+            <td><a>{{ offer.offerName }}</a></td>
+            <td><a>{{ offer.description }}</a></td>
+            <td><a>{{ offer.price }}€</a></td>
+            <td><a>{{ offer.totalPortions }}</a></td>
+          </tr>
+          </tbody>
+        </table>
       </template>
       <template #footer>
         <button @click="deleteOffer" type="button" class="btn btn-danger">Kustuta</button>
@@ -22,16 +43,34 @@ import Modal from "@/components/modal/Modal.vue";
 export default {
   name: 'DeleteOfferModal',
   components: {Modal},
-  props: {
-    /*offer: {},*/
-    offerId: Number
+  data() {
+    return {
+      offer:{
+        offerId: 0,
+        userId: 0,
+        offerName: '',
+        description: '',
+        date: '',
+        time: 0,
+        address: '',
+        firstName: '',
+        lastName: '',
+        price: 0,
+        availableMeals: 0,
+        userRating: 0
+      }
+    }
+
   },
 
 
   methods: {
 
     deleteOffer() {
-      alert("delete offer request to db")
+      alert("send delete offer request to db")
+      this.$refs.modalRef.closeModal()
+
+
       /*  this.$http.delete("/meals/offer", {
               params: {
                 locationId: this.locationId
