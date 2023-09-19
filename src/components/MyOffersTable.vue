@@ -26,7 +26,6 @@
         <td><a>
           <font-awesome-icon @click="navigateToOfferView(offer)" class="hoverable-link m-2"
                              :icon="['fas', 'pen-to-square']"/>
-          &#20;
           <font-awesome-icon @click="openDeleteOfferModal(offer)" class="hoverable-link m-2"
                              :icon="['fas', 'trash']"/>
         </a></td>

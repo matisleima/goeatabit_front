@@ -1,41 +1,46 @@
 <template>
   <LogoutModal ref="logoutModalRef"/>
 
-  <h1>Minu pakkumised</h1>
-
   <div class="container text-center">
     <div class="row">
 
-      <my-offers-table :filteredOffers="filteredOffers"/>
+      <div class="col m-3">
+        <h1>MINU PAKKUMISED</h1>
+      </div>
+
+      <div class="col">
+      </div>
+
+      <div class="col">
+      </div>
+
 
     </div>
 
     <div class="row">
-      <div class="col">
-        Column
+      <div class="col col-9">
+        <my-offers-table :filteredOffers="filteredOffers"/>
       </div>
-      <div class="col">
-        Column
-      </div>
-      <div class="col">
-        Column
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        Column
-      </div>
-      <div class="col">
-        Column
-      </div>
-      <div class="col">
+
+      <div class="col col-3">
         <div class="d-grid gap-3">
           <button @click="$router.push('/home')" type="button" class="btn btn-secondary">Kodu</button>
-          <button @click="$router.push('/reservations')" type="button" class="btn btn-secondary">Minu broneeringud</button>
+          <button @click="$router.push('/reservations')" type="button" class="btn btn-secondary">Minu broneeringud
+          </button>
           <button @click="$router.push('/offer')" type="button" class="btn btn-secondary">Pakun süüa</button>
           <button @click="handleLogout" type="button" class="btn btn-secondary">Logi välja</button>
         </div>
+      </div>
+    </div>
 
+    <div class="row">
+      <div class="col">
+      </div>
+
+      <div class="col">
+      </div>
+
+      <div class="col">
       </div>
     </div>
   </div>
@@ -56,20 +61,20 @@ export default {
     return {
       offerId: 0,
       filteredOffers: [
-          {
-        offerId: 0,
-        userId: 0,
-        offerName: '',
-        description: '',
-        date: '',
-        time: 0,
-        address: '',
-        firstName: '',
-        lastName: '',
-        price: 0,
-        availableMeals: 0,
-        userRating: 0
-      }
+        {
+          offerId: 0,
+          userId: 0,
+          offerName: '',
+          description: '',
+          date: '',
+          time: 0,
+          address: '',
+          firstName: '',
+          lastName: '',
+          price: 0,
+          availableMeals: 0,
+          userRating: 0
+        }
       ]
     }
 
