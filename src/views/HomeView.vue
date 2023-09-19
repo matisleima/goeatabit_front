@@ -5,7 +5,7 @@
 
 
     <div>
-      <h1>Järgmised kellaajaliselt lähimat pakkumist {{ locations.districtName }}</h1>
+      <h1>Kohe saabuvad lõunad, {{ locations.districtName }}</h1>
     </div>
 
     <!--  //PILDID-->
@@ -14,10 +14,10 @@
 
     <!--  //TABEL-->
 
-    <h1>3 viimasena lisatud pakkumist</h1>
+    <h1>Uued kuumad pakkumised!</h1>
 
 
-    <FilteredOffersTable @event-open-userOfferView="openUserOfferView"/>
+    <FilteredOffersTable/>
 
     <!--  //NUPUD-->
 
@@ -76,9 +76,6 @@ export default {
     openBookingModal(userId, offerId) {
       this.$refs.bookingConfirmModalRef.$refs.modalRef.openModal()
       this.$refs.bookingConfirmModalRef.getOfferByOfferId(userId, offerId)
-    },
-    openUserOfferView(userId) {
-      router.push({name:'userOffersRoute', query: {userId:userId}})
     },
 
   },

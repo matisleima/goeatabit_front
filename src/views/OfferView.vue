@@ -32,8 +32,8 @@
       </div>
       <div class="col">
         <div class="d-grid gap-3">
-          <button @click="handleLogout" type="button" class="btn btn-secondary">Tahan süüa</button>
-          <button @click="handleLogout" type="button" class="btn btn-secondary">Minu pakkumised</button>
+          <button @click="$router.push('/reserve')" class="btn btn-secondary">Tahan süüa</button>
+          <button @click="$router.push('/my-offers')" type="button" class="btn btn-secondary">Minu pakkumised</button>
           <button @click="handleLogout" type="button" class="btn btn-secondary">Logi välja</button>
         </div>
 
@@ -53,6 +53,7 @@ import LogoutModal from "@/components/modal/LogoutModal.vue";
 import {FILL_ALL_FIELDS, OFFER_ADDED, USER_REGISTERED} from "@/assets/script/AlertMessage";
 import {USER_NAME_UNAVAILABLE} from "@/assets/script/ErrorCode";
 import FoodGroupDropDown from "@/components/FoodGroupDropdown.vue";
+import router from "@/router";
 
 export default {
   name: 'OfferView',
@@ -149,7 +150,8 @@ export default {
 
     setOfferFoodGroupId(selectedFoodGroupId) {
       this.offer.foodGroupId = selectedFoodGroupId;
-    }
+    },
+
 
   }
 }
