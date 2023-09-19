@@ -114,7 +114,7 @@ export default {
 
     confirm() {
       this.$refs.modalRef.closeModal()
-      router.push({name: 'reservationsView'})
+      router.push({name: 'reservationsRoute'})
     },
   }
 }
