@@ -11,7 +11,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr v-for="offer in offers" :value="offer.offerId" :key="offer.offerId">
+          <tr v-for="offer in offers" :key="offer.offerId">
             <td @click="navigateToUserOffersView(offer.offerId)"
                 style="cursor: pointer; color: blue; text-decoration: underline;">{{offer.firstName}}{{" "}}{{offer.lastName}}</td>
             <td> {{offer.offerName}}</td>
@@ -27,29 +27,17 @@
 import router from "@/router";
 
 export default {
-  name: 'HomePageFilteredOffersTable',
+  name: 'FilteredOffersTable',
 
   data(){
     return{
-
       offers:[
         {
           offerId: 0,
           userId: 0,
-          userRating: 0,
-          time: '',
-          date: '',
-          price: 0,
-          totalPortions: 0,
           offerName: '',
-          description: '',
-          foodGroupId: 0,
-          offerStatus: '',
-          address: '',
-          districtId: 0,
           firstName: '',
-          lastName: '',
-          imageString:''
+          lastName: ''
         }
       ]
     }
@@ -57,8 +45,10 @@ export default {
 
   methods:{
     getOffers() {
-      this.$http.get("/meals/offers")
+      this.$http.get("/meals/offers/last-3")
           .then(response => {
+            console.log(response.data)
+
             // Siit saame kätte JSONi  ↓↓↓↓↓↓↓↓
             this.offers = response.data
           })
@@ -73,7 +63,7 @@ export default {
 
   },
   beforeMount(){
-    // this.getOffers()
+    this.getOffers()
   }
 }
 </script>
