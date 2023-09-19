@@ -12,9 +12,11 @@
           </thead>
           <tbody>
           <tr v-for="offer in offers" :key="offer.offerId">
-            <td @click="navigateToUserOffersView(offer.offerId)"
-                style="cursor: pointer; color: blue; text-decoration: underline;">{{offer.firstName}}{{" "}}{{offer.lastName}}</td>
-            <td> {{offer.offerName}}</td>
+            <td @click="navigateToUserOffersView(offer.userId)" type="submit"
+                style="cursor: pointer; color: blue; text-decoration: underline;">
+              {{ offer.firstName }}{{ " " }}{{ offer.lastName }}
+            </td>
+            <td> {{ offer.offerName }}</td>
           </tr>
           </tbody>
         </table>
@@ -29,9 +31,9 @@ import router from "@/router";
 export default {
   name: 'FilteredOffersTable',
 
-  data(){
-    return{
-      offers:[
+  data() {
+    return {
+      offers: [
         {
           offerId: 0,
           userId: 0,
@@ -43,7 +45,7 @@ export default {
     }
   },
 
-  methods:{
+  methods: {
     getOffers() {
       this.$http.get("/meals/offers/last-3")
           .then(response => {
@@ -54,15 +56,16 @@ export default {
           })
           .catch(error => {
             // Siit saame kätte errori JSONi  ↓↓↓↓↓↓↓↓
-            router.push({name:'errorRoute'})
+            router.push({name: 'errorRoute'})
           })
     },
-    navigateToUserOffersView(offerId){
-      router.push({name:'userOffersRoute', query:{offerId:offerId}})
+    navigateToUserOffersView(offerUserId) {
+      // this.$emit('event-open-userOfferView', userId)
+      router.push({name: 'userOffersRoute', query: {offerUserId: offerUserId}})
     },
 
   },
-  beforeMount(){
+  beforeMount() {
     this.getOffers()
   }
 }

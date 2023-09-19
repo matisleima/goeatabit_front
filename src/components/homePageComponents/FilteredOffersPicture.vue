@@ -67,9 +67,9 @@ export default {
 
     },
 
-    navigateToUserOffersView(offerId) {
-      router.push({name: 'userOffersRoute', query: {offerId: offerId}})
-    },
+    // navigateToUserOffersView(offerId) {
+    //   router.push({name: 'userOffersRoute', query: {offerId: offerId}})
+    // },
   },
 
   beforeMount() {

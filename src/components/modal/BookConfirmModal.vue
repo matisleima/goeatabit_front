@@ -42,7 +42,7 @@
       </template>
 
       <template #footer>
-        <button @click="confirm(); bookOffer()" type="button" class="btn btn-success">Kinnitan</button>
+        <button @click="confirmAndBookOrder()" type="button" class="btn btn-success">Kinnitan</button>
       </template>
 
     </Modal>
@@ -85,7 +85,6 @@ export default {
   },
   methods: {
     getOfferByOfferId(userId, offerId) {
-      console.log('enne päringut', offerId)
       this.$http.get("/meals/offer", {
             params: {
               offerId: offerId,
@@ -106,15 +105,15 @@ export default {
             }
           }
       ).then(response => {
-        const responseBody = response.data
+        router.push({name: 'reservationsRoute'})
       }).catch(error => {
-        const errorResponseBody = error.response.data
+        router.push({name: 'errorRoute'})
       })
     },
 
-    confirm() {
+    confirmAndBookOrder() {
       this.$refs.modalRef.closeModal()
-      router.push({name: 'reservationsRoute'})
+      this.bookOffer()
     },
   }
 }

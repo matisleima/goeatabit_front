@@ -1,26 +1,27 @@
 <template>
   <div>
-  <LogoutModal ref="logoutModalRef"/>
-  <BookConfirmModal ref="bookingConfirmModalRef"/>
-
-  <div>
-    <h1>Järgmised kellaajaliselt lähimat pakkumist {{locations.districtName}}</h1>
-  </div>
-
-<!--  //PILDID-->
-
-  <FilteredOffersPicture @event-open-modal="openBookingModal"/>
-
-<!--  //TABEL-->
-
-  <h1>3 viimasena lisatud pakkumist</h1>
+    <LogoutModal ref="logoutModalRef"/>
+    <BookConfirmModal ref="bookingConfirmModalRef"/>
 
 
-  <FilteredOffersTable/>
+    <div>
+      <h1>Järgmised kellaajaliselt lähimat pakkumist {{ locations.districtName }}</h1>
+    </div>
 
-<!--  //NUPUD-->
+    <!--  //PILDID-->
 
-  <HomePageButtons :handle-logout="handleLogout"/>
+    <FilteredOffersPicture @event-open-modal="openBookingModal"/>
+
+    <!--  //TABEL-->
+
+    <h1>3 viimasena lisatud pakkumist</h1>
+
+
+    <FilteredOffersTable @event-open-userOfferView="openUserOfferView"/>
+
+    <!--  //NUPUD-->
+
+    <HomePageButtons :handle-logout="handleLogout"/>
 
   </div>
 </template>
@@ -32,17 +33,20 @@ import HomePageButtons from "@/components/homePageComponents/Buttons.vue";
 import router from "@/router";
 import BookConfirmModal from "@/components/modal/BookConfirmModal.vue";
 import FilteredOffersPicture from "@/components/homePageComponents/FilteredOffersPicture.vue";
+import UserOfferView from "@/views/UserOffersView.vue";
 
-export default{
+export default {
   name: 'HomeView',
   components: {
+    UserOfferView,
     BookConfirmModal,
-    HomePageButtons, FilteredOffersTable, LogoutModal, FilteredOffersPicture},
+    HomePageButtons, FilteredOffersTable, LogoutModal, FilteredOffersPicture
+  },
 
   data() {
     return {
 
-      locations:[
+      locations: [
         {
           districtId: 0,
           districtName: ''
@@ -69,9 +73,12 @@ export default{
         router.push({name: 'errorRoute'})
       })
     },
-    openBookingModal(userId,offerId) {
+    openBookingModal(userId, offerId) {
       this.$refs.bookingConfirmModalRef.$refs.modalRef.openModal()
       this.$refs.bookingConfirmModalRef.getOfferByOfferId(userId, offerId)
+    },
+    openUserOfferView(userId) {
+      router.push({name:'userOffersRoute', query: {userId:userId}})
     },
 
   },
