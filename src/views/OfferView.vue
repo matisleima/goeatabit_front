@@ -1,6 +1,6 @@
 <template>
   <LogoutModal ref="logoutModalRef"/>
-  <h3>Lisan uue pakkumise</h3>
+  <h3> {{ title }}</h3>
   <div class="container text-center">
     <div class="row">
       <div class="col-6">
@@ -23,7 +23,8 @@
         <p></p>
         <div>
           <button @click="resetForm" type="button" class="btn btn-secondary">Tühjenda väljad</button>
-          <button @click="validateForm" type="button" class="btn btn-secondary">Lisa pakkumine</button>
+          <button v-if="isEdit" @click="validateForm" type="button" class="btn btn-secondary">Muuda pakkumine</button>
+          <button v-else @click="validateForm" type="button" class="btn btn-secondary">Lisa pakkumine</button>
         </div>
 
       </div>
@@ -32,8 +33,8 @@
       </div>
       <div class="col">
         <div class="d-grid gap-3">
-          <button @click="handleLogout" type="button" class="btn btn-secondary">Tahan süüa</button>
-          <button @click="handleLogout" type="button" class="btn btn-secondary">Minu pakkumised</button>
+          <button @click="$router.push('/reserve')" type="button" class="btn btn-secondary">Tahan süüa</button>
+          <button @click="$router.push('/my-offers')" type="button" class="btn btn-secondary">Minu pakkumised</button>
           <button @click="handleLogout" type="button" class="btn btn-secondary">Logi välja</button>
         </div>
 
@@ -76,6 +77,8 @@ export default {
         address: '',
         districtId: 0,
       },
+      title: "Pakkumise lisamine",
+      isEdit: false,
 
       successMessage: '',
       errorResponse: {
