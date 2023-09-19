@@ -4,11 +4,10 @@
   <BookConfirmModal ref="bookingConfirmModalRef"/>
 
   <div>
-    <h1>Järgmised kellaajaliselt lähimat pakkumist {{locations.districtName}}</h1>
+    <h1>{{locations.districtName}}, järgmised pakkumised </h1>
   </div>
 
 <!--  //PILDID-->
-
   <FilteredOffersPicture @event-open-modal="openBookingModal"/>
 
 <!--  //TABEL-->
@@ -72,6 +71,9 @@ export default{
     openBookingModal(userId,offerId) {
       this.$refs.bookingConfirmModalRef.$refs.modalRef.openModal()
       this.$refs.bookingConfirmModalRef.getOfferByOfferId(userId, offerId)
+    },
+    openUserOfferView(userId) {
+      router.push({name:'userOffersRoute', query: {userId:userId}})
     },
 
   },

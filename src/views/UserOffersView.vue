@@ -80,7 +80,7 @@ export default {
   data() {
     return {
       userId: sessionStorage.getItem('userId'),
-      offerUserId: 4, //SEE VÄÄRTUSTATAKSE HOME PAGE'ILT TULLES! KELLE NIMELE KLIKID?
+      offerUserId: 0,
       offerUserImageString: '',
       offers: [
         {

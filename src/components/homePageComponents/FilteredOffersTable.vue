@@ -57,8 +57,9 @@ export default {
             router.push({name:'errorRoute'})
           })
     },
-    navigateToUserOffersView(offerId){
-      router.push({name:'userOffersRoute', query:{offerId:offerId}})
+    navigateToUserOffersView(offerUserId) {
+      // this.$emit('event-open-userOfferView', userId)
+      router.push({name: 'userOffersRoute', query: {offerUserId: offerUserId}})
     },
 
   },

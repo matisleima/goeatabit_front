@@ -1,4 +1,6 @@
 <template>
+<div>
+  <h3 v-show="offers.length === 0" >Praegu sinu linnaosas pakkumisi pole!</h3>
 
   <div class="container">
     <div class="row justify-content-center">
@@ -13,6 +15,7 @@
 
     </div>
   </div>
+</div>
 
 </template>
 

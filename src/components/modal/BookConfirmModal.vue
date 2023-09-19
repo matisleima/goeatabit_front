@@ -42,7 +42,7 @@
       </template>
 
       <template #footer>
-        <button @click="confirm(); bookOffer()" type="button" class="btn btn-success">Kinnitan</button>
+        <button @click="bookAndGo()" type="button" class="btn btn-success">Kinnitan</button>
       </template>
 
     </Modal>
@@ -106,15 +106,15 @@ export default {
             }
           }
       ).then(response => {
-        const responseBody = response.data
+        router.push({name: 'reservationsRoute'})
       }).catch(error => {
-        const errorResponseBody = error.response.data
+        router.push({name: 'errorRoute'})
       })
     },
 
-    confirm() {
+    bookAndGo() {
       this.$refs.modalRef.closeModal()
-      router.push({name: 'reservationsRoute'})
+      this.bookOffer()
     },
   }
 }

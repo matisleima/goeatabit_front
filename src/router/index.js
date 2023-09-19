@@ -5,7 +5,7 @@ import ErrorView from "@/views/ErrorView.vue";
 import OfferView from "@/views/OfferView.vue";
 import ReserveView from "@/views/ReserveView.vue";
 import ReservationsView from "@/views/ReservationsView.vue";
-import UserOffersView from "@/components/UserOffersView.vue";
+import UserOffersView from "@/views/UserOffersView.vue";
 import MyOffersView from "@/views/MyOffersView.vue";
 
 const routes = [
@@ -40,12 +40,12 @@ const routes = [
         component: ReservationsView
     },
     {
-        path: '/user_offers',
+        path: '/user-offers',
         name: 'userOffersRoute',
         component: UserOffersView
     },
     {
-        path: '/myOffers',
+        path: '/my-offers',
         name: 'myOffersRoute',
         component: MyOffersView
     },
