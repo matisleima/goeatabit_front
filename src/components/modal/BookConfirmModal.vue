@@ -42,7 +42,7 @@
       </template>
 
       <template #footer>
-        <button @click="confirmAndBookOrder()" type="button" class="btn btn-success">Kinnitan</button>
+        <button @click="bookAndGo()" type="button" class="btn btn-success">Kinnitan</button>
       </template>
 
     </Modal>
@@ -85,6 +85,7 @@ export default {
   },
   methods: {
     getOfferByOfferId(userId, offerId) {
+      console.log('enne päringut', offerId)
       this.$http.get("/meals/offer", {
             params: {
               offerId: offerId,
@@ -111,7 +112,7 @@ export default {
       })
     },
 
-    confirmAndBookOrder() {
+    bookAndGo() {
       this.$refs.modalRef.closeModal()
       this.bookOffer()
     },

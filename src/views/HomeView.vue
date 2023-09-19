@@ -1,27 +1,26 @@
 <template>
   <div>
-    <LogoutModal ref="logoutModalRef"/>
-    <BookConfirmModal ref="bookingConfirmModalRef"/>
+  <LogoutModal ref="logoutModalRef"/>
+  <BookConfirmModal ref="bookingConfirmModalRef"/>
+
+  <div>
+    <h1>{{locations.districtName}}, järgmised pakkumised </h1>
+  </div>
+
+<!--  //PILDID-->
+
+  <FilteredOffersPicture @event-open-modal="openBookingModal"/>
+
+<!--  //TABEL-->
+
+  <h1>3 viimasena lisatud pakkumist</h1>
 
 
-    <div>
-      <h1>Kohe saabuvad lõunad, {{ locations.districtName }}</h1>
-    </div>
+    <FilteredOffersTable @event-open-userOfferView="openUserOfferView"/>
 
-    <!--  //PILDID-->
+<!--  //NUPUD-->
 
-    <FilteredOffersPicture @event-open-modal="openBookingModal"/>
-
-    <!--  //TABEL-->
-
-    <h1>Uued kuumad pakkumised!</h1>
-
-
-    <FilteredOffersTable/>
-
-    <!--  //NUPUD-->
-
-    <HomePageButtons :handle-logout="handleLogout"/>
+  <HomePageButtons :handle-logout="handleLogout"/>
 
   </div>
 </template>
@@ -35,18 +34,17 @@ import BookConfirmModal from "@/components/modal/BookConfirmModal.vue";
 import FilteredOffersPicture from "@/components/homePageComponents/FilteredOffersPicture.vue";
 import UserOfferView from "@/views/UserOffersView.vue";
 
-export default {
+export default{
   name: 'HomeView',
   components: {
     UserOfferView,
     BookConfirmModal,
-    HomePageButtons, FilteredOffersTable, LogoutModal, FilteredOffersPicture
-  },
+    HomePageButtons, FilteredOffersTable, LogoutModal, FilteredOffersPicture},
 
   data() {
     return {
 
-      locations: [
+      locations:[
         {
           districtId: 0,
           districtName: ''
@@ -76,6 +74,9 @@ export default {
     openBookingModal(userId, offerId) {
       this.$refs.bookingConfirmModalRef.$refs.modalRef.openModal()
       this.$refs.bookingConfirmModalRef.getOfferByOfferId(userId, offerId)
+    },
+    openUserOfferView(userId) {
+      router.push({name:'userOffersRoute', query: {userId:userId}})
     },
 
   },
