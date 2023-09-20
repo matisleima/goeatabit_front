@@ -24,7 +24,7 @@
         <td><a>{{ offer.price }}€</a></td>
         <td><a>{{  offer.totalPortions }}</a></td>
         <td><a>
-          <font-awesome-icon @click="navigateToOfferView(offer)" class="hoverable-link m-2"
+          <font-awesome-icon @click="navigateToOfferView(offer.offerId)" class="hoverable-link m-2"
                              :icon="['fas', 'pen-to-square']"/>
           <font-awesome-icon @click="openDeleteOfferModal(offer)" class="hoverable-link m-2"
                              :icon="['fas', 'trash']"/>
@@ -95,8 +95,8 @@ export default {
       })
     },
 
-    navigateToOfferView(offer) {
-      router.push({name: 'offerRoute', query: offer})
+    navigateToOfferView(offerId) {
+      router.push({name: 'offerRoute', query: {offerId:offerId}})
     },
 
     openDeleteOfferModal(offer) {

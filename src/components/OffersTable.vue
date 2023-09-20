@@ -20,7 +20,12 @@
         <td><a>{{ offer.date }}</a></td>
         <td><a>{{ offer.time }}</a></td>
         <td><a>{{ offer.address }}</a></td>
-        <td><a>{{ offer.firstName }} {{ offer.lastName }}</a></td>
+        <td>
+          <div class="hover-container" @click="openUserOfferView(offer.userId)">
+          <a>{{ offer.firstName }} {{ offer.lastName }}</a>
+            <div class="hover-text">Kasutaja pakkumised</div>
+          </div>
+        </td>
         <td>
           <div class="hover-container">
             <a>{{ offer.offerName }}</a>
@@ -32,7 +37,7 @@
         <td><a>{{ offer.userRating }}</a></td>
         <td>
             <a>
-              <button type="button" class="btn btn-success" @click="launchConfirmModal(offer.offerId, offer.userId)">Go Eat A Bit!</button>
+              <button type="button" class="btn btn-success" @click="launchConfirmModal(offer.offerId)">Go Eat A Bit!</button>
             </a>
         </td>
       </tr>
@@ -66,6 +71,8 @@
 </style>
 
 <script>
+import router from "@/router";
+
 export default {
   name: "OffersTable",
   props: {
@@ -99,7 +106,7 @@ export default {
 
   methods: {
     getFilteredOffers() {
-      this.$http.get("meals/filtered-offers", {
+      this.$http.get("/meals/filtered-offers", {
             params: {
               districtId: this.filter.selectedDistrictId,
               date: this.filter.selectedDate,
@@ -115,9 +122,13 @@ export default {
         const errorResponseBody = error.response.data
       })
     },
-    launchConfirmModal(offerId, userId) {
-      this.$emit('event-book-meal', offerId, userId)
+    launchConfirmModal(offerId) {
+      this.$emit('event-book-meal', offerId)
     },
+    openUserOfferView(userId) {
+      this.$emit('event-open-user-offer-view', userId)
+    },
+
   },
   mounted() {
     this.getFilteredOffers()

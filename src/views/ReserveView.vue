@@ -30,7 +30,7 @@
         </div>
 
         <div class="col mt-5">
-          <offers-table @event-book-meal="handleConfirmation" ref="filterRequestRef" :filter="filter"/>
+          <offers-table @event-open-user-offer-view="openUserOfferView" @event-book-meal="handleBookingConfirmationModal" ref="filterRequestRef" :filter="filter"/>
         </div>
 
         <div class="col col-2">
@@ -70,6 +70,7 @@ import loginView from "@/views/LoginView.vue";
 import DistrictDropdown from "@/components/DistrictDropdown.vue";
 import Filters from "@/components/Filters.vue";
 import BookConfirmModal from "@/components/modal/BookConfirmModal.vue";
+import router from "@/router";
 
 export default {
   name: "ReserveView",
@@ -90,13 +91,17 @@ export default {
     handleLogout() {
       this.$refs.logoutModalRef.$refs.modalRef.openModal()
     },
-    handleConfirmation(offerId, userId) {
+    handleBookingConfirmationModal(offerId) {
       this.$refs.bookConfirmModalRef.$refs.modalRef.openModal()
-      this.$refs.bookConfirmModalRef.getOfferByOfferId(userId, offerId)
+      this.$refs.bookConfirmModalRef.offerId = offerId
+      this.$refs.bookConfirmModalRef.getMealConfirmationInfo()
     },
     passFilterOn(filter) {
       this.filter = filter
       this.$refs.filterRequestRef.getFilteredOffers()
+    },
+    openUserOfferView(userId) {
+      router.push({name:'userOffersRoute', query: {userId:userId}})
     },
   },
   mounted() {

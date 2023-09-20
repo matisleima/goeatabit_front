@@ -53,7 +53,6 @@ export default{
     }
   },
   methods: {
-
     handleLogout() {
       this.$refs.logoutModalRef.$refs.modalRef.openModal()
     },
@@ -71,23 +70,18 @@ export default{
         router.push({name: 'errorRoute'})
       })
     },
-    openBookingModal(userId, offerId) {
+    openBookingModal(offerId) {
       this.$refs.bookingConfirmModalRef.$refs.modalRef.openModal()
-      this.$refs.bookingConfirmModalRef.getOfferByOfferId(userId, offerId)
+      this.$refs.bookingConfirmModalRef.offerId = offerId
+      this.$refs.bookingConfirmModalRef.getMealConfirmationInfo()
     },
     openUserOfferView(userId) {
       router.push({name:'userOffersRoute', query: {userId:userId}})
     },
-
   },
   beforeMount() {
     this.userId = sessionStorage.getItem('userId')
     this.getDistrict()
-
   },
-
-
 }
-
-
 </script>

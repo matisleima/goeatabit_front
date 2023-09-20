@@ -22,18 +22,18 @@
 
           <tbody>
           <tr>
-            <td><a>{{ filteredOffer.date }}</a></td>
-            <td><a>{{ filteredOffer.time }}</a></td>
-            <td><a>{{ filteredOffer.address }}</a></td>
-            <td><a>{{ filteredOffer.firstName }} {{ filteredOffer.lastName }}</a></td>
+            <td><a>{{ offer.date }}</a></td>
+            <td><a>{{ offer.time }}</a></td>
+            <td><a>{{ offer.address }}</a></td>
+            <td><a>{{ offer.firstName }} {{ offer.lastName }}</a></td>
             <td>
               <div class="hover-container">
-                <a>{{ filteredOffer.offerName }}</a>
-                <div class="hover-text">{{ filteredOffer.description }}</div>
+                <a>{{ offer.offerName }}</a>
+                <div class="hover-text">{{ offer.description }}</div>
               </div>
             </td>
-            <td><a>{{ filteredOffer.price }}€</a></td>
-            <td><a>{{ filteredOffer.userRating }}</a></td>
+            <td><a>{{ offer.price }}€</a></td>
+            <td><a>{{ offer.userRating }}</a></td>
             <td></td>
 
           </tr>
@@ -59,41 +59,30 @@ export default {
 
   data() {
     return {
+      offerId: 0,
       userId: sessionStorage.getItem('userId'),
-      filteredOffer: [
-        {
-          offerId: 0,
-          userId: 0,
-          userRating: 0,
-          time: 0,
-          date: '',
-          price: 0,
-          totalPortions: 0,
-          offerName: '',
-          description: '',
-          foodGroupId: 0,
-          offerStatus: '',
-          address: '',
-          districtId: 0,
-          firstName: '',
-          lastName: '',
-          imageString: ''
-
-        }
-      ]
+      offer:{
+        date: '',
+        time: 0,
+        address: '',
+        firstName: '',
+        lastName: '',
+        offerName: '',
+        description: '',
+        price: 0,
+        userRating: 0
+      }
     }
   },
   methods: {
-    getOfferByOfferId(userId, offerId) {
-      console.log('enne päringut', offerId)
-      this.$http.get("/meals/offer", {
+    getMealConfirmationInfo() {
+      this.$http.get("/meals/offer/booking/confirmation-info", {
             params: {
-              offerId: offerId,
-              userId: userId
+              offerId: this.offerId
             }
           }
       ).then(response => {
-        this.filteredOffer = response.data
+        this.offer = response.data
       }).catch(error => {
         const errorResponseBody = error.response.data
       })
@@ -102,7 +91,7 @@ export default {
       this.$http.post("/meals/event", null, {
             params: {
               userId: this.userId,
-              offerId: this.filteredOffer.offerId
+              offerId: this.offerId
             }
           }
       ).then(response => {

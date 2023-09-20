@@ -54,7 +54,7 @@
             <td><a>{{ offer.userRating }}</a></td>
             <td>
               <a>
-                <button type="button" class="btn btn-success" @click="handleConfirmation(offer.offerId, userId)">Go Eat
+                <button type="button" class="btn btn-success" @click="handleConfirmation(offer.offerId)">Go Eat
                   A Bit!
                 </button>
               </a>
@@ -138,9 +138,10 @@ export default {
       }).catch(error => {
       })
     },
-    handleConfirmation(offerId, userId) {
+    handleConfirmation(offerId) {
       this.$refs.bookConfirmModalRef.$refs.modalRef.openModal()
-      this.$refs.bookConfirmModalRef.getOfferByOfferId(userId, offerId)
+      this.$refs.bookConfirmModalRef.offerId = offerId
+      this.$refs.bookConfirmModalRef.getMealConfirmationInfo()
     },
     handleLogout() {
       this.$refs.logoutModalRef.$refs.modalRef.openModal()

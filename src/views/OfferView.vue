@@ -34,8 +34,12 @@
         <p></p>
         <div>
           <button @click="resetForm" type="button" class="btn btn-secondary">Tühjenda väljad</button>
-          <button v-if="isEdit" @click="validateFormAndSendUpdateOfferRequest" type="button" class="btn btn-secondary">Muuda pakkumine</button>
-          <button v-else @click="validateFormAndSendAddOfferRequest" type="button" class="btn btn-secondary">Lisa pakkumine</button>
+          <button v-if="isEdit" @click="validateFormAndSendUpdateOfferRequest" type="button" class="btn btn-secondary">
+            Muuda pakkumine
+          </button>
+          <button v-else @click="validateFormAndSendAddOfferRequest" type="button" class="btn btn-secondary">Lisa
+            pakkumine
+          </button>
         </div>
       </div>
 
@@ -44,8 +48,11 @@
 
       <div class="col">
         <div class="d-grid gap-3">
-          <button @click="$router.push({name: 'reserveRoute'})" type="button" class="btn btn-secondary">Tahan süüa</button>
-          <button @click="$router.push({name: 'myOffersRoute'})" type="button" class="btn btn-secondary">Minu pakkumised</button>
+          <button @click="$router.push({name: 'reserveRoute'})" type="button" class="btn btn-secondary">Tahan süüa
+          </button>
+          <button @click="$router.push({name: 'myOffersRoute'})" type="button" class="btn btn-secondary">Minu
+            pakkumised
+          </button>
           <button @click="handleLogout" type="button" class="btn btn-secondary">Logi välja</button>
         </div>
       </div>
@@ -74,20 +81,15 @@ export default {
 
   data() {
     return {
+      offerId: Number(useRoute().query.offerId),
       offer: {
-        offerId: 0,
-        userId: sessionStorage.getItem('userId'),
-        userRating: '',
-        time: '',
         date: '',
-        price: '',
-        totalPortions: '',
+        time: 0,
+        foodGroupId: 0,
         offerName: '',
         description: '',
-        foodGroupId: 0,
-        offerStatus: 'A',
-        address: '',
-        districtId: 0,
+        price: 0,
+        totalPortions: 0
       },
       title: "PAKKUMISE LISAMINE",
       isEdit: false,
@@ -101,6 +103,26 @@ export default {
   },
 
   methods: {
+
+    getOfferInfoAndUpdateFields() {
+      this.$http.get("/meals/offer", {
+            params: {
+              offerId: this.offerId
+            }
+          }
+      ).then(response => {
+        // Siit saame kätte JSONi  ↓↓↓↓↓↓↓↓
+        this.offer = response.data
+        this.title = "Pakkumise muutmine"
+        this.$refs.foodGroupRef.selectedFoodGroupId = this.offer.foodGroupId
+
+      }).catch(error => {
+        // Siit saame kätte errori JSONi  ↓↓↓↓↓↓↓↓
+        const errorResponseBody = error.response.data
+      })
+    },
+
+
     resetForm() {
       this.offer.date = ''
       this.offer.time = ''
@@ -124,7 +146,6 @@ export default {
       if (!this.allFieldsAreFilled()) {
         this.errorResponse.message = FILL_ALL_FIELDS
       } else {
-        alert("send update odder request to db")
         this.sendUpdateOfferRequest()
       }
     },
@@ -156,7 +177,11 @@ export default {
     sendUpdateOfferRequest() {
       this.errorResponse.message = ''
       this.successMessage = ''
-      this.$http.put("/meals/offer", this.offer
+      this.$http.put("/meals/offer", this.offer, {
+            params: {
+              offerId: this.offerId
+            }
+          }
       ).then(response => {
         // Siit saame kätte JSONi  ↓↓↓↓↓↓↓↓
         this.handleAddOfferSuccessResponse()
@@ -165,7 +190,6 @@ export default {
         this.handleErrorResponse(error)
       })
     },
-
 
 
     handleLogout() {
@@ -189,34 +213,19 @@ export default {
       this.offer.foodGroupId = selectedFoodGroupId;
     },
 
-    handleIsEdit: function () {
-      this.offerId = Number(useRoute().query.offerId)
+    handleIsEdit() {
       this.isEdit = !isNaN(this.offerId)
-
-      alert("isEdit: " + this.isEdit)
-
-      if(this.isEdit) {
-        this.title = "Pakkumise muutmine"
-        this.offer.offerId = useRoute().query.offerId
-        this.offer.date = useRoute().query.date
-        this.offer.time = useRoute().query.time
-        this.offer.offerName = useRoute().query.offerName
-        this.offer.description = useRoute().query.description
-        this.offer.price = useRoute().query.price
-        this.offer.totalPortions = useRoute().query.totalPortions
-        this.$refs.foodGroupRef.setSelectedFoodGroupId(useRoute().query.foodGroupId)
-        this.offer.foodGroupId = useRoute().query.foodGroupId
+      if (this.isEdit) {
+        this.getOfferInfoAndUpdateFields()
       }
     }
-
-
-
 
 
   },
 
   mounted() {
     this.handleIsEdit()
+
   }
 }
 
