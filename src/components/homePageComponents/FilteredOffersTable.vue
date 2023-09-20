@@ -19,7 +19,7 @@
 
             <td><a>{{ offer.offerName }}</a></td>
             <td><a>
-              <button type="button" class="btn btn-success" @click="launchConfirmModal(offer.offerId, offer.userId)">
+              <button type="button" class="btn btn-success" @click="navigateToUserOffersView(offer.userId)">
                 Go Eat A Bit!
               </button>
             </a>
