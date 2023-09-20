@@ -13,7 +13,7 @@
             <div class="row">
               Pakkuja: {{ offer.firstName }} {{ offer.lastName }}
             </div>
-            <div @click="$router.push('/my-offers')" class="row" style="cursor: pointer; color: #198754; font-weight: bold">
+            <div @click="openBookConfirmModal(offer.userId, offer.offerId)" type="submit" class="row" style="cursor: pointer; color: #198754; font-weight: bold">
               Pakkumises: {{ offer.offerName }}
             </div>
             <div class="row">
