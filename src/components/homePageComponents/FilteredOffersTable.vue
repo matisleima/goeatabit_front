@@ -8,15 +8,22 @@
           <tr>
             <th scope="col">Pakkuja</th>
             <th scope="col">Pakkumine</th>
+            <th scope="col">Registreeru</th>
           </tr>
           </thead>
           <tbody>
           <tr v-for="offer in offers" :key="offer.offerId">
-            <td @click="navigateToUserOffersView(offer.userId)" type="submit"
-                style="cursor: pointer; color: blue; text-decoration: underline;">
+            <td><a>
               {{ offer.firstName }}{{ " " }}{{ offer.lastName }}
+            </a></td>
+
+            <td><a>{{ offer.offerName }}</a></td>
+            <td><a>
+              <button type="button" class="btn btn-success" @click="launchConfirmModal(offer.offerId, offer.userId)">Go
+                Eat A Bit!
+              </button>
+            </a>
             </td>
-            <td> {{ offer.offerName }}</td>
           </tr>
           </tbody>
         </table>

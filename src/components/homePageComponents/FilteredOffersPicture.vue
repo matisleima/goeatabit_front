@@ -9,7 +9,7 @@
       <div class="col col-2" v-for="offer in offers" :key="offer.offerId" >
         <div class="row">
           <UserImage :image-data-base64="offer.imageString"/>
-          <p @click="openBookConfirmModal(offer.userId, offer.offerId)" type="submit" style="cursor: pointer; color: blue; text-decoration: underline;">  {{offer.offerName}} - {{offer.time}}</p>
+          <p @click="openBookConfirmModal(offer.userId, offer.offerId)" type="submit" style="cursor: pointer; color: #198754; font-weight: bold">  {{offer.offerName}}  {{offer.time}}</p>
         </div>
       </div>
 

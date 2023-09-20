@@ -8,14 +8,21 @@
 
       <div class="col m-3 col-10">
 
-        <h1>{{ districtName }}, JÄRGMISED PAKKUMISED </h1>
+        <h1>{{ districtName }}, JÄRGMISED PAKKUMISED TÄNA </h1>
       </div>
 
-      <div class="col">
-      </div>
+      <div class="row">
+        <div class="col">
+        </div>
 
-      <div class="col">
-      </div>
+        <div class="col">
+        </div>
+
+        <div class="col">
+        </div>
+
+      </div>>
+
 
     </div>
 
@@ -34,13 +41,26 @@
       </div>
 
     </div>
+
+    <div class="row mb-5">
+      <div class="col">
+      </div>
+
+      <div class="col">
+      </div>
+
+      <div class="col">
+      </div>
+    </div>
+
     <!--  //TABEL-->
+    <div class="row">
+      <div class="col m-3 col-10">
+        <h1>KOLM VIIMAST PAKKUMIST</h1>
+      </div>
 
-    <h1>3 viimasena lisatud pakkumist</h1>
-
-
-    <FilteredOffersTable @event-open-userOfferView="openUserOfferView"/>
-
+      <FilteredOffersTable @event-open-userOfferView="openUserOfferView"/>
+    </div>
 
   </div>
 </template>
@@ -63,7 +83,7 @@ export default {
 
   data() {
     return {
-      districtName:''
+      districtName: ''
     }
   },
 
@@ -86,8 +106,8 @@ export default {
         router.push({name: 'errorRoute'})
       })
     },
-    navigateToOffersView(){
-      router.push({name:'reserveRoute'})
+    navigateToOffersView() {
+      router.push({name: 'reserveRoute'})
     },
     openBookingModal(userId, offerId) {
       this.$refs.bookingConfirmModalRef.$refs.modalRef.openModal()
