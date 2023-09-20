@@ -1,7 +1,7 @@
 <template>
-    <h1>Oops... Midagi läks valesti :(</h1>
+    <h1>Ups... Midagi läks valesti :(</h1>
     <p></p>
-    <a href="//localhost:8089">Tagasi kodulehele</a>
+    <a @click="goToLogin">Tagasi kodulehele</a>
     <p></p>
   <div>
     Kirjuta meile
@@ -12,8 +12,17 @@
 
 
 <script>
+import router from "@/router";
+
 export default {
-  name: "ErrorView"
+  name: "ErrorView",
+  methods: {
+
+    goToLogin() {
+      router.push('/')
+      sessionStorage.clear()
+    },
+  }
 }
 </script>
 
