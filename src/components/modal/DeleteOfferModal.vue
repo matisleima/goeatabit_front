@@ -38,6 +38,7 @@
 
 <script>
 import Modal from "@/components/modal/Modal.vue";
+import {OFFER_DELETED, USER_REGISTERED} from "@/assets/script/AlertMessage";
 
 
 export default {
@@ -67,7 +68,6 @@ export default {
   methods: {
 
     deleteOffer() {
-      alert("send delete offer request to db")
       this.$refs.modalRef.closeModal()
       this.$http.delete("/meals/offer", {
             params: {
@@ -75,11 +75,17 @@ export default {
             }
           }
       ).then(response => {
-        this.$emit("event-offer-successfully-deleted")
+        this.handleDeleteOfferSuccessResponse()
       }).catch(error => {
-        const errorResponseBody = error.response.data
+        this.handleErrorResponse(error)
       })
     },
+
+    handleDeleteOfferSuccessResponse() {
+      this.successMessage = OFFER_DELETED
+      this.$emit('event-offer-deletion-success', this.successMessage)
+      this.$refs.modalRef.closeModal()
+    }
   }
 }
 </script>

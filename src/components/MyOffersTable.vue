@@ -1,5 +1,5 @@
 <template>
-  <delete-offer-modal ref="deleteOfferRef"/>
+  <delete-offer-modal ref="deleteOfferRef" @event-offer-deletion-success="showOfferDeleteSuccessMessage"/>
   <div>
     <table class="table">
       <thead>
@@ -32,6 +32,7 @@
       </tr>
       </tbody>
     </table>
+    <AlertSuccess :alert-message="successMessage"/>
   </div>
 </template>
 
@@ -44,10 +45,11 @@
 <script>
 import DeleteOfferModal from "@/components/modal/DeleteOfferModal.vue";
 import router from "@/router";
+import AlertSuccess from "@/components/alert/AlertSuccess.vue";
 
 export default {
   name: "MyOffersTable",
-  components: {DeleteOfferModal},
+  components: {AlertSuccess, DeleteOfferModal},
   props: {
 
   },
@@ -69,7 +71,8 @@ export default {
           totalPortions: 0,
           userRating: 0
         }
-      ]
+      ],
+      successMessage: ''
     }
   },
 
@@ -87,9 +90,8 @@ export default {
           }
       ).then(response => {
         this.filteredOffers = response.data
-        console.log(response.data)
       }).catch(error => {
-        const errorResponseBody = error.response.data
+        this.handleErrorResponse(error)
       })
     },
 
@@ -100,6 +102,12 @@ export default {
     openDeleteOfferModal(offer) {
       this.$refs.deleteOfferRef.$refs.modalRef.openModal()
       this.$refs.deleteOfferRef.offer = offer
+    },
+
+    showOfferDeleteSuccessMessage(successMessage) {
+      this.getFilteredOffers()
+      this.successMessage = successMessage
+      setTimeout(() => {this.successMessage = ''}, 2000 )
     }
 
 
