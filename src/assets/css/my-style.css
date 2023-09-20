@@ -8,7 +8,7 @@
 
 /* Kui modaal on nähtav, rakenda järgmised stiilid */
 .modal.fade.show.d-block {
-    background-color: rgba(0, 0, 0, 0.8); /* Tausta värv koos läbipaistvusega */
+    background-color: rgba(0, 0, 0, 0.5); /* Tausta värv koos läbipaistvusega */
     position: fixed; /* Positsiooni tüüp on fikseeritud */
     z-index: 1050; /* Z-indeks määrab modaalakna kihi järjekorra */
     left: 0; /* Vasak paigutus on null */
@@ -24,4 +24,8 @@
     top: 10%; /* Ülemine paigutus on 10% */
     left: 50%; /* Vasak paigutus on 50% */
     transform: translateX(-50%); /* Teisendab X-telje piki -50% võrra */
+}
+
+tbody tr.highlight-row {
+    background-color: #ff5b6d !important;
 }

@@ -24,6 +24,7 @@
           <table class="table">
             <thead>
             <tr>
+              <th scope="col"></th>
               <th scope="col">Kuupäev</th>
               <th scope="col">Kell</th>
               <th scope="col">Aadress</th>
@@ -38,6 +39,15 @@
 
             <tbody>
             <tr v-for="event in myEvents" :key="event.eventId">
+              <th>
+                <div class="hover-container">
+
+                <a v-if="event.offerStatus === 'D'" id="">
+                <font-awesome-icon :icon="['fas', 'circle-exclamation']" style="color: #ff3d3d;"/>
+              </a>
+                  <div v-show="event.description.length > 0" class="hover-text">Pakkuja on selle pakkumise tühistanud!</div>
+                </div>
+              </th>
               <td><a>{{ event.date }}</a></td>
               <td><a>{{ event.time }}</a></td>
               <td><a>{{ event.address }}</a></td>
@@ -97,6 +107,12 @@ import DeleteEventModal from "@/components/modal/DeleteEventModal.vue";
 export default {
   name: "ReservationsView",
   components: {DeleteEventModal, LogoutModal, OffersTable},
+  computed: {
+    getHighlightStyle() {
+      return 'background-color: #ff5b6d !important;';
+    }
+  },
+
   data() {
     return {
       userId: sessionStorage.getItem('userId'),
