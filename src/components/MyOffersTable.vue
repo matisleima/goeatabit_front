@@ -43,6 +43,7 @@
 
 <script>
 import DeleteOfferModal from "@/components/modal/DeleteOfferModal.vue";
+import router from "@/router";
 
 export default {
   name: "MyOffersTable",
@@ -92,8 +93,9 @@ export default {
       })
     },
 
-    navigateToOfferView(offerId) {
-      alert("update offer view: " + offerId)
+    navigateToOfferView(offer) {
+      alert("update offer #" + offer.offerId)
+      router.push({name: 'offerRoute', query: offer})
     },
 
     openDeleteOfferModal(offer) {

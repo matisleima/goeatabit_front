@@ -34,7 +34,7 @@
         <p></p>
         <div>
           <button @click="resetForm" type="button" class="btn btn-secondary">Tühjenda väljad</button>
-          <button v-if="isEdit" @click="validateForm" type="button" class="btn btn-secondary">Muuda pakkumine</button>
+          <button v-if="isEdit" @click="testMethod" type="button" class="btn btn-secondary">Muuda pakkumine</button>
           <button v-else @click="validateForm" type="button" class="btn btn-secondary">Lisa pakkumine</button>
         </div>
       </div>
@@ -44,7 +44,7 @@
 
       <div class="col">
         <div class="d-grid gap-3">
-          <button @click="$router.push('/reserve')" class="btn btn-secondary">Tahan süüa</button>
+          <button @click="$router.push('/reserve')" type="button" class="btn btn-secondary">Tahan süüa</button>
           <button @click="$router.push('/my-offers')" type="button" class="btn btn-secondary">Minu pakkumised</button>
           <button @click="handleLogout" type="button" class="btn btn-secondary">Logi välja</button>
         </div>
@@ -64,6 +64,7 @@ import LogoutModal from "@/components/modal/LogoutModal.vue";
 import {FILL_ALL_FIELDS, OFFER_ADDED, USER_REGISTERED} from "@/assets/script/AlertMessage";
 import {USER_NAME_UNAVAILABLE} from "@/assets/script/ErrorCode";
 import FoodGroupDropDown from "@/components/FoodGroupDropdown.vue";
+import {useRoute} from "vue-router";
 import router from "@/router";
 
 export default {
@@ -163,8 +164,41 @@ export default {
 
     setOfferFoodGroupId(selectedFoodGroupId) {
       this.offer.foodGroupId = selectedFoodGroupId;
+    },
+
+    handleIsEdit: function () {
+      this.offerId = Number(useRoute().query.offerId)
+      this.isEdit = !isNaN(this.offerId)
+
+      alert(this.isEdit)
+
+      if(this.isEdit) {
+        this.title = "Pakkumise muutmine"
+        this.offer.offerId = useRoute().query.offerId
+        this.offer.date = useRoute().query.date
+        this.offer.time = useRoute().query.time
+        this.offer.offerName = useRoute().query.offerName
+        this.offer.description = useRoute().query.description
+        this.offer.price = useRoute().query.price
+        this.offer.totalPortions = useRoute().query.totalPortions
+        this.$refs.foodGroupRef.setSelectedFoodGroupId(useRoute().query.foodGroupId)
+        this.offer.foodGroupId = useRoute().query.foodGroupId
+
+
+        alert(this.offerId)
+      }
+    },
+
+    testMethod() {
+      alert("food group " + this.offer.foodGroupId)
     }
 
+
+
+  },
+
+  mounted() {
+    this.handleIsEdit()
   }
 }
 
