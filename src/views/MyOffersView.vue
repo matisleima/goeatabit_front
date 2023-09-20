@@ -52,10 +52,11 @@
 import MyOffersTable from "@/components/MyOffersTable.vue";
 import DeleteOfferModal from "@/components/modal/DeleteOfferModal.vue";
 import LogoutModal from "@/components/modal/LogoutModal.vue";
+import AlertSuccess from "@/components/alert/AlertSuccess.vue";
 
 export default {
   name: 'MyOfferView',
-  components: {LogoutModal, DeleteOfferModal, MyOffersTable},
+  components: {AlertSuccess, LogoutModal, DeleteOfferModal, MyOffersTable},
 
   data() {
     return {
@@ -75,8 +76,8 @@ export default {
           availableMeals: 0,
           userRating: 0,
           foodGroupId: 0
-
         }
+
       ]
     }
 
