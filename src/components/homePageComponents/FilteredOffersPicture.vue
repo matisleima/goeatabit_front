@@ -13,14 +13,12 @@
             <div class="row">
               Pakkuja: {{ offer.firstName }} {{ offer.lastName }}
             </div>
-            <div @click="openBookConfirmModal(offer.userId, offer.offerId)" type="submit" class="row" style="cursor: pointer; color: #198754; font-weight: bold">
-              Pakkumises: {{ offer.offerName }}
+            <div @click="openBookConfirmModal(offer.userId, offer.offerId)" type="submit" style="cursor: pointer; color: #198754; font-weight: bold" class="row">
+               Pakkumises: {{ offer.offerName }}
             </div>
             <div class="row">
                 Kuupäev: {{ offer.date }}, {{ offer.time }}
             </div>
-
-
 
           </div>
         </div>
