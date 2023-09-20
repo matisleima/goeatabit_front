@@ -1,21 +1,33 @@
 <template>
-<div>
-  <h3 v-show="offers.length === 0" >Praegu sinu linnaosas pakkumisi pole!</h3>
+  <div>
+    <h3 v-show="offers.length === 0">Praegu sinu linnaosas pakkumisi pole!</h3>
 
-  <div class="container">
-    <div class="row justify-content-center">
+    <div class="container">
+      <div class="row justify-content-center">
 
 
-      <div class="col col-2" v-for="offer in offers" :key="offer.offerId" >
-        <div class="row">
-          <UserImage :image-data-base64="offer.imageString"/>
-          <p @click="openBookConfirmModal(offer.userId, offer.offerId)" type="submit" style="cursor: pointer; color: #198754; font-weight: bold">  {{offer.offerName}}  {{offer.time}}</p>
+        <div class="col col-4" v-for="offer in offers" :key="offer.offerId">
+          <div class="row">
+            <UserImage :image-data-base64="offer.imageString"/>
+
+            <div class="row">
+              Pakkuja: {{ offer.firstName }} {{ offer.lastName }}
+            </div>
+            <div @click="$router.push('/my-offers')" class="row" style="cursor: pointer; color: #198754; font-weight: bold">
+              Pakkumises: {{ offer.offerName }}
+            </div>
+            <div class="row">
+                Kuupäev: {{ offer.date }}, {{ offer.time }}
+            </div>
+
+
+
+          </div>
         </div>
-      </div>
 
+      </div>
     </div>
   </div>
-</div>
 
 </template>
 
@@ -66,7 +78,7 @@ export default {
       })
     },
     openBookConfirmModal(userId, offerId) {
-      this.$emit('event-open-modal',userId, offerId)
+      this.$emit('event-open-modal', userId, offerId)
 
     },
 

@@ -6,7 +6,7 @@
   <div class="container text-center">
     <div class="row">
 
-      <div class="col m-3 col-10">
+      <div class="col m-3 col-12">
 
         <h1>{{ districtName }}, JÄRGMISED PAKKUMISED TÄNA </h1>
       </div>
