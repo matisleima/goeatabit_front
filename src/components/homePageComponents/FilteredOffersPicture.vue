@@ -17,7 +17,7 @@
                Pakkumises: {{ offer.offerName }}
             </div>
             <div class="row">
-                Kuupäev: {{ offer.date }}, {{ offer.time }}
+                Toimumise aeg: {{ offer.date }}, kell {{ offer.time }}
             </div>
 
           </div>
