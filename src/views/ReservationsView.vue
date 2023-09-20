@@ -43,7 +43,7 @@
                 <div class="hover-container">
 
                 <a v-if="event.offerStatus === 'D'" id="">
-                <font-awesome-icon :icon="['fas', 'circle-exclamation']" style="color: #ff3d3d;"/>
+                  <font-awesome-icon :icon="['fas', 'circle-exclamation']" size="xl" style="color: #ff3842;" />
               </a>
                   <div v-show="event.description.length > 0" class="hover-text">Pakkuja on selle pakkumise tühistanud!</div>
                 </div>
