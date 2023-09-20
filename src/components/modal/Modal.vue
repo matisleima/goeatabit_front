@@ -1,6 +1,6 @@
 <template>
   <div v-if="isOpen" class="modal fade show d-block" tabindex="-1" @click="closeModal">
-    <div class="modal-dialog modal-lg" @click.stop >
+    <div class="modal-dialog" @click.stop >
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">

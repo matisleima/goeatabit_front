@@ -68,7 +68,7 @@ import AlertDanger from "@/components/alert/AlertDanger.vue";
 import AlertSuccess from "@/components/alert/AlertSuccess.vue";
 import Modal from "@/components/modal/Modal.vue";
 import LogoutModal from "@/components/modal/LogoutModal.vue";
-import {FILL_ALL_FIELDS, OFFER_ADDED, USER_REGISTERED} from "@/assets/script/AlertMessage";
+import {FILL_ALL_FIELDS, OFFER_ADDED, OFFER_MODIFIED, USER_REGISTERED} from "@/assets/script/AlertMessage";
 import {USER_NAME_UNAVAILABLE} from "@/assets/script/ErrorCode";
 import FoodGroupDropDown from "@/components/FoodGroupDropdown.vue";
 import {useRoute} from "vue-router";
@@ -113,7 +113,7 @@ export default {
       ).then(response => {
         // Siit saame kätte JSONi  ↓↓↓↓↓↓↓↓
         this.offer = response.data
-        this.title = "Pakkumise muutmine"
+        this.title = "PAKKUMISE MUUTMINE"
         this.$refs.foodGroupRef.selectedFoodGroupId = this.offer.foodGroupId
 
       }).catch(error => {
@@ -184,7 +184,7 @@ export default {
           }
       ).then(response => {
         // Siit saame kätte JSONi  ↓↓↓↓↓↓↓↓
-        this.handleAddOfferSuccessResponse()
+        this.handleUpdateOfferSuccessResponse()
       }).catch(error => {
         // Siit saame kätte errori JSONi  ↓↓↓↓↓↓↓↓
         this.handleErrorResponse(error)
@@ -200,6 +200,14 @@ export default {
       this.successMessage = OFFER_ADDED
       this.resetForm();
       this.$emit('event-offer-creation-success', this.successMessage)
+    },
+
+    handleUpdateOfferSuccessResponse() {
+      this.successMessage = OFFER_MODIFIED
+      this.resetForm();
+      this.isEdit = false;
+      this.title = "PAKKUMISE LISAMINE";
+      this.$emit('event-offer-update-success', this.successMessage)
     },
 
     handleErrorResponse(error) {
