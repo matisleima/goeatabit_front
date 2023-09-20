@@ -1,5 +1,7 @@
 <template>
   <logout-modal ref="logoutModalRef"/>
+  <delete-event-modal @event-event-successfully-deleted="handleSuccessfulDeletion" ref="deleteEventRef"/>
+
   <div>
     <div class="container">
       <div class="row mt-5">
@@ -15,7 +17,7 @@
 
       </div>
       <div class="row">
-        <div class="col col-2">
+        <div class="col col-1">
         </div>
 
         <div class="col mt-5">
@@ -30,6 +32,7 @@
               <th scope="col">Hind</th>
               <th scope="col">Broneeringuid</th>
               <th scope="col">Hinnang</th>
+              <th scope="col">Kustuta</th>
             </tr>
             </thead>
 
@@ -46,15 +49,27 @@
                 </div>
               </td>
               <td><a>{{ event.price }}€</a></td>
-              <td><a>?/{{event.totalPortions}}</a></td>
+              <td><a>?/{{ event.totalPortions }}</a></td>
               <td><a>{{ event.offerUserRating }}</a></td>
-
+              <td><a>
+                <font-awesome-icon @click="openDeleteEventModal(event)" class="hoverable-link m-2"
+                                   :icon="['fas', 'trash']"/>
+              </a></td>
             </tr>
             </tbody>
           </table>
         </div>
 
         <div class="col col-2">
+          <div class="d-grid gap-3">
+            <button @click="$router.push('/reserve')" type="button" class="btn btn-secondary">Tahan süüa</button>
+            <button @click="$router.push('/my-offers')" type="button" class="btn btn-secondary">Minu pakkumised</button>
+            <button @click="handleLogout" type="button" class="btn btn-secondary">Logi välja</button>
+
+            <div v-show="successMessage.length > 0" class="alert alert-success" role="alert">
+              {{ successMessage }}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -66,12 +81,6 @@
         </div>
 
         <div class="col col-2">
-          <div class="d-grid gap-3">
-            <button @click="$router.push('/reserve')" type="button" class="btn btn-secondary">Tahan süüa</button>
-            <button @click="$router.push('/my-offers')" type="button" class="btn btn-secondary">Minu pakkumised</button>
-            <button @click="handleLogout" type="button" class="btn btn-secondary">Logi välja</button>
-
-          </div>
         </div>
       </div>
 
@@ -83,13 +92,15 @@
 <script>
 import OffersTable from "@/components/OffersTable.vue";
 import LogoutModal from "@/components/modal/LogoutModal.vue";
+import DeleteEventModal from "@/components/modal/DeleteEventModal.vue";
 
 export default {
   name: "ReservationsView",
-  components: {LogoutModal, OffersTable},
+  components: {DeleteEventModal, LogoutModal, OffersTable},
   data() {
     return {
       userId: sessionStorage.getItem('userId'),
+      successMessage: '',
       myEvents: [
         {
           eventId: 0,
@@ -122,14 +133,24 @@ export default {
       ).then(response => {
         this.myEvents = response.data
       }).catch(error => {
-        const errorResponseBody = error.response.data
+        alert('Error: Could not populate my events table!')
       })
+    },
+    openDeleteEventModal(event) {
+      this.$refs.deleteEventRef.$refs.modalRef.openModal()
+      this.$refs.deleteEventRef.event = event
+    },
+    handleSuccessfulDeletion() {
+      this.getMyEvents()
+      this.successMessage = 'Broneering kustutatud!'
+      setTimeout(() => {
+        this.successMessage = '';
+      }, 2000)
     },
     handleLogout() {
       this.$refs.logoutModalRef.$refs.modalRef.openModal()
     },
   },
-
   mounted() {
     this.getMyEvents()
   }
