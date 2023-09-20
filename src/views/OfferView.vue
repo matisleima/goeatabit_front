@@ -34,8 +34,8 @@
         <p></p>
         <div>
           <button @click="resetForm" type="button" class="btn btn-secondary">Tühjenda väljad</button>
-          <button v-if="isEdit" @click="testMethod" type="button" class="btn btn-secondary">Muuda pakkumine</button>
-          <button v-else @click="validateForm" type="button" class="btn btn-secondary">Lisa pakkumine</button>
+          <button v-if="isEdit" @click="validateFormAndSendUpdateOfferRequest" type="button" class="btn btn-secondary">Muuda pakkumine</button>
+          <button v-else @click="validateFormAndSendAddOfferRequest" type="button" class="btn btn-secondary">Lisa pakkumine</button>
         </div>
       </div>
 
@@ -44,8 +44,8 @@
 
       <div class="col">
         <div class="d-grid gap-3">
-          <button @click="$router.push('/reserve')" type="button" class="btn btn-secondary">Tahan süüa</button>
-          <button @click="$router.push('/my-offers')" type="button" class="btn btn-secondary">Minu pakkumised</button>
+          <button @click="$router.push({name: 'reserveRoute'})" type="button" class="btn btn-secondary">Tahan süüa</button>
+          <button @click="$router.push({name: 'myOffersRoute'})" type="button" class="btn btn-secondary">Minu pakkumised</button>
           <button @click="handleLogout" type="button" class="btn btn-secondary">Logi välja</button>
         </div>
       </div>
@@ -112,14 +112,22 @@ export default {
       this.offer.totalPortions = ''
     },
 
-    validateForm() {
+    validateFormAndSendAddOfferRequest() {
       if (!this.allFieldsAreFilled()) {
         this.errorResponse.message = FILL_ALL_FIELDS
       } else {
-        this.sendOfferRequest()
+        this.sendAddOfferRequest()
       }
     },
 
+    validateFormAndSendUpdateOfferRequest() {
+      if (!this.allFieldsAreFilled()) {
+        this.errorResponse.message = FILL_ALL_FIELDS
+      } else {
+        alert("send update odder request to db")
+        this.sendUpdateOfferRequest()
+      }
+    },
 
     allFieldsAreFilled() {
       let check = this.offer;
@@ -132,7 +140,7 @@ export default {
     },
 
 
-    sendOfferRequest() {
+    sendAddOfferRequest() {
       this.errorResponse.message = ''
       this.successMessage = ''
       this.$http.post("/meals/offer", this.offer
@@ -144,6 +152,21 @@ export default {
         this.handleErrorResponse(error)
       })
     },
+
+    sendUpdateOfferRequest() {
+      this.errorResponse.message = ''
+      this.successMessage = ''
+      this.$http.put("/meals/offer", this.offer
+      ).then(response => {
+        // Siit saame kätte JSONi  ↓↓↓↓↓↓↓↓
+        this.handleAddOfferSuccessResponse()
+      }).catch(error => {
+        // Siit saame kätte errori JSONi  ↓↓↓↓↓↓↓↓
+        this.handleErrorResponse(error)
+      })
+    },
+
+
 
     handleLogout() {
       this.$refs.logoutModalRef.$refs.modalRef.openModal()
@@ -170,7 +193,7 @@ export default {
       this.offerId = Number(useRoute().query.offerId)
       this.isEdit = !isNaN(this.offerId)
 
-      alert(this.isEdit)
+      alert("isEdit: " + this.isEdit)
 
       if(this.isEdit) {
         this.title = "Pakkumise muutmine"
@@ -183,15 +206,10 @@ export default {
         this.offer.totalPortions = useRoute().query.totalPortions
         this.$refs.foodGroupRef.setSelectedFoodGroupId(useRoute().query.foodGroupId)
         this.offer.foodGroupId = useRoute().query.foodGroupId
-
-
-        alert(this.offerId)
       }
-    },
-
-    testMethod() {
-      alert("food group " + this.offer.foodGroupId)
     }
+
+
 
 
 

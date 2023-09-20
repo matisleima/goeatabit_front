@@ -4,7 +4,7 @@
     <table class="table">
       <thead>
       <tr>
-        <th scope="col">*offerId*</th>
+        <th scope="col">Pakkumise nr.</th>
         <th scope="col">Kuupäev</th>
         <th scope="col">Kell</th>
         <th scope="col">Söök</th>
@@ -94,7 +94,6 @@ export default {
     },
 
     navigateToOfferView(offer) {
-      alert("update offer #" + offer.offerId)
       router.push({name: 'offerRoute', query: offer})
     },
 

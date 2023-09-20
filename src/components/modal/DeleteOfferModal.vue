@@ -45,7 +45,7 @@ export default {
   components: {Modal},
   data() {
     return {
-      offer:{
+      offer: {
         offerId: 0,
         userId: 0,
         offerName: '',
@@ -69,18 +69,16 @@ export default {
     deleteOffer() {
       alert("send delete offer request to db")
       this.$refs.modalRef.closeModal()
-
-
-      /*  this.$http.delete("/meals/offer", {
-              params: {
-                locationId: this.locationId
-              }
+      this.$http.delete("/meals/offer", {
+            params: {
+              offerId: this.offer.offerId
             }
-        ).then(response => {
-          this.$emit("event-offer-successfully-deleted")
-        }).catch(error => {
-          const errorResponseBody = error.response.data
-        })*/
+          }
+      ).then(response => {
+        this.$emit("event-offer-successfully-deleted")
+      }).catch(error => {
+        const errorResponseBody = error.response.data
+      })
     },
   }
 }
