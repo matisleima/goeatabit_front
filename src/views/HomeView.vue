@@ -34,8 +34,7 @@
 
       <div class="col col-3">
         <div class="d-grid gap-3">
-          <button @click="navigateToOffersView" type="button" class="btn btn-secondary">Rohkem valikuid</button>
-          <button type="button" class="btn btn-secondary">Vaata kaardilt</button>
+          <button @click="$router.push('/reserve')" type="button" class="btn btn-secondary">Rohkem valikuid</button>
           <button @click="handleLogout" type="button" class="btn btn-secondary">Logi välja</button>
         </div>
       </div>
