@@ -153,7 +153,7 @@ export default {
     formatDate(date){
       const parts = date.split('-');
       return `${parts[2]}.${parts[1]}`
-    }
+    },
     navigateToMyOffersView() {
       router.push({name: 'myOffersRoute'})
     },
