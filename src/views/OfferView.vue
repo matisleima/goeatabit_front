@@ -208,6 +208,7 @@ export default {
       this.isEdit = false;
       this.title = "PAKKUMISE LISAMINE";
       this.$emit('event-offer-update-success', this.successMessage)
+      setTimeout(() => {this.successMessage = ''}, 2000 )
     },
 
     handleErrorResponse(error) {
