@@ -13,7 +13,7 @@
             <th scope="col">Söök</th>
             <th scope="col">Kirjeldus</th>
             <th scope="col">Hind</th>
-            <th scope="col">Vabu kohti</th>
+            <th scope="col">Broneeringuid</th>
           </tr>
           </thead>
           <tbody>
@@ -23,7 +23,7 @@
             <td><a>{{ offer.offerName }}</a></td>
             <td><a>{{ offer.description }}</a></td>
             <td><a>{{ offer.price }}€</a></td>
-            <td><a>{{ offer.totalPortions }}</a></td>
+            <td><a>{{ offer.bookings + "/" + offer.totalPortions }}</a></td>
           </tr>
           </tbody>
         </table>
@@ -58,7 +58,8 @@ export default {
         lastName: '',
         price: 0,
         availableMeals: 0,
-        userRating: 0
+        userRating: 0,
+        bookings: 0
       }
     }
 

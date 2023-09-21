@@ -10,7 +10,7 @@
         <th scope="col">Söök</th>
         <th scope="col">Kirjeldus</th>
         <th scope="col">Hind</th>
-        <th scope="col">Vabu kohti</th>
+        <th scope="col">Broneeringuid</th>
         <th scope="col"></th>
       </tr>
       </thead>
@@ -22,7 +22,7 @@
         <td><a>{{ offer.offerName }}</a></td>
         <td><a>{{ offer.description }}</a></td>
         <td><a>{{ offer.price }}€</a></td>
-        <td><a>{{  offer.totalPortions }}</a></td>
+        <td><a>{{  offer.bookings + "/" + offer.totalPortions }}</a></td>
         <td><a>
           <font-awesome-icon @click="navigateToOfferView(offer.offerId)" class="hoverable-link m-2"
                              :icon="['fas', 'pen-to-square']"/>
@@ -69,10 +69,11 @@ export default {
           lastName: '',
           price: 0,
           totalPortions: 0,
-          userRating: 0
+          userRating: 0,
+          bookings: 0
         }
       ],
-      successMessage: ''
+      successMessage: '',
     }
   },
 

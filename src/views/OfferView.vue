@@ -152,6 +152,7 @@ export default {
       this.offer.description = ''
       this.offer.price = ''
       this.offer.totalPortions = ''
+      this.errorResponse.message = ''
     },
 
     validateFormAndSendAddOfferRequest() {
@@ -220,6 +221,7 @@ export default {
       this.successMessage = OFFER_ADDED
       this.resetForm();
       this.$emit('event-offer-creation-success', this.successMessage)
+      setTimeout(() => {this.successMessage = ''}, 2000)
     },
 
     handleUpdateOfferSuccessResponse() {
@@ -228,9 +230,7 @@ export default {
       this.isEdit = false;
       this.title = "PAKKUMISE LISAMINE";
       this.$emit('event-offer-update-success', this.successMessage)
-      setTimeout(() => {
-        this.successMessage = ''
-      }, 2000)
+      setTimeout(() => {this.successMessage = ''}, 2000)
     },
 
     handleErrorResponse(error) {
@@ -238,7 +238,7 @@ export default {
         alert("error")
         // this.errorResponse.message = error.response.data.message
       } else {
-        alert("some other error happened")
+        router.push({name: 'errorRoute'})
       }
     },
 

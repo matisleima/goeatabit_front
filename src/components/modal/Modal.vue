@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isOpen" class="modal fade show d-block" tabindex="-1">
+  <div v-if="isOpen" class="modal fade show d-block modal-lg" tabindex="-1">
     <div class="modal-dialog" @click.stop >
       <div class="modal-content">
         <div class="modal-header">
