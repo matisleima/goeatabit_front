@@ -66,6 +66,9 @@
             </tr>
             </tbody>
           </table>
+          <div v-show="successMessage.length > 0" class="alert alert-success" role="alert">
+            {{ successMessage }}
+          </div>
         </div>
 
 
@@ -77,10 +80,6 @@
             <button @click="navigateToMyOffersView()" type="button" class="btn btn-secondary">Minu pakkumised</button>
             <button @click="$router.push('/offer')" type="button" class="btn btn-secondary">Pakun süüa</button>
             <button @click="handleLogout" type="button" class="btn btn-secondary">Logi välja</button>
-
-            <div v-show="successMessage.length > 0" class="alert alert-success" role="alert">
-              {{ successMessage }}
-            </div>
           </div>
         </div>
       </div>

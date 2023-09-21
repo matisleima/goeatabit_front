@@ -56,7 +56,9 @@
   visibility: hidden;
   position: absolute;
   bottom: 100%;
-  left: 50%;
+  left: -5; /* Start from the left edge of the container */
+  width: 200px; /* Adjust to your needs */
+
   transform: translate(-50%, -8px);
   background-color: #333;
   color: #fff;
