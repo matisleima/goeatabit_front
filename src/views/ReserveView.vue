@@ -28,7 +28,7 @@
                       ref="filterRequestRef" :filter="filter"/>
       </div>
 
-      <div class="col col-2">
+      <div class="col col-2 mt-5">
         <div class="d-grid gap-3">
           <button @click="$router.push('/home')" type="button" class="btn btn-secondary">Kodu</button>
           <!--            <button @click="$router.push('/reserve')" type="button" class="btn btn-secondary">Tahan süüa</button>-->
