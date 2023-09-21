@@ -4,10 +4,13 @@
 
     <div class="container  mt-5" @keydown.enter="login">
       <div class="row">
+
       </div>
+
       <div class="row">
-        <div class="col">
-          <h1 style="color: #e70d2a">GO EAT A BIT</h1>
+        <div class="col col-5">
+          <img src="../assets/logouus.png" height="125" width="500"/>
+<p>tutvustustekst tutvustustekst tutvustustekst tutvustustekst tutvustustekst tutvustustekst tutvustustekst tutvustustekst tutvustustekst tutvustustekst tutvustustekst tutvustustekst tutvustustekst tutvustustekst tutvustustekst tutvustustekst </p>
         </div>
         <div class="col">
         </div>
@@ -26,6 +29,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </template>

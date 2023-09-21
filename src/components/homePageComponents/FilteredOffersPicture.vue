@@ -6,13 +6,13 @@
       <div class="row justify-content-center">
 
         <div class="col col-4" v-for="offer in offers" :key="offer.offerId">
-          <div class="row">
+          <div class="row m-3 " @click="openBookConfirmModal(offer.userId, offer.offerId)" style="cursor: pointer">
             <UserImage :image-data-base64="offer.imageString"/>
 
             <div class="row" style="font-weight: bold; ">
               Pakkuja: {{ offer.firstName }} {{ offer.lastName }}
             </div>
-            <div @click="openBookConfirmModal(offer.userId, offer.offerId)" type="submit"
+            <div  type="submit"
                  style="cursor: pointer; color: #198754; font-weight: bold; " class="row">
                Pakkumine: {{ offer.offerName }}
             </div>
