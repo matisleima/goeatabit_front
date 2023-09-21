@@ -56,7 +56,6 @@ export default {
     getOffers() {
       this.$http.get("/meals/offers/last-3")
           .then(response => {
-            console.log(response.data)
 
             // Siit saame kätte JSONi  ↓↓↓↓↓↓↓↓
             this.offers = response.data

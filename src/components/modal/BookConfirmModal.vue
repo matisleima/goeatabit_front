@@ -83,6 +83,7 @@ export default {
           }
       ).then(response => {
         this.offer = response.data
+        console.log(response.data)
       }).catch(error => {
         const errorResponseBody = error.response.data
       })

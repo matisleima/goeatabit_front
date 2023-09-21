@@ -6,16 +6,17 @@
       <div class="row justify-content-center">
 
         <div class="col col-4" v-for="offer in offers" :key="offer.offerId">
-          <div class="row m-3 " @click="openBookConfirmModal(offer.userId, offer.offerId)" style="cursor: pointer">
+          <div class="row m-3" @click="openBookConfirmModal(offer.offerId)" style="cursor: pointer">
             <UserImage :image-data-base64="offer.imageString"/>
 
             <div class="row" style="font-weight: bold; ">
               Pakkuja: {{ offer.firstName }} {{ offer.lastName }}
             </div>
-            <div  type="submit"
-                 style="cursor: pointer; color: #198754; font-weight: bold; " class="row">
-               Pakkumine: {{ offer.offerName }}
+
+            <div style="font-weight: bold; " class="row">
+              Pakkumine: {{ offer.offerName }}
             </div>
+
             <div class="row" style="font-weight: bold; ">
               Aeg: {{ formatDate(offer.date) }}, kell {{ offer.time }}
             </div>
@@ -69,16 +70,15 @@ export default {
           }
       ).then(response => {
         this.offers = response.data
-        console.log('pärast databloki väärtistamist', this.offers)
       }).catch(error => {
         router.push({name: 'errorRoute'})
       })
     },
     openBookConfirmModal(offerId) {
-      this.$emit('event-open-modal',offerId)
+      this.$emit('event-open-modal', offerId)
 
     },
-    formatDate(date){
+    formatDate(date) {
       const parts = date.split('-');
       return `${parts[2]}.${parts[1]}`
     }

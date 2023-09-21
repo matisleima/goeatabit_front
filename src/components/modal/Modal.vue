@@ -1,6 +1,6 @@
 <template>
   <div v-if="isOpen" class="modal fade show d-block" tabindex="-1">
-    <div class="modal-dialog" @click.stop >
+    <div class="modal-dialog modal-lg" @click.stop>
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">
@@ -16,7 +16,7 @@
           </slot>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary m-3" @click="closeModal">{{closeButtonName}}</button>
+          <button type="button" class="btn btn-secondary m-3" @click="closeModal">{{ closeButtonName }}</button>
           <slot name="footer">
           </slot>
         </div>
@@ -30,7 +30,7 @@ export default {
   props: {
     closeButtonName: String
   },
-  data(){
+  data() {
     return {
       isOpen: false,
     }

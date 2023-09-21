@@ -123,7 +123,6 @@ export default {
           }
       ).then(response => {
         this.offerUserImageString = response.data
-        console.log('image string pärast väärtustamist', response.data)
       })
     },
     getUserOffers() {

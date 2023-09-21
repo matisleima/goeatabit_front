@@ -31,7 +31,6 @@
               <th scope="col">Pakkuja</th>
               <th scope="col">Söök</th>
               <th scope="col">Hind</th>
-              <th scope="col">Broneeringuid</th>
               <th scope="col">Hinnang</th>
               <th scope="col">Kustuta</th>
             </tr>
@@ -59,7 +58,6 @@
                 </div>
               </td>
               <td><a>{{ event.price }}€</a></td>
-              <td><a>?/{{ event.totalPortions }}</a></td>
               <td><a>{{ event.offerUserRating }}</a></td>
               <td><a>
                 <font-awesome-icon @click="openDeleteEventModal(event)" class="hoverable-link m-2"

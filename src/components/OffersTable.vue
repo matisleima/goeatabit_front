@@ -33,7 +33,7 @@
           </div>
         </td>
         <td><a>{{ offer.price }}€</a></td>
-        <td><a>?/{{offer.totalPortions}}</a></td>
+        <td><a>{{offer.bookings}}/{{offer.totalPortions}}</a></td>
         <td><a>{{ offer.userRating }}</a></td>
         <td>
             <a>
@@ -98,7 +98,8 @@ export default {
           districtId: 0,
           firstName: '',
           lastName: '',
-          imageString: 0
+          imageString: 0,
+          bookings: 0
         }
       ]
     }
