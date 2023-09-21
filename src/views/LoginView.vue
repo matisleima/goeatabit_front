@@ -8,14 +8,19 @@
       </div>
 
       <div class="row">
-        <div class="col col-5">
-          <img src="../assets/logouus.png" height="125" width="500"/>
-<!--          <p>Go Eat A Bit- platvorm, et viia kiirelt ja mugavalt kokku toidu pakkuja ja einestaja. Tule ja organiseeri-->
-<!--            lõuna või kliki end sööma. </p>-->
+        <div class="col col-9">
+          <img src="../assets/logouus.png" height="125" width="500" style="margin-left: -260px"/>
+        <div style=" font-style: italic; text-align: justify; font-size: 20px; margin-left: 90px; margin-right: 90px ">
+<!--          Jaga oma kokkamiskirge ja kohtu uute inimestega! Go Eat A Bit'iga avastad võrratuid maitseid, paned end-->
+<!--          proovile võõrustajana ning veedad aega parimas seltskonnas! Ühine meiega ja kliki end sööma!-->
+
+          <p>"Enne Go Eat A Biti avastamist tõin igal lõunal Rimist pitsat ja näksisin üksi oma laua taga.
+          Nüüd aga kohtun iga päev lahedate inimestega, me naudime head toitu ja mis kõige tähtsam - see on odav!"</p>
+          <p style="text-align: right">- Rain, 39 </p>
         </div>
-        <div class="col">
         </div>
-        <div class="col">
+
+        <div class="col-3">
           <div class="d-grid gap-3">
             <div class="col">
               <AlertDanger :alert-message="errorResponse.message"/>
@@ -45,10 +50,7 @@
       <div class="container">
         <div class="row" style="font-size: 30px">
           <div class="col col-10 ">
-            Go Eat A Bit- platvorm, et viia kiirelt ja mugavalt kokku toidu pakkuja ja einestaja. Tule ja organiseeri
-            lõuna või kliki end sööma.
           </div>
-
         </div>
       </div>
 

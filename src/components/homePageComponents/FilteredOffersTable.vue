@@ -8,7 +8,7 @@
           <tr>
             <th scope="col">Pakkuja</th>
             <th scope="col">Pakkumine</th>
-            <th scope="col">Veel pakkumisi</th>
+            <th scope="col">Veel kasutaja pakkumisi</th>
           </tr>
           </thead>
           <tbody>
@@ -20,7 +20,7 @@
             <td><a>{{ offer.offerName }}</a></td>
             <td><a>
               <button type="button" class="btn btn-success" @click="navigateToUserOffersView(offer.userId)">
-                Go Eat A Bit!
+                Vaata
               </button>
             </a>
             </td>

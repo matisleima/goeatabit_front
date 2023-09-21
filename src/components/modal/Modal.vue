@@ -24,6 +24,7 @@
     </div>
   </div>
 </template>
+
 <script>
 export default {
   name: 'Modal',
@@ -42,13 +43,13 @@ export default {
     closeModal() {
       this.$emit("event-modal-closed")
       this.isOpen = false
-    }
+    },
   }
 }
 </script>
 
 <style>
-.modal-overlay {
+.modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -59,5 +60,10 @@ export default {
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
 }
-
+.center {
+  position: absolute;
+  left: 10%;
+  top: 1%;
+  transform: translate(10%, -10%);
+}
 </style>

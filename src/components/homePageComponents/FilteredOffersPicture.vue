@@ -13,7 +13,7 @@
               Pakkuja: {{ offer.firstName }} {{ offer.lastName }}
             </div>
 
-            <div style="font-weight: bold; " class="row">
+              <div style="font-weight: bold; " class="row">
               Pakkumine: {{ offer.offerName }}
             </div>
 

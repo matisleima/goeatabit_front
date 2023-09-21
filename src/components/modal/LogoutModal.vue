@@ -3,7 +3,7 @@
     <Modal close-button-name="Ei" ref="modalRef">
 
       <template #header>
-        <h3>Logime välja</h3>
+        <h3>Logi välja</h3>
       </template>
 
       <template #body>
@@ -33,15 +33,3 @@ export default {
   }
 }
 </script>
-<style>
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-</style>
