@@ -29,3 +29,13 @@
 tbody tr.highlight-row {
     background-color: #ff5b6d !important;
 }
+
+.shift-left {
+    margin-left: -60px;
+}
+.shift-right {
+    margin-right: 60px;
+}
+.shift-toright {
+    margin-right: -60px;
+}

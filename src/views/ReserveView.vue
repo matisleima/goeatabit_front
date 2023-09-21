@@ -29,7 +29,7 @@
           />
         </div>
 
-        <div class="col mt-5">
+        <div class="col mt-5 shift-toright">
           <offers-table @event-open-user-offer-view="openUserOfferView" @event-book-meal="handleBookingConfirmationModal" ref="filterRequestRef" :filter="filter"/>
         </div>
 

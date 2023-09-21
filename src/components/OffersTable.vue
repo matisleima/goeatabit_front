@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table class="table">
+    <table class="table shift-left">
       <thead>
       <tr>
         <th scope="col">Kuupäev</th>

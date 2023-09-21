@@ -153,7 +153,7 @@ export default {
     allFieldsAreFilled() {
       let check = this.offer;
       return check.date !== '' &&
-          check.time > 0 &&
+          check.time !== '' &&
           check.foodGroupId > 0 &&
           check.offerName.length > 0 &&
           check.price > 0 &&
