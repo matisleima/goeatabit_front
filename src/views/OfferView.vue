@@ -92,7 +92,7 @@ import AlertSuccess from "@/components/alert/AlertSuccess.vue";
 import Modal from "@/components/modal/Modal.vue";
 import LogoutModal from "@/components/modal/LogoutModal.vue";
 import {FILL_ALL_FIELDS, OFFER_ADDED, OFFER_MODIFIED, USER_REGISTERED} from "@/assets/script/AlertMessage";
-import {USER_NAME_UNAVAILABLE} from "@/assets/script/ErrorCode";
+import {OFFER_ALREADY_EXISTS, USER_NAME_UNAVAILABLE} from "@/assets/script/ErrorCode";
 import FoodGroupDropDown from "@/components/FoodGroupDropdown.vue";
 import {useRoute} from "vue-router";
 import router from "@/router";
@@ -112,7 +112,8 @@ export default {
         offerName: '',
         description: '',
         price: 0,
-        totalPortions: 0
+        totalPortions: 0,
+        userId: sessionStorage.getItem('userId')
       },
       title: "PAKKUMISE LISAMINE",
       isEdit: false,
