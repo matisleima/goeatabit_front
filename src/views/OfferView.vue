@@ -84,7 +84,7 @@ export default {
       offerId: Number(useRoute().query.offerId),
       offer: {
         date: '',
-        time: 0,
+        time: '',
         foodGroupId: 0,
         offerName: '',
         description: '',

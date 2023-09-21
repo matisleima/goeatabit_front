@@ -52,7 +52,7 @@ export default {
         offerName: '',
         description: '',
         date: '',
-        time: 0,
+        time: '',
         address: '',
         firstName: '',
         lastName: '',

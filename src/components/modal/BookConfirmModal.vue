@@ -63,7 +63,7 @@ export default {
       userId: sessionStorage.getItem('userId'),
       offer:{
         date: '',
-        time: 0,
+        time: '',
         address: '',
         firstName: '',
         lastName: '',

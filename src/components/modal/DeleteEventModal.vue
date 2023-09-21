@@ -47,7 +47,7 @@ export default {
         offerId: 0,
         offerUserId: 0,
         offerUserRating: 0,
-        time: 0,
+        time: '',
         date: '',
         price: 0,
         totalPortions: 0,

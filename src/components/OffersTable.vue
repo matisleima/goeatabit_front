@@ -86,7 +86,7 @@ export default {
           offerId: 0,
           userId: 0,
           userRating: 0,
-          time: 0,
+          time: '',
           date: '',
           price: 0,
           totalPortions: 0,
@@ -128,7 +128,6 @@ export default {
     openUserOfferView(userId) {
       this.$emit('event-open-user-offer-view', userId)
     },
-
   },
   mounted() {
     this.getFilteredOffers()

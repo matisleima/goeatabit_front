@@ -98,7 +98,7 @@ export default {
           offerName: '',
           description: '',
           date: 0,
-          time: 0,
+          time: '',
           address: '',
           firstName: '',
           lastName: '',
