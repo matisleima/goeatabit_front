@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="d-grid gap-3 mt-5 shift-left shift-right">
+    <div class="d-grid gap-3 mt-5">
       <h5>Täpsem otsing</h5>
 
       <district-dropdown @event-update-selected-district-id="setSelectedDistrictId"/>
