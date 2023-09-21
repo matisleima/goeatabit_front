@@ -10,14 +10,15 @@
           <div class="row">
             <UserImage :image-data-base64="offer.imageString"/>
 
-            <div class="row">
+            <div class="row" style="font-weight: bold; font-size: 20px;">
               Pakkuja: {{ offer.firstName }} {{ offer.lastName }}
             </div>
-            <div @click="openBookConfirmModal(offer.userId, offer.offerId)" type="submit" style="cursor: pointer; color: #198754; font-weight: bold" class="row">
+            <div @click="openBookConfirmModal(offer.userId, offer.offerId)" type="submit"
+                 style="cursor: pointer; color: #198754; font-weight: bold; font-size: 20px;" class="row">
                Pakkumine: {{ offer.offerName }}
             </div>
-            <div class="row">
-                Aeg: {{ formatDate(offer.date) }}, kell {{ offer.time }}
+            <div class="row" style="font-weight: bold; font-size: 20px;">
+              Aeg: {{ formatDate(offer.date) }}, kell {{ offer.time }}
             </div>
 
           </div>

@@ -6,7 +6,7 @@
   <div>
     <div class="row">
       <div class="col col-6 m-3">
-        <h1>Kasutaja {{ offers[0].firstName }} {{ offers[0].lastName }} pakkumised</h1>
+        <h1>KASUTAJA {{ offers[0].firstName }} {{ offers[0].lastName }} PAKKUMISED</h1>
       </div>
 
       <div class="col">
@@ -67,11 +67,14 @@
       <div class="col col-2">
         <div class="d-grid gap-3">
           <button @click="$router.push('/home')" type="button" class="btn btn-secondary">Kodu</button>
+          <button @click="$router.push('/reserve')" type="button" class="btn btn-secondary">Tahan süüa</button>
           <button @click="$router.push('/reservations')" type="button" class="btn btn-secondary">Minu broneeringud</button>
+          <button @click="navigateToMyOffersView()" type="button" class="btn btn-secondary">Minu pakkumised</button>
           <button @click="$router.push('/offer')" type="button" class="btn btn-secondary">Pakun süüa</button>
           <button @click="handleLogout" type="button" class="btn btn-secondary">Logi välja</button>
         </div>
       </div>
+
     </div>
   </div>
 </template>
@@ -82,6 +85,7 @@ import OffersTable from "@/components/OffersTable.vue";
 import BookConfirmModal from "@/components/modal/BookConfirmModal.vue";
 import {useRoute} from "vue-router";
 import LogoutModal from "@/components/modal/LogoutModal.vue";
+import router from "@/router";
 
 export default {
   name: "UserOfferView",
@@ -150,6 +154,9 @@ export default {
       const parts = date.split('-');
       return `${parts[2]}.${parts[1]}`
     }
+    navigateToMyOffersView() {
+      router.push({name: 'myOffersRoute'})
+    },
   },
   beforeMount() {
     this.getUserImage()

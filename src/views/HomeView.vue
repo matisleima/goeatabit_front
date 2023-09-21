@@ -6,7 +6,7 @@
     <div class="row">
 
       <div class="col m-3 col-12">
-        <h1>{{ districtName }}, JÄRGMISED PAKKUMISED TÄNA </h1>
+        <h1>{{ districtName }}, JÄRGMISED PAKKUMISED </h1>
       </div>
 
       <div class="col">
@@ -35,6 +35,9 @@
       <div class="col col-3">
         <div class="d-grid gap-3">
           <button @click="$router.push('/reserve')" type="button" class="btn btn-secondary">Rohkem valikuid</button>
+          <button @click="$router.push('/reservations')" type="button" class="btn btn-secondary">Minu broneeringud</button>
+          <button @click="navigateToMyOffersView()" type="button" class="btn btn-secondary">Minu pakkumised</button>
+          <button @click="$router.push('/offer')" type="button" class="btn btn-secondary">Pakun süüa</button>
           <button @click="handleLogout" type="button" class="btn btn-secondary">Logi välja</button>
         </div>
       </div>
@@ -107,6 +110,9 @@ export default{
     },
     openUserOfferView(userId) {
       router.push({name: 'userOffersRoute', query: {userId: userId}})
+    },
+    navigateToMyOffersView() {
+      router.push({name: 'myOffersRoute'})
     },
   },
   beforeMount() {

@@ -8,12 +8,12 @@
           <tr>
             <th scope="col">Pakkuja</th>
             <th scope="col">Pakkumine</th>
-            <th scope="col">Registreeru</th>
+            <th scope="col">Veel pakkumisi</th>
           </tr>
           </thead>
           <tbody>
           <tr v-for="offer in offers" :key="offer.offerId">
-            <td><a>
+            <td @click="navigateToUserOffersView(offer.userId)"><a>
               {{ offer.firstName }}{{ " " }}{{ offer.lastName }}
             </a></td>
 
