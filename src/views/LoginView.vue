@@ -43,7 +43,7 @@
       </div>
 
       <div class="container">
-        <div class="row" style="font-size: 20px">
+        <div class="row" style="font-size: 30px">
           <div class="col col-10 ">
             Go Eat A Bit- platvorm, et viia kiirelt ja mugavalt kokku toidu pakkuja ja einestaja. Tule ja organiseeri
             lõuna või kliki end sööma.
