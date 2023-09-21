@@ -6,7 +6,7 @@
   <div>
     <div class="row">
       <div class="col col-6 m-3">
-        <h1>KASUTAJA {{ offers[0].firstName }} {{ offers[0].lastName }} PAKKUMISED</h1>
+        <h1>KASUTAJA <span class="text-uppercase">{{ offers[0].firstName }}</span> <span class="text-uppercase">{{ offers[0].lastName }}</span> PAKKUMISED</h1>
       </div>
 
       <div class="col">
