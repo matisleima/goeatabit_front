@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col">
+      <div class="col col-9">
 
         <table class="table">
           <thead>
