@@ -18,27 +18,46 @@
         <AlertDanger :alert-message="errorResponse.message"/>
         <AlertSuccess :alert-message="successMessage"/>
         <div class="d-grid gap-3">
-          <input v-model="offer.date" :min="new Date().toISOString().substr(0, 10)" type="date" class="form-control"
-                 placeholder="Kuupäev">
-          <input v-model="offer.time" type="number" class="form-control" placeholder="Kellaaeg">
+          <div class="form-floating">
+            <input v-model="offer.date" type="date" :min="new Date().toISOString().substr(0,10)" class="form-control"
+                   id="floatingDate">
+            <label for="floatingDate">Kuupäev</label>
+          </div>
+          <div class="form-floating">
+            <input v-model="offer.time" type="time" class="form-control" id="floatingTime">
+            <label for="floatingTime">Aeg</label>
+          </div>
 
           <FoodGroupDropDown @event-update-selected-food-group-id="setOfferFoodGroupId" ref="foodGroupRef"/>
 
-          <input v-model="offer.offerName" type="text" size="" class="form-control" placeholder="Toidu nimi">
-          <input v-model="offer.description" id="descriptionbox" type="text" class="form-control"
-                 placeholder="Sisaldab...">
-          <input v-model="offer.price" type="number" class="form-control" placeholder="Hind">
-          <input v-model="offer.totalPortions" type="number" class="form-control" id=""
-                 placeholder="Mitmele inimesele süüa pakud?">
+          <div class="form-floating">
+            <input v-model="offer.offerName" type="text" class="form-control" id="floatingName">
+            <label for="floatingName">Toidu nimetus</label>
+          </div>
+          <div class="form-floating">
+            <input v-model="offer.description" type="text" class="form-control" id="floatingDescription">
+            <label for="floatingDescription">Kirjeldus</label>
+          </div>
+          <div class="form-floating">
+            <input v-model="offer.price" type="number" :min="0" class="form-control" id="floatingPrice">
+            <label for="floatingPrice">Hind</label>
+          </div>
+          <div class="form-floating">
+            <input v-model="offer.totalPortions" type="number" :min="1" class="form-control" id="floatingPortions">
+            <label for="floatingPortions">Mitmele inimesele süüa pakud?</label>
+          </div>
         </div>
         <p></p>
         <div>
-          <button @click="resetForm" type="button" class="btn btn-secondary">Tühjenda väljad</button>
-          <button v-if="isEdit" @click="validateFormAndSendUpdateOfferRequest" type="button" class="btn btn-secondary">
+          <button @click="resetForm" type="button" class="btn btn-secondary m-3">
+            Tühjenda väljad
+          </button>
+          <button v-if="isEdit" @click="validateFormAndSendUpdateOfferRequest" type="button"
+                  class="btn btn-success m-3">
             Muuda pakkumine
           </button>
-          <button v-else @click="validateFormAndSendAddOfferRequest" type="button" class="btn btn-secondary">Lisa
-            pakkumine
+          <button v-else @click="validateFormAndSendAddOfferRequest" type="button" class="btn btn-success m-3">
+            Lisa pakkumine
           </button>
         </div>
       </div>
@@ -48,12 +67,16 @@
 
       <div class="col">
         <div class="d-grid gap-3">
-          <button @click="$router.push({name: 'reserveRoute'})" type="button" class="btn btn-secondary">Tahan süüa
+          <button @click="$router.push({name: 'reserveRoute'})" type="button" class="btn btn-secondary">
+            Tahan süüa
           </button>
-          <button @click="$router.push({name: 'myOffersRoute'})" type="button" class="btn btn-secondary">Minu
+          <button @click="$router.push({name: 'myOffersRoute'})" type="button" class="btn btn-secondary">
+            Minu
             pakkumised
           </button>
-          <button @click="handleLogout" type="button" class="btn btn-secondary">Logi välja</button>
+          <button @click="handleLogout" type="button" class="btn btn-secondary">
+            Logi välja
+          </button>
         </div>
       </div>
     </div>
@@ -208,13 +231,17 @@ export default {
       this.isEdit = false;
       this.title = "PAKKUMISE LISAMINE";
       this.$emit('event-offer-update-success', this.successMessage)
-      setTimeout(() => {this.successMessage = ''}, 2000 )
+      setTimeout(() => {
+        this.successMessage = ''
+      }, 2000)
     },
 
     handleErrorResponse(error) {
-      if (error.response.data.errorCode === USER_NAME_UNAVAILABLE) {
+      if (error.response.data.errorCode === OFFER_ALREADY_EXISTS) {
         alert("error")
         // this.errorResponse.message = error.response.data.message
+      } else {
+        alert("some other error happened")
       }
     },
 
@@ -242,9 +269,10 @@ export default {
 
 
 <style>
-#descriptionbox {
+#floatingDescription {
   height: 100px;
 }
+
 
 </style>
 

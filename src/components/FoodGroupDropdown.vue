@@ -1,5 +1,5 @@
 <template>
-  <select v-model="selectedFoodGroupId" @change="emitSelectedFoodGroupId" class="form-select" aria-label="Default select example">
+  <select v-model="selectedFoodGroupId" @change="emitSelectedFoodGroupId" class="form-select" id="foodgroup" aria-label="Default select example">
     <option :value="0">Toidu kategooria</option>
     <option v-for="foodGroup in foodGroups" :value="foodGroup.foodGroupId" :key="foodGroup.foodGroupId">
       {{ foodGroup.foodGroupName }}
@@ -57,5 +57,8 @@ export default {
 
 
 <style>
+#foodgroup {
+  height: 60px;
+}
 
 </style>
