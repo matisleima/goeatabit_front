@@ -10,7 +10,8 @@
       <div class="row">
         <div class="col col-5">
           <img src="../assets/logouus.png" height="125" width="500"/>
-<p>tutvustustekst tutvustustekst tutvustustekst tutvustustekst tutvustustekst tutvustustekst tutvustustekst tutvustustekst tutvustustekst tutvustustekst tutvustustekst tutvustustekst tutvustustekst tutvustustekst tutvustustekst tutvustustekst </p>
+<!--          <p>Go Eat A Bit- platvorm, et viia kiirelt ja mugavalt kokku toidu pakkuja ja einestaja. Tule ja organiseeri-->
+<!--            lõuna või kliki end sööma. </p>-->
         </div>
         <div class="col">
         </div>
@@ -24,9 +25,30 @@
                    placeholder="Sisesta email">
             <input v-model="password" type="password" class="form-control" id="exampleInputPassword1"
                    placeholder="Sisesta parool">
-            <button @click="login" type="submit" class="btn btn-primary">Logi sisse</button>
-            <button @click="openSignupModal" type="submit" class="btn btn-primary">Loo kasutaja</button>
+            <button @click="login" type="submit" class="btn btn-secondary">Logi sisse</button>
+            <button @click="openSignupModal" type="submit" class="btn btn-secondary">Loo kasutaja</button>
           </div>
+        </div>
+      </div>
+
+      <div class="container mt-5">
+        <div class="row" style="font-size: 20px">
+          <div class="col col-7 ">
+
+          </div>
+          <div class="col">
+
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row" style="font-size: 30px">
+          <div class="col col-10 ">
+            Go Eat A Bit- platvorm, et viia kiirelt ja mugavalt kokku toidu pakkuja ja einestaja. Tule ja organiseeri
+            lõuna või kliki end sööma.
+          </div>
+
         </div>
       </div>
 
@@ -129,7 +151,7 @@ export default {
 
 <style>
 body {
-background-image: url("../assets/transparent2.png");
-background-size: cover;
+  background-image: url("../assets/transparent2.png");
+  background-size: cover;
 }
 </style>
