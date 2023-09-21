@@ -16,7 +16,7 @@
           </slot>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary m-3" @click="closeModal">{{ closeButtonName }}</button>
+          <button type="button" class="btn btn-secondary m-3" @click="closeModal">{{closeButtonName}}</button>
           <slot name="footer">
           </slot>
         </div>
@@ -30,7 +30,7 @@ export default {
   props: {
     closeButtonName: String
   },
-  data() {
+  data(){
     return {
       isOpen: false,
     }
@@ -46,3 +46,18 @@ export default {
   }
 }
 </script>
+
+<style>
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+}
+
+</style>

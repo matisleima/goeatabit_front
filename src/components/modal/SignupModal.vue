@@ -28,11 +28,11 @@
                   <label for="floatingEmail">e-mail</label>
                 </div>
                 <div class="form-floating">
-                  <input v-model="user.password" type="text" class="form-control" id="floatingPassword">
+                  <input v-model="user.password" type="password" class="form-control" id="floatingPassword">
                   <label for="floatingPassword">Parool</label>
                 </div>
                 <div class="form-floating">
-                  <input v-model="passwordAgain" type="text" class="form-control" id="floatingPasswordAgain">
+                  <input v-model="passwordAgain" type="password" class="form-control" id="floatingPasswordAgain">
                   <label for="floatingPasswordAgain">Parool uuesti</label>
                 </div>
                 <DistrictDropdown @event-update-selected-district-id="setUserDistrictId" ref="districtDropdownRef"/>
