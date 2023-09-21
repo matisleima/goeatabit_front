@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Modal close-button-name="Sulge" ref="modalRef">
+    <Modal close-button-name="Sulge" ref="modalRef" @event-modal-closed="resetModalInfo()">
       <template #header>
         <h3>Kasutaja loomine</h3>
       </template>
@@ -168,6 +168,11 @@ export default {
       this.user.imageString = ''
       this.errorResponse.message = ''
       this.errorResponse.errorCode = 0
+    },
+
+    resetModalInfo() {
+      this.resetAllFields()
+      this.errorResponse.message = ''
     }
 
 

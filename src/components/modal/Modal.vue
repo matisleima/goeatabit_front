@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isOpen" class="modal fade show d-block" tabindex="-1" @click="closeModal">
+  <div v-if="isOpen" class="modal fade show d-block" tabindex="-1">
     <div class="modal-dialog" @click.stop >
       <div class="modal-content">
         <div class="modal-header">
@@ -40,6 +40,7 @@ export default {
       this.isOpen = true
     },
     closeModal() {
+      this.$emit("event-modal-closed")
       this.isOpen = false
     }
   }
