@@ -125,7 +125,7 @@ export default {
 
 <style>
 body {
-//background-image: url("../assets/background.jpg");
-//background-size: cover;
+background-image: url("../assets/transparent2.png");
+background-size: cover;
 }
 </style>

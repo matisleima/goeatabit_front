@@ -53,7 +53,8 @@ export default {
           lastName: '',
           imageString: '',
           address: '',
-          time: ''
+          time: '',
+          date: ''
         }
       ]
     }
