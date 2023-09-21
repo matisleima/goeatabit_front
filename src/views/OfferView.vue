@@ -68,7 +68,7 @@
       <div class="col">
         <div class="d-grid gap-3">
           <button @click="$router.push('/home')" type="button" class="btn btn-secondary">Kodu</button>
-          <button @click="$router.push('/reserve')" type="button" class="btn btn-secondary">Tahan süüa</button>
+          <button @click="$router.push('/reserve')" type="button" class="btn btn-secondary">Kõik pakkumised</button>
           <button @click="$router.push('/reservations')" type="button" class="btn btn-secondary">Minu broneeringud</button>
           <button @click="navigateToMyOffersView()" type="button" class="btn btn-secondary">Minu pakkumised</button>
 <!--          <button @click="$router.push('/offer')" type="button" class="btn btn-secondary">Pakun süüa</button>-->

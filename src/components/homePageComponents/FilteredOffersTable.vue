@@ -20,7 +20,7 @@
             <td><a>{{ offer.offerName }}</a></td>
             <td><a>
               <button type="button" class="btn btn-success" @click="navigateToUserOffersView(offer.userId)">
-                Veel kasutaja pakkumisi
+                Go Eat A Bit!
               </button>
             </a>
             </td>

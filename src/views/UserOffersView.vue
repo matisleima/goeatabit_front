@@ -6,7 +6,7 @@
   <div>
     <div class="row">
       <div class="col col-6 m-3">
-        <h1>KASUTAJA {{ offers[0].firstName }} {{ offers[0].lastName }} PAKKUMISED</h1>
+        <h1>KASUTAJA <span class="text-uppercase">{{ offers[0].firstName }}</span> <span class="text-uppercase">{{ offers[0].lastName }}</span> PAKKUMISED</h1>
       </div>
 
       <div class="col">
@@ -67,7 +67,7 @@
       <div class="col col-2">
         <div class="d-grid gap-3">
           <button @click="$router.push('/home')" type="button" class="btn btn-secondary">Kodu</button>
-          <button @click="$router.push('/reserve')" type="button" class="btn btn-secondary">Tahan süüa</button>
+          <button @click="$router.push('/reserve')" type="button" class="btn btn-secondary">Kõik pakkumised</button>
           <button @click="$router.push('/reservations')" type="button" class="btn btn-secondary">Minu broneeringud</button>
           <button @click="navigateToMyOffersView()" type="button" class="btn btn-secondary">Minu pakkumised</button>
           <button @click="$router.push('/offer')" type="button" class="btn btn-secondary">Pakun süüa</button>
