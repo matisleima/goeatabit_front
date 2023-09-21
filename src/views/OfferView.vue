@@ -48,11 +48,11 @@
 
       <div class="col">
         <div class="d-grid gap-3">
-          <button @click="$router.push({name: 'reserveRoute'})" type="button" class="btn btn-secondary">Tahan süüa
-          </button>
-          <button @click="$router.push({name: 'myOffersRoute'})" type="button" class="btn btn-secondary">Minu
-            pakkumised
-          </button>
+          <button @click="$router.push('/home')" type="button" class="btn btn-secondary">Kodu</button>
+          <button @click="$router.push('/reserve')" type="button" class="btn btn-secondary">Tahan süüa</button>
+          <button @click="$router.push('/reservations')" type="button" class="btn btn-secondary">Minu broneeringud</button>
+          <button @click="navigateToMyOffersView()" type="button" class="btn btn-secondary">Minu pakkumised</button>
+<!--          <button @click="$router.push('/offer')" type="button" class="btn btn-secondary">Pakun süüa</button>-->
           <button @click="handleLogout" type="button" class="btn btn-secondary">Logi välja</button>
         </div>
       </div>
@@ -227,7 +227,10 @@ export default {
       if (this.isEdit) {
         this.getOfferInfoAndUpdateFields()
       }
-    }
+    },
+    navigateToMyOffersView() {
+      router.push({name: 'myOffersRoute'})
+    },
 
 
   },

@@ -70,10 +70,14 @@
           </table>
         </div>
 
+
         <div class="col col-2">
           <div class="d-grid gap-3">
+            <button @click="$router.push('/home')" type="button" class="btn btn-secondary">Kodu</button>
             <button @click="$router.push('/reserve')" type="button" class="btn btn-secondary">Tahan süüa</button>
-            <button @click="$router.push('/my-offers')" type="button" class="btn btn-secondary">Minu pakkumised</button>
+<!--            <button @click="$router.push('/reservations')" type="button" class="btn btn-secondary">Minu broneeringud</button>-->
+            <button @click="navigateToMyOffersView()" type="button" class="btn btn-secondary">Minu pakkumised</button>
+            <button @click="$router.push('/offer')" type="button" class="btn btn-secondary">Pakun süüa</button>
             <button @click="handleLogout" type="button" class="btn btn-secondary">Logi välja</button>
 
             <div v-show="successMessage.length > 0" class="alert alert-success" role="alert">
@@ -103,6 +107,7 @@
 import OffersTable from "@/components/OffersTable.vue";
 import LogoutModal from "@/components/modal/LogoutModal.vue";
 import DeleteEventModal from "@/components/modal/DeleteEventModal.vue";
+import router from "@/router";
 
 export default {
   name: "ReservationsView",
@@ -165,6 +170,9 @@ export default {
     },
     handleLogout() {
       this.$refs.logoutModalRef.$refs.modalRef.openModal()
+    },
+    navigateToMyOffersView() {
+      router.push({name: 'myOffersRoute'})
     },
   },
   mounted() {
