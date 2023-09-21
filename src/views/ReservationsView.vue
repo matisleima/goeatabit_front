@@ -48,7 +48,7 @@
                   <div v-show="event.description.length > 0" class="hover-text">Pakkuja on selle pakkumise tühistanud!</div>
                 </div>
               </th>
-              <td><a>{{ event.date }}</a></td>
+              <td><a>{{ formatDate(event.date) }}</a></td>
               <td><a>{{ event.time }}</a></td>
               <td><a>{{ event.address }}</a></td>
               <td><a>{{ event.firstName }} {{ event.lastName }}</a></td>
@@ -166,6 +166,10 @@ export default {
     handleLogout() {
       this.$refs.logoutModalRef.$refs.modalRef.openModal()
     },
+    formatDate(date){
+      const parts = date.split('-');
+      return `${parts[2]}.${parts[1]}`
+    }
   },
   mounted() {
     this.getMyEvents()

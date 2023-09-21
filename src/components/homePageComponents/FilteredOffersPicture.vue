@@ -17,7 +17,7 @@
                Pakkumine: {{ offer.offerName }}
             </div>
             <div class="row">
-                Toimumise aeg: {{ offer.date }}, kell {{ offer.time }}
+                Aeg: {{ formatDate(offer.date) }}, kell {{ offer.time }}
             </div>
 
           </div>
@@ -80,6 +80,10 @@ export default {
       this.$emit('event-open-modal',offerId)
 
     },
+    formatDate(date){
+      const parts = date.split('-');
+      return `${parts[2]}.${parts[1]}`
+    }
 
     // navigateToUserOffersView(offerId) {
     //   router.push({name: 'userOffersRoute', query: {offerId: offerId}})

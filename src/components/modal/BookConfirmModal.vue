@@ -22,7 +22,7 @@
 
           <tbody>
           <tr>
-            <td><a>{{ offer.date }}</a></td>
+            <td><a>{{ formatDate(offer.date) }}</a></td>
             <td><a>{{ offer.time }}</a></td>
             <td><a>{{ offer.address }}</a></td>
             <td><a>{{ offer.firstName }} {{ offer.lastName }}</a></td>
@@ -105,6 +105,10 @@ export default {
       this.$refs.modalRef.closeModal()
       this.bookOffer()
     },
+    formatDate(date){
+      const parts = date.split('-');
+      return `${parts[2]}.${parts[1]}`
+    }
   }
 }
 </script>

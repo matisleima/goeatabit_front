@@ -17,7 +17,7 @@
 
       <tbody>
       <tr v-for="offer in filteredOffers" :key="offer.offerId">
-        <td><a>{{ offer.date }}</a></td>
+        <td><a>{{ formatDate(offer.date) }}</a></td>
         <td><a>{{ offer.time }}</a></td>
         <td><a>{{ offer.address }}</a></td>
         <td>
@@ -128,6 +128,10 @@ export default {
     openUserOfferView(userId) {
       this.$emit('event-open-user-offer-view', userId)
     },
+    formatDate(date){
+      const parts = date.split('-');
+      return `${parts[2]}.${parts[1]}`
+    }
   },
   mounted() {
     this.getFilteredOffers()

@@ -16,7 +16,7 @@
           </thead>
           <tbody>
           <tr>
-            <td><a>{{ event.date }}</a></td>
+            <td><a>{{ formatDate(event.date) }}</a></td>
             <td><a>{{ event.time }}</a></td>
             <td><a>{{ event.offerName }}</a></td>
             <td><a>{{ event.price }}€</a></td>
@@ -76,6 +76,10 @@ export default {
         }).catch(error => {
           alert('Error: event not deleted!')
         })
+    },
+    formatDate(date){
+      const parts = date.split('-');
+      return `${parts[2]}.${parts[1]}`
     }
   }
 }

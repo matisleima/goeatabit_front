@@ -39,7 +39,7 @@
 
           <tbody>
           <tr v-for="offer in offers" :key="offer.offerId">
-            <td><a>{{ offer.date }}</a></td>
+            <td><a>{{ formatDate(offer.date) }}</a></td>
             <td><a>{{ offer.time }}</a></td>
             <td><a>{{ offer.address }}</a></td>
             <td><a>{{ offer.firstName }} {{ offer.lastName }}</a></td>
@@ -97,7 +97,7 @@ export default {
           userId: 0,
           offerName: '',
           description: '',
-          date: 0,
+          date: '',
           time: '',
           address: '',
           firstName: '',
@@ -146,6 +146,10 @@ export default {
     handleLogout() {
       this.$refs.logoutModalRef.$refs.modalRef.openModal()
     },
+    formatDate(date){
+      const parts = date.split('-');
+      return `${parts[2]}.${parts[1]}`
+    }
   },
   beforeMount() {
     this.getUserImage()
