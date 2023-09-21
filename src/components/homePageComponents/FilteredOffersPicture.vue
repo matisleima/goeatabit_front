@@ -5,19 +5,20 @@
     <div class="container">
       <div class="row justify-content-center">
 
-
         <div class="col col-4" v-for="offer in offers" :key="offer.offerId">
-          <div class="row">
+          <div class="row m-3" @click="openBookConfirmModal(offer.offerId)" style="cursor: pointer">
             <UserImage :image-data-base64="offer.imageString"/>
 
-            <div class="row">
+            <div class="row" style="font-weight: bold; ">
               Pakkuja: {{ offer.firstName }} {{ offer.lastName }}
             </div>
-            <div @click="openBookConfirmModal(offer.userId, offer.offerId)" type="submit" style="cursor: pointer; color: #198754; font-weight: bold" class="row">
-               Pakkumine: {{ offer.offerName }}
+
+            <div style="font-weight: bold; " class="row">
+              Pakkumine: {{ offer.offerName }}
             </div>
-            <div class="row">
-                Toimumise aeg: {{ offer.date }}, kell {{ offer.time }}
+
+            <div class="row" style="font-weight: bold; ">
+              Aeg: {{ formatDate(offer.date) }}, kell {{ offer.time }}
             </div>
 
           </div>
@@ -53,7 +54,8 @@ export default {
           lastName: '',
           imageString: '',
           address: '',
-          time: ''
+          time: '',
+          date: ''
         }
       ]
     }
@@ -67,27 +69,23 @@ export default {
             }
           }
       ).then(response => {
-        // Siit saame kätte JSONi  ↓↓↓↓↓↓↓↓
         this.offers = response.data
-        console.log('pärast databloki väärtistamist', this.offers)
       }).catch(error => {
-        // Siit saame kätte errori JSONi  ↓↓↓↓↓↓↓↓
         router.push({name: 'errorRoute'})
       })
     },
     openBookConfirmModal(offerId) {
-      this.$emit('event-open-modal',offerId)
+      this.$emit('event-open-modal', offerId)
 
     },
-
-    // navigateToUserOffersView(offerId) {
-    //   router.push({name: 'userOffersRoute', query: {offerId: offerId}})
-    // },
+    formatDate(date) {
+      const parts = date.split('-');
+      return `${parts[2]}.${parts[1]}`
+    }
   },
 
   beforeMount() {
     this.getOffers()
   },
 }
-
 </script>

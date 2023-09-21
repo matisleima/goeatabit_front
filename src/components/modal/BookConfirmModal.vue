@@ -22,7 +22,7 @@
 
           <tbody>
           <tr>
-            <td><a>{{ offer.date }}</a></td>
+            <td><a>{{ formatDate(offer.date) }}</a></td>
             <td><a>{{ offer.time }}</a></td>
             <td><a>{{ offer.address }}</a></td>
             <td><a>{{ offer.firstName }} {{ offer.lastName }}</a></td>
@@ -63,7 +63,7 @@ export default {
       userId: sessionStorage.getItem('userId'),
       offer:{
         date: '',
-        time: 0,
+        time: '',
         address: '',
         firstName: '',
         lastName: '',
@@ -83,6 +83,7 @@ export default {
           }
       ).then(response => {
         this.offer = response.data
+        console.log(response.data)
       }).catch(error => {
         const errorResponseBody = error.response.data
       })
@@ -105,6 +106,10 @@ export default {
       this.$refs.modalRef.closeModal()
       this.bookOffer()
     },
+    formatDate(date){
+      const parts = date.split('-');
+      return `${parts[2]}.${parts[1]}`
+    }
   }
 }
 </script>

@@ -1,20 +1,20 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col">
+      <div class="col col-9">
 
         <table class="table">
           <thead>
           <tr>
             <th scope="col">Pakkuja</th>
             <th scope="col">Pakkumine</th>
-            <th scope="col">Registreeru</th>
+            <th scope="col">Veel pakkumisi</th>
           </tr>
           </thead>
           <tbody>
           <tr v-for="offer in offers" :key="offer.offerId">
             <td><a>
-              {{ offer.firstName }}{{ " " }}{{ offer.lastName }}
+              {{ offer.firstName }} {{ offer.lastName }}
             </a></td>
 
             <td><a>{{ offer.offerName }}</a></td>
@@ -56,7 +56,6 @@ export default {
     getOffers() {
       this.$http.get("/meals/offers/last-3")
           .then(response => {
-            console.log(response.data)
 
             // Siit saame kätte JSONi  ↓↓↓↓↓↓↓↓
             this.offers = response.data

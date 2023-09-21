@@ -17,7 +17,7 @@
       <tbody>
       <tr v-for="offer in filteredOffers" :key="filteredOffers.offerId">
         <td><a>{{ offer.offerId }}</a></td>
-        <td><a>{{ offer.date }}</a></td>
+        <td><a>{{ formatDate(offer.date) }}</a></td>
         <td><a>{{ offer.time }}</a></td>
         <td><a>{{ offer.offerName }}</a></td>
         <td><a>{{ offer.description }}</a></td>
@@ -63,7 +63,7 @@ export default {
           offerName: '',
           description: '',
           date: '',
-          time: 0,
+          time: '',
           address: '',
           firstName: '',
           lastName: '',
@@ -108,6 +108,10 @@ export default {
       this.getFilteredOffers()
       this.successMessage = successMessage
       setTimeout(() => {this.successMessage = ''}, 2000 )
+    },
+    formatDate(date){
+      const parts = date.split('-');
+      return `${parts[2]}.${parts[1]}`
     }
 
 

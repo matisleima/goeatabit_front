@@ -2,63 +2,59 @@
   <logout-modal ref="logoutModalRef"/>
   <BookConfirmModal ref="bookConfirmModalRef"/>
 
-  <div v-if="userId === 0">
-    <h1>
-      <router-link to="/">Palun logi sisse!</router-link>
-    </h1>
-  </div>
 
-  <div v-show="userId != 0">
 
-    <div class="container">
-      <div class="row mt-5">
-        <div class="col col-4">
-          <h1>BRONEERI LÕUNA</h1>
-        </div>
-
-        <div class="col">
-        </div>
-
-        <div class="col col-2">
-        </div>
-
-      </div>
-      <div class="row">
-        <div class="col col-2">
-          <filters @event-emit-filter-request="passFilterOn"
-          />
-        </div>
-
-        <div class="col mt-5">
-          <offers-table @event-open-user-offer-view="openUserOfferView" @event-book-meal="handleBookingConfirmationModal" ref="filterRequestRef" :filter="filter"/>
-        </div>
-
-        <div class="col col-2">
-          <div class="d-grid gap-3">
-            <button @click="$router.push('/home')" type="button" class="btn btn-secondary">Kodu</button>
-            <button @click="$router.push('/reservations')" type="button" class="btn btn-secondary">Minu broneeringud</button>
-            <button @click="$router.push('/offer')" type="button" class="btn btn-secondary">Pakun süüa</button>
-            <button @click="handleLogout" type="button" class="btn btn-secondary">Logi välja</button>
-          </div>
-        </div>
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col col-4">
+        <h1>BRONEERI LÕUNA</h1>
       </div>
 
-      <div class="row">
-        <div class="col">
-
-        </div>
-
-        <div class="col">
-        </div>
-
-        <div class="col col-2">
-
-        </div>
+      <div class="col">
       </div>
 
-
+      <div class="col col-2">
+      </div>
 
     </div>
+    <div class="row">
+      <div class="col col-2">
+        <filters @event-emit-filter-request="passFilterOn"
+        />
+      </div>
+
+      <div class="col mt-5">
+        <offers-table @event-open-user-offer-view="openUserOfferView" @event-book-meal="handleBookingConfirmationModal"
+                      ref="filterRequestRef" :filter="filter"/>
+      </div>
+
+      <div class="col col-2 mt-5">
+        <div class="d-grid gap-3">
+          <button @click="$router.push('/home')" type="button" class="btn btn-secondary">Kodu</button>
+          <!--            <button @click="$router.push('/reserve')" type="button" class="btn btn-secondary">Kõik pakkumised</button>-->
+          <button @click="$router.push('/reservations')" type="button" class="btn btn-secondary">Minu broneeringud
+          </button>
+          <button @click="navigateToMyOffersView()" type="button" class="btn btn-secondary">Minu pakkumised</button>
+          <button @click="$router.push('/offer')" type="button" class="btn btn-secondary">Pakun süüa</button>
+          <button @click="handleLogout" type="button" class="btn btn-secondary">Logi välja</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+
+      </div>
+
+      <div class="col">
+      </div>
+
+      <div class="col col-2">
+
+      </div>
+    </div>
+
+
   </div>
 </template>
 
@@ -101,7 +97,10 @@ export default {
       this.$refs.filterRequestRef.getFilteredOffers()
     },
     openUserOfferView(userId) {
-      router.push({name:'userOffersRoute', query: {userId:userId}})
+      router.push({name: 'userOffersRoute', query: {userId: userId}})
+    },
+    navigateToMyOffersView() {
+      router.push({name: 'myOffersRoute'})
     },
   },
   mounted() {

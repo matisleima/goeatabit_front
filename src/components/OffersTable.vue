@@ -17,7 +17,7 @@
 
       <tbody>
       <tr v-for="offer in filteredOffers" :key="offer.offerId">
-        <td><a>{{ offer.date }}</a></td>
+        <td><a>{{ formatDate(offer.date) }}</a></td>
         <td><a>{{ offer.time }}</a></td>
         <td><a>{{ offer.address }}</a></td>
         <td>
@@ -33,7 +33,7 @@
           </div>
         </td>
         <td><a>{{ offer.price }}€</a></td>
-        <td><a>?/{{offer.totalPortions}}</a></td>
+        <td><a>{{offer.bookings}}/{{offer.totalPortions}}</a></td>
         <td><a>{{ offer.userRating }}</a></td>
         <td>
             <a>
@@ -56,7 +56,9 @@
   visibility: hidden;
   position: absolute;
   bottom: 100%;
-  left: 50%;
+  left: -5; /* Start from the left edge of the container */
+  width: 200px; /* Adjust to your needs */
+
   transform: translate(-50%, -8px);
   background-color: #333;
   color: #fff;
@@ -86,7 +88,7 @@ export default {
           offerId: 0,
           userId: 0,
           userRating: 0,
-          time: 0,
+          time: '',
           date: '',
           price: 0,
           totalPortions: 0,
@@ -98,7 +100,8 @@ export default {
           districtId: 0,
           firstName: '',
           lastName: '',
-          imageString: 0
+          imageString: 0,
+          bookings: 0
         }
       ]
     }
@@ -128,7 +131,10 @@ export default {
     openUserOfferView(userId) {
       this.$emit('event-open-user-offer-view', userId)
     },
-
+    formatDate(date){
+      const parts = date.split('-');
+      return `${parts[2]}.${parts[1]}`
+    }
   },
   mounted() {
     this.getFilteredOffers()

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Modal close-button-name="Sulge" ref="modalRef">
+    <Modal close-button-name="Sulge" ref="modalRef" @event-modal-closed="resetModalInfo()">
       <template #header>
         <h3>Kasutaja loomine</h3>
       </template>
@@ -15,16 +15,31 @@
           <div class="row">
             <div class="col">
               <div class="d-grid gap-3">
-                <input v-model="user.firstName" type="text" class="form-control" placeholder="Sisesta eesnimi">
-                <input v-model="user.lastName" type="text" class="form-control" placeholder="Sisesta perekonnanimi">
-                <input v-model="user.email" class="form-control" placeholder="Sisesta e-mail">
-                <input v-model="user.password" type="password" class="form-control" placeholder="Sisesta parool">
-                <input v-model="passwordAgain" type="password" class="form-control" placeholder="Sisesta parool uuesti">
-
+                <div class="form-floating">
+                  <input v-model="user.firstName" type="text" class="form-control" id="floatingFirstName">
+                  <label for="floatingFirstName">Eesnimi</label>
+                </div>
+                <div class="form-floating">
+                  <input v-model="user.lastName" type="text" class="form-control" id="floatingLastName">
+                  <label for="floatingLastName">Perekonnanimi</label>
+                </div>
+                <div class="form-floating">
+                  <input v-model="user.email" type="text" class="form-control" id="floatingEmail">
+                  <label for="floatingEmail">e-mail</label>
+                </div>
+                <div class="form-floating">
+                  <input v-model="user.password" type="text" class="form-control" id="floatingPassword">
+                  <label for="floatingPassword">Parool</label>
+                </div>
+                <div class="form-floating">
+                  <input v-model="passwordAgain" type="text" class="form-control" id="floatingPasswordAgain">
+                  <label for="floatingPasswordAgain">Parool uuesti</label>
+                </div>
                 <DistrictDropdown @event-update-selected-district-id="setUserDistrictId" ref="districtDropdownRef"/>
-
-                <input v-model="user.address" type="text" class="form-control" id="" placeholder="Sisesta aadress">
-
+                <div class="form-floating">
+                  <input v-model="user.address" type="text" class="form-control" id="floatingAddress">
+                  <label for="floatingAddress">Aadress</label>
+                </div>
                 <ImageInput @event-emit-base64="setUserImageData"/>
                 <div class="col col-3">
                   <UserImage :image-data-base64="user.imageString"/>
@@ -36,7 +51,7 @@
         </div>
       </template>
       <template #footer>
-        <button @click="validateForm" type="button" class="btn btn-secondary" >Loo kasutaja</button>
+        <button @click="validateForm" type="button" class="btn btn-success m-3" >Loo kasutaja</button>
       </template>
     </Modal>
   </div>
@@ -153,9 +168,15 @@ export default {
       this.user.imageString = ''
       this.errorResponse.message = ''
       this.errorResponse.errorCode = 0
+    },
+
+    resetModalInfo() {
+      this.resetAllFields()
+      this.errorResponse.message = ''
     }
 
 
   }
+
 }
 </script>

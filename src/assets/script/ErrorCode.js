@@ -1,2 +1,4 @@
 export const INCORRECT_CREDENTIALS = 111
 export const USER_NAME_UNAVAILABLE = 333
+
+export const OFFER_ALREADY_EXISTS = 444

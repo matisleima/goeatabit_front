@@ -18,7 +18,7 @@
           </thead>
           <tbody>
           <tr>
-            <td><a>{{ offer.date }}</a></td>
+            <td><a>{{ formatDate(offer.date) }}</a></td>
             <td><a>{{ offer.time }}</a></td>
             <td><a>{{ offer.offerName }}</a></td>
             <td><a>{{ offer.description }}</a></td>
@@ -52,7 +52,7 @@ export default {
         offerName: '',
         description: '',
         date: '',
-        time: 0,
+        time: '',
         address: '',
         firstName: '',
         lastName: '',
@@ -85,6 +85,10 @@ export default {
       this.successMessage = OFFER_DELETED
       this.$emit('event-offer-deletion-success', this.successMessage)
       this.$refs.modalRef.closeModal()
+    },
+    formatDate(date){
+      const parts = date.split('-');
+      return `${parts[2]}.${parts[1]}`
     }
   }
 }

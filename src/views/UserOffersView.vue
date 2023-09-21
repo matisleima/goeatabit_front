@@ -6,7 +6,7 @@
   <div>
     <div class="row">
       <div class="col col-6 m-3">
-        <h1>Kasutaja {{ offers[0].firstName }} {{ offers[0].lastName }} pakkumised</h1>
+        <h1>KASUTAJA <span class="text-uppercase">{{ offers[0].firstName }}</span> <span class="text-uppercase">{{ offers[0].lastName }}</span> PAKKUMISED</h1>
       </div>
 
       <div class="col">
@@ -39,7 +39,7 @@
 
           <tbody>
           <tr v-for="offer in offers" :key="offer.offerId">
-            <td><a>{{ offer.date }}</a></td>
+            <td><a>{{ formatDate(offer.date) }}</a></td>
             <td><a>{{ offer.time }}</a></td>
             <td><a>{{ offer.address }}</a></td>
             <td><a>{{ offer.firstName }} {{ offer.lastName }}</a></td>
@@ -67,11 +67,14 @@
       <div class="col col-2">
         <div class="d-grid gap-3">
           <button @click="$router.push('/home')" type="button" class="btn btn-secondary">Kodu</button>
+          <button @click="$router.push('/reserve')" type="button" class="btn btn-secondary">Kõik pakkumised</button>
           <button @click="$router.push('/reservations')" type="button" class="btn btn-secondary">Minu broneeringud</button>
+          <button @click="navigateToMyOffersView()" type="button" class="btn btn-secondary">Minu pakkumised</button>
           <button @click="$router.push('/offer')" type="button" class="btn btn-secondary">Pakun süüa</button>
           <button @click="handleLogout" type="button" class="btn btn-secondary">Logi välja</button>
         </div>
       </div>
+
     </div>
   </div>
 </template>
@@ -82,6 +85,7 @@ import OffersTable from "@/components/OffersTable.vue";
 import BookConfirmModal from "@/components/modal/BookConfirmModal.vue";
 import {useRoute} from "vue-router";
 import LogoutModal from "@/components/modal/LogoutModal.vue";
+import router from "@/router";
 
 export default {
   name: "UserOfferView",
@@ -97,8 +101,8 @@ export default {
           userId: 0,
           offerName: '',
           description: '',
-          date: 0,
-          time: 0,
+          date: '',
+          time: '',
           address: '',
           firstName: '',
           lastName: '',
@@ -119,7 +123,6 @@ export default {
           }
       ).then(response => {
         this.offerUserImageString = response.data
-        console.log('image string pärast väärtustamist', response.data)
       })
     },
     getUserOffers() {
@@ -145,6 +148,13 @@ export default {
     },
     handleLogout() {
       this.$refs.logoutModalRef.$refs.modalRef.openModal()
+    },
+    formatDate(date){
+      const parts = date.split('-');
+      return `${parts[2]}.${parts[1]}`
+    },
+    navigateToMyOffersView() {
+      router.push({name: 'myOffersRoute'})
     },
   },
   beforeMount() {

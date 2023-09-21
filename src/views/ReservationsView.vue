@@ -31,7 +31,6 @@
               <th scope="col">Pakkuja</th>
               <th scope="col">Söök</th>
               <th scope="col">Hind</th>
-              <th scope="col">Broneeringuid</th>
               <th scope="col">Hinnang</th>
               <th scope="col">Kustuta</th>
             </tr>
@@ -48,7 +47,7 @@
                   <div v-show="event.description.length > 0" class="hover-text">Pakkuja on selle pakkumise tühistanud!</div>
                 </div>
               </th>
-              <td><a>{{ event.date }}</a></td>
+              <td><a>{{ formatDate(event.date) }}</a></td>
               <td><a>{{ event.time }}</a></td>
               <td><a>{{ event.address }}</a></td>
               <td><a>{{ event.firstName }} {{ event.lastName }}</a></td>
@@ -59,7 +58,6 @@
                 </div>
               </td>
               <td><a>{{ event.price }}€</a></td>
-              <td><a>?/{{ event.totalPortions }}</a></td>
               <td><a>{{ event.offerUserRating }}</a></td>
               <td><a>
                 <font-awesome-icon @click="openDeleteEventModal(event)" class="hoverable-link m-2"
@@ -68,17 +66,20 @@
             </tr>
             </tbody>
           </table>
+          <div v-show="successMessage.length > 0" class="alert alert-success" role="alert">
+            {{ successMessage }}
+          </div>
         </div>
+
 
         <div class="col col-2">
           <div class="d-grid gap-3">
-            <button @click="$router.push('/reserve')" type="button" class="btn btn-secondary">Tahan süüa</button>
-            <button @click="$router.push('/my-offers')" type="button" class="btn btn-secondary">Minu pakkumised</button>
+            <button @click="$router.push('/home')" type="button" class="btn btn-secondary">Kodu</button>
+            <button @click="$router.push('/reserve')" type="button" class="btn btn-secondary">Kõik pakkumised</button>
+<!--            <button @click="$router.push('/reservations')" type="button" class="btn btn-secondary">Minu broneeringud</button>-->
+            <button @click="navigateToMyOffersView()" type="button" class="btn btn-secondary">Minu pakkumised</button>
+            <button @click="$router.push('/offer')" type="button" class="btn btn-secondary">Pakun süüa</button>
             <button @click="handleLogout" type="button" class="btn btn-secondary">Logi välja</button>
-
-            <div v-show="successMessage.length > 0" class="alert alert-success" role="alert">
-              {{ successMessage }}
-            </div>
           </div>
         </div>
       </div>
@@ -103,6 +104,7 @@
 import OffersTable from "@/components/OffersTable.vue";
 import LogoutModal from "@/components/modal/LogoutModal.vue";
 import DeleteEventModal from "@/components/modal/DeleteEventModal.vue";
+import router from "@/router";
 
 export default {
   name: "ReservationsView",
@@ -124,7 +126,7 @@ export default {
           offerId: 0,
           offerUserId: 0,
           offerUserRating: 0,
-          time: 0,
+          time: '',
           date: '',
           price: 0,
           totalPortions: 0,
@@ -165,6 +167,13 @@ export default {
     },
     handleLogout() {
       this.$refs.logoutModalRef.$refs.modalRef.openModal()
+    },
+    formatDate(date){
+      const parts = date.split('-');
+      return `${parts[2]}.${parts[1]}`
+    },
+    navigateToMyOffersView() {
+      router.push({name: 'myOffersRoute'})
     },
   },
   mounted() {
