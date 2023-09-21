@@ -14,7 +14,7 @@
           <tbody>
           <tr v-for="offer in offers" :key="offer.offerId">
             <td @click="navigateToUserOffersView(offer.userId)"><a>
-              {{ offer.firstName }}{{ " " }}{{ offer.lastName }}
+              {{ offer.firstName }}{{ offer.lastName }}
             </a></td>
 
             <td><a>{{ offer.offerName }}</a></td>
