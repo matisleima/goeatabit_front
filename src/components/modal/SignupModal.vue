@@ -42,7 +42,7 @@
                 </div>
                 <ImageInput @event-emit-base64="setUserImageData"/>
                 <div class="col col-3">
-                  <UserImage :image-data-base64="user.imageString"/>
+<!--                  <UserImage :image-data-base64="user.imageString"/>-->
                 </div>
 
               </div>

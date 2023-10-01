@@ -37,7 +37,7 @@
         <td><a>{{ offer.userRating }}</a></td>
         <td>
             <a>
-              <button type="button" class="btn btn-success" @click="launchConfirmModal(offer.offerId)">Go Eat A Bit!</button>
+              <button v-show="offer.totalPortions > offer.bookings" type="button" class="btn btn-success" @click="launchConfirmModal(offer.offerId)">Go Eat A Bit!</button>
             </a>
         </td>
       </tr>

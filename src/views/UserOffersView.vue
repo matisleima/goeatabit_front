@@ -31,7 +31,7 @@
             <th scope="col">Pakkuja</th>
             <th scope="col">Söök</th>
             <th scope="col">Hind</th>
-            <th scope="col">Vabu kohti</th>
+            <th scope="col">Broneeringuid</th>
             <th scope="col">Hinnang</th>
             <th scope="col">Lähen sööma</th>
           </tr>
@@ -50,7 +50,7 @@
               </div>
             </td>
             <td><a>{{ offer.price }}€</a></td>
-            <td><a>?/{{ offer.totalPortions }}</a></td>
+            <td><a>{{ offer.bookings }}/{{ offer.totalPortions }}</a></td>
             <td><a>{{ offer.userRating }}</a></td>
             <td>
               <a>
@@ -108,7 +108,8 @@ export default {
           lastName: '',
           price: 0,
           totalPortions: 0,
-          userRating: 0
+          userRating: 0,
+          bookings: 0
         }
       ]
     }
